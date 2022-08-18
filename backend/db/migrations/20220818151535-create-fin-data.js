@@ -6,38 +6,38 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       fin_types_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'Fin_types', key: 'id'}
+        references: { model: 'Fin_types', key: 'id' },
       },
       project_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {model: 'Projects', key: 'id'}
+        references: { model: 'Projects', key: 'id' },
       },
       title: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       sum: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       date: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       regular: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       }
     });
   },

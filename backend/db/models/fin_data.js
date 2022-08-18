@@ -5,9 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class Fin_data extends Model {
     static associate({ Project, Fin_types,  Schedules}) {
-      Fin_data.belongsTo(Project, { foreignKey: 'project_id' })
-      Fin_data.belongsTo(Fin_types, { foreignKey: 'fin_types_id' })
-      Fin_data.hasOne(Schedules, { foreignKey: 'fin_data_id' })
+      Fin_data.belongsTo(Project, { foreignKey: 'project_id' }),
+      Fin_data.belongsTo(Fin_types, { foreignKey: 'fin_types_id' }),
+      Fin_data.hasOne(Schedules, { foreignKey: 'fin_data_id' }),
     }
   }
   Fin_data.init({
