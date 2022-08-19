@@ -12,40 +12,40 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Fin_data', key: 'id' },
       },
-      m1: {
+      1: {
         type: Sequelize.INTEGER,
       },
-      m2: {
+      2: {
         type: Sequelize.INTEGER,
       },
-      m3: {
+      3: {
         type: Sequelize.INTEGER,
       },
-      m4: {
+      4: {
         type: Sequelize.INTEGER,
       },
-      m5: {
+      5: {
         type: Sequelize.INTEGER,
       },
-      m6: {
+      6: {
         type: Sequelize.INTEGER,
       },
-      m7: {
+      7: {
         type: Sequelize.INTEGER,
       },
-      m8: {
+      8: {
         type: Sequelize.INTEGER,
       },
-      m9: {
+      9: {
         type: Sequelize.INTEGER,
       },
-      m10: {
+      10: {
         type: Sequelize.INTEGER,
       },
-      m11: {
+      11: {
         type: Sequelize.INTEGER,
       },
-      m12: {
+      12: {
         type: Sequelize.INTEGER,
       },
       createdAt: {

@@ -19,40 +19,40 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       references: { model: 'Fin_data', key: 'id' },
     },
-    m1: {
+    1: {
       type: DataTypes.INTEGER,
     },
-    m2: {
+    2: {
       type: DataTypes.INTEGER,
     },
-    m3: {
+    3: {
       type: DataTypes.INTEGER,
     },
-    m4: {
+    4: {
       type: DataTypes.INTEGER,
     },
-    m5: {
+    5: {
       type: DataTypes.INTEGER,
     },
-    m6: {
+    6: {
       type: DataTypes.INTEGER,
     },
-    m7: {
+    7: {
       type: DataTypes.INTEGER,
     },
-    m8: {
+    8: {
       type: DataTypes.INTEGER,
     },
-    m9: {
+    9: {
       type: DataTypes.INTEGER,
     },
-    m10: {
+    10: {
       type: DataTypes.INTEGER,
     },
-    m11: {
+    11: {
       type: DataTypes.INTEGER,
     },
-    m12: {
+    12: {
       type: DataTypes.INTEGER,
     },
     createdAt: {
