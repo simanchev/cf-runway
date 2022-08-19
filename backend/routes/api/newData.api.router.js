@@ -10,17 +10,27 @@ const {
 //   title: 'Шава', type: '', date: { month: 2, year: 2020 }, regular: true, sum: 500000, id: 2,
 // };
 newDataRouter.post('/findata/new', async (req, res) => {
-  console.log('+++++++++++')
+  console.log('+++++++++++');
   // await Project.create({ user_id: finData.id, title: finData.title });
 
   const {
-    title, type, month, year, regular, sum,
+    title, type, regular, sum,
   } = req.body;
-  console.log(title, '+++++++++++');
+
+  let {
+    month, year,
+  } = req.body;
+
+  month = Number(month);
+  year = Number(year);
+  // console.log(title, '+++++++++++');
   const { id } = await Fin_data.create({
     fin_types_id: type, project_id: 1, title, sum, regular, date: year,
   });
+  console.log(year, month);
+  // const typesId = await Fin_data.findOne({where:{
 
+  // }})
   const scheduleData = {
     fin_data_id: id,
     1: 0,
@@ -47,6 +57,8 @@ newDataRouter.post('/findata/new', async (req, res) => {
     firstFillMnth = 12 - curMnth + 1 + month;
   }
 
+
+console.log(firstFillMnth);
   for (let i = 1; i <= 12; i++) {
     if (i === firstFillMnth) {
       scheduleData[i] = sum;
@@ -55,8 +67,8 @@ newDataRouter.post('/findata/new', async (req, res) => {
     }
   }
 
-  await Schedule.create(scheduleData);
-
+  const kek = await Schedule.create(scheduleData);
+ console.log(kek);
   // console.log(scheduleData);
 
   // if (finData.regular) {
