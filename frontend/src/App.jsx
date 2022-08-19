@@ -1,14 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import FinDataForm from './features/finData/FinDataForm';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>CF Runway Project</p>
-      </header>
+    <div className="container">
+      <FinDataForm />
     </div>
   );
 }
