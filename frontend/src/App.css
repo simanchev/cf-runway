@@ -15,15 +15,12 @@ label {
 .data-input-section {
   display: flex;
   align-items: center;
+  width: 700px;
 }
 
 .data-input-section > * {
   margin-right: 10px;
   font-size: 14px;
-}
-
-.data-input-wrap {
-  width: 500px;
 }
 
 .form-check {
@@ -38,3 +35,30 @@ label {
 .date-control {
   width: 350px;
 }
+
+.input-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 30px;
+}
+
+table {
+  margin: 0 !important;
+  font-size: 14px;
+}
+
+.number-control {
+  width: 100px;
+}
+
+.btn-update {
+  padding: 0;
+  border: unset;
+}
+
+.btn-update:hover {
+  border: unset;
+}
+
+
