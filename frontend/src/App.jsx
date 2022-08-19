@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import FinDataForm from './features/finData/FinDataForm';
+import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
   return (
     <div className="container">
-      <FinDataForm />
+      <ProjectPage />
     </div>
   );
 }

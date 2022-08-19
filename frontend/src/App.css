@@ -1,15 +1,10 @@
-h6 {
+/* h6 {
   margin-bottom: 20px;
 }
 
 label {
   margin: 0   !important;
   white-space: nowrap;
-}
-
-.container {
-  margin-top: 50px;
-  margin-bottom: 50px;
 }
 
 .data-input-section {
@@ -61,4 +56,117 @@ table {
   border: unset;
 }
 
+ */
 
+
+ .container {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+th, td {
+  padding-left: 0 !important;
+  font-size: 13px;
+  text-align: center;
+}
+
+.btn-edit {
+  padding: 0 5px;
+  border: unset;
+}
+
+.btn-edit:hover {
+  border: unset;
+  color: #0d6efd;
+}
+
+.fin-data {
+  /* padding: 0 20px;
+  border-left: 3px solid green; */
+  padding: 20px 20px 40px 20px;
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs {
+  border-radius: 0 !important;
+  font-size: 15px;
+}
+
+h6 {
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.fin-data-wrap {
+  margin-bottom: 50px;
+}
+
+.btn-add {
+  border: 1px dotted black;
+  padding: 1px 8px;
+}
+
+.check-black:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.nav-tabs > li > a {
+  padding: 10px 20px;
+
+}
+
+button {
+  font-size: 15px !important;
+}
+
+th {
+  padding-bottom: 15px !important;
+}
+
+h4, h5 {
+  margin: 0 !important;
+}
+
+.card {
+  margin: 30px 20px 40px 0 !important;
+}
+
+.project-resume {
+  display: flex;
+}
+
+.card-header {
+  font-weight: 700;
+}
+
+p {
+  font-size: 13px;
+}
+
+.card-info {
+  background-color: unset !important;
+  border: 1px dashed lightgrey;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.card-text {
+  margin-bottom: 10px !important;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  margin: 0 !important;
+}
