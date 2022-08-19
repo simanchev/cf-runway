@@ -2,14 +2,14 @@ const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const sessionConfig = require('./session-config');
-// const test = require('../routes/api/test');
+const newDataRouter = require('../routes/api/newData.api.router');
 
 const config = (app) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());
   app.use(session(sessionConfig));
-  // app.use('/', test);
+  app.use('/api', newDataRouter);
 };
 
 module.exports = config;
