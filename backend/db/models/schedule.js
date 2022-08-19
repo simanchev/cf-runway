@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE,
-    }
+    },
   }, {
     sequelize,
     modelName: 'Schedule',
