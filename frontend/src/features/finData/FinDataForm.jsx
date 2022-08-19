@@ -5,6 +5,9 @@ async function addFinData(event) {
   const {
     title, date, sum, regular,
   } = event.target;
+  console.log(date);
+  const year = date.value.slice(0, 4);
+  const month = date.value.slice(5, 7);
 
   const response = await fetch('/api/findata/new', {
     method: 'POST',
@@ -12,12 +15,10 @@ async function addFinData(event) {
     body: JSON.stringify({
       title: title.value,
       type: 1,
-      date: {
-        year: date.slice(0, 4),
-        month: date.slice(5, 7),
-      },
-      regular,
-      sum,
+      year,
+      month,
+      regular: regular.checked,
+      sum: sum.value,
     }),
   });
 
@@ -31,9 +32,9 @@ function FinDataForm() {
       <div className="mb-3 data-input-wrap">
         <h6>Поступления</h6>
         <div className="data-input-section">
-          <input type="input" name="title" className="form-control" placeholder="Название операции" />
-          <input type="number" name="sum" className="form-control number-control" placeholder="Сумма" />
-          <input type="date" name="date" className="form-control date-control" placeholder="Дата" />
+          <input type="input" name="title" className="form-control" placeholder="Название операции" required />
+          <input type="number" name="sum" className="form-control number-control" placeholder="Сумма" required />
+          <input type="date" name="date" className="form-control date-control" placeholder="Дата" required />
           <div className="form-check">
             <input className="form-check-input flex-check" name="regular" type="checkbox" value="" />
             <label className="form-check-label">Ежемесячная операция</label>
