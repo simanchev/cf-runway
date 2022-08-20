@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
-import RevenueDataList from '../finData/RevenueDataList';
+import FinDataSection from '../finData/FinDataSection';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
@@ -82,7 +82,7 @@ function ProjectPage({ id }) {
         </div>
       </div>
       <div className="fin-data-group">
-        <RevenueDataList />
+        <FinDataSection />
         <ProjectModal />
       </div>
       <button type="submit" className="btn btn-dark">Загрузить отчет о проекте</button>
