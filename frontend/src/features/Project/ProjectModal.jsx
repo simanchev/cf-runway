@@ -13,17 +13,15 @@ function ProjectModal() {
             <form className="modal-form">
               <div className="mb-3">
                 <label className="form-label">Название проекта</label>
-                <input type="text" className="form-control" name="title" value="Тестовый проект" />
+                <input type="text" className="form-control" name="title" defaultValue="Тестовый проект" />
               </div>
               <div className="mb-3">
                 <label className="form-label">Индустрия (основное направление)</label>
-                <input type="text" className="form-control" name="industry" value="Интернет-торговля" />
+                <input type="text" className="form-control" name="industry" defaultValue="Интернет-торговля" />
               </div>
               <div className="mb-3">
                 <label className="form-label">Краткое описание</label>
-                <textarea className="form-control">
-                  Интернет-магазин одежды и аксессуаров для детей от 3 до 14 лет. Ассортиментный ряд включает множество разнообразных по цвету и фасону моделей повседневной, школьной, спортивной и праздничной одежды
-                </textarea>
+                <textarea className="form-control" defaultValue="Интернет-магазин одежды и аксессуаров для детей от 3 до 14 лет. Ассортиментный ряд включает множество разнообразных по цвету и фасону моделей повседневной, школьной, спортивной и праздничной одежды" />
               </div>
             </form>
           </div>

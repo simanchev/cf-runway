@@ -5,7 +5,7 @@ import ProjectPage from './features/Project/ProjectPage';
 function App() {
   return (
     <div className="container">
-      <ProjectPage />
+      <ProjectPage id={1} />
     </div>
   );
 }

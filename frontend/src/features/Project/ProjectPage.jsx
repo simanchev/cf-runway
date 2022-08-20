@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProjectModal from './ProjectModal';
 import RevenueData from './RevenueData';
 
-function App() {
+function ProjectPage({ id }) {
+  const [project, setProject] = useState({});
+
+  useEffect(() => {
+    async function loadProjectData() {
+      const response = await fetch(`/api/project/${id}`);
+      const data = await response.json();
+      setProject(data);
+    }
+    loadProjectData();
+  }, [id]);
+
   return (
     <div className="project-container">
       <h4>
-        Тестовый проект
+        {project.title}
         {' '}
         <button type="button" className="btn btn-outline-dark btn-add" data-bs-toggle="modal" data-bs-target="#projectModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" className="bi bi-pencil-fill" viewBox="0 0 16 16" style={{ marginLeft: '5px', marginBottom: '5px' }}>
@@ -15,7 +26,7 @@ function App() {
         </button>
       </h4>
       <div className="col-sm-6 project-desc">
-        <p>Интернет-магазин одежды и аксессуаров для детей от 3 до 14 лет. Ассортиментный ряд включает множество разнообразных по цвету и фасону моделей повседневной, школьной, спортивной и праздничной одежды</p>
+        <p>{project.description}</p>
       </div>
       <div className="project-resume">
         <div className="card text-bg-warning mb-3" style={{ maxWidth: '18rem' }}>
@@ -26,7 +37,9 @@ function App() {
           <div className="card-body">
             <p className="card-text">
               <b>Индустрия</b>
-              : интернет-торговля
+              :
+              {' '}
+              {project.industry.toLowerCase()}
             </p>
             <p className="card-text">
               <b>Ежемесячный CF через год</b>
@@ -57,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default ProjectPage;
