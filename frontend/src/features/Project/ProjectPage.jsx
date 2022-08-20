@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import ProjectModal from './ProjectModal';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import actionType from '../store/actions';
+// import ProjectModal from './ProjectModal';
 import RevenueData from './RevenueData';
 
 function ProjectPage({ id }) {
-  const [project, setProject] = useState({});
+  const project = useSelector((state) => state.projects.curProject);
+  const dispatch = useDispatch();
+
+  const memoLoadProjectData = useCallback(
+    async () => {
+      const response = await fetch(`/api/project/${id}`);
+      const projectData = await response.json();
+      projectData.industry = projectData.industry.toLowerCase();
+      dispatch({ type: actionType.LOAD_PROJECT, payload: projectData });
+    },
+    [dispatch, id],
+  );
 
   useEffect(() => {
-    async function loadProjectData() {
-      const response = await fetch(`/api/project/${id}`);
-      const data = await response.json();
-      data.industry = data.industry.toLowerCase();
-      setProject(data);
-    }
-    loadProjectData();
-  }, [id]);
+    memoLoadProjectData();
+  }, [id, memoLoadProjectData]);
 
   return (
     <div className="project-container">
@@ -64,7 +71,7 @@ function ProjectPage({ id }) {
       </div>
       <div className="fin-data-group">
         <RevenueData />
-        <ProjectModal project={project} setProject={setProject} />
+        {/* <ProjectModal /> */}
       </div>
       <button type="submit" className="btn btn-dark">Загрузить отчет о проекте</button>
     </div>

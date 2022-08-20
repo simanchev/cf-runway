@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ProjectPage from './features/Project/ProjectPage';
+import ProjectPage from './features/project/ProjectPage';
 
 function App() {
   return (
