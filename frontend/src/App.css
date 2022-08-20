@@ -104,8 +104,16 @@ h6 {
 }
 
 .btn-add {
-  border: 1px dotted black;
-  padding: 1px 8px;
+  border: unset;
+  padding: unset;
+  box-shadow: unset !important;
+  /* pointer-events: none; */
+  /* cursor: pointer !important; */
+}
+
+.btn-add:hover, .btn-add:focus {
+  background-color: white;
+  color: black;
 }
 
 .check-black:checked {
@@ -131,7 +139,7 @@ h4, h5 {
 }
 
 .card {
-  margin: 30px 20px 40px 0 !important;
+  margin: 40px 20px 50px 0 !important;
 }
 
 .project-resume {
@@ -169,4 +177,65 @@ ul {
 
 ul {
   margin: 0 !important;
+}
+
+.card-text:last-child {
+  margin-bottom: 5px !important;
+}
+
+.modal-dialog {
+  width: 500px !important;
+}
+
+.modal-content {
+  padding: 30px 40px !important;
+}
+
+.modal-content > div {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.modal-header {
+  padding: 0 0 20px 0;
+}
+
+.modal-body {
+  padding: 40px 0 60px 0;
+}
+
+.modal-footer {
+  border: unset;
+  justify-content: left;
+  padding-top: 0;
+}
+
+form .mb-3 {
+  margin-bottom: 30px !important;
+}
+
+label, input, select {
+  font-size: 15px !important;
+}
+
+.modal-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-flex input, .modal-flex select {
+  width: 190px !important;
+}
+
+form .mb-3:last-child {
+  margin-bottom: 0 !important;
+}
+
+.btn-modal {
+  margin: 0;
 }
