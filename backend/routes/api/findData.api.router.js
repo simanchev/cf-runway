@@ -35,6 +35,29 @@ finDataRouter.post('/project/:id/findata/new', async (req, res) => {
   }
 });
 
+finDataRouter.put('/findata/:id', async (req, res) => {
+  const { id } = req.params;
+  const {
+    fin_types_id, title, sum, regular, start_date, end_date,
+  } = req.body;
+
+  try {
+    await Fin_data.update({
+      fin_types_id,
+      title,
+      sum,
+      regular,
+      start_date,
+      end_date,
+    }, {
+      where: { id },
+    });
+    res.status(201).json({ updated: true });
+  } catch (err) {
+    res.status(500).json({ updated: false, error: 'Не удалось сохранить изменения' });
+  }
+});
+
 finDataRouter.delete('/findata/:id', async (req, res) => {
   const { id } = req.params;
 

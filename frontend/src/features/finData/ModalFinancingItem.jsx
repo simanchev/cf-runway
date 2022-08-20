@@ -15,7 +15,7 @@ function FinDataModal() {
       method: 'POST',
       headers: { 'Content-Type': 'Application/json' },
       body: JSON.stringify({
-        fin_types_id: 1,
+        fin_types_id: 4,
         title: title.value,
         sum: sum.value,
         regular: regular.value,
@@ -41,14 +41,12 @@ function FinDataModal() {
   }
 
   return (
-    <div className="modal fade" id="finDataModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade" id="modalFinancingItem" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">
-              {finData.id ? 'Изменить текущую' : 'Добавить новую'}
-              {' '}
-              операцию
+              {finData.id ? 'Изменить текущую операцию' : 'Добавить новое финансирование'}
             </h5>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
