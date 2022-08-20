@@ -81,8 +81,6 @@ th, td {
 }
 
 .fin-data {
-  /* padding: 0 20px;
-  border-left: 3px solid green; */
   padding: 20px 20px 40px 20px;
   border-left: 1px solid #dee2e6;
   border-right: 1px solid #dee2e6;
@@ -107,8 +105,6 @@ h6 {
   border: unset;
   padding: unset;
   box-shadow: unset !important;
-  /* pointer-events: none; */
-  /* cursor: pointer !important; */
 }
 
 .btn-add:hover, .btn-add:focus {
@@ -123,7 +119,6 @@ h6 {
 
 .nav-tabs > li > a {
   padding: 10px 20px;
-
 }
 
 button {
@@ -214,7 +209,7 @@ form .mb-3 {
   margin-bottom: 30px !important;
 }
 
-label, input, select {
+label, input, select, textarea {
   font-size: 15px !important;
 }
 
@@ -238,4 +233,14 @@ form .mb-3:last-child {
 
 .btn-modal {
   margin: 0;
+}
+
+textarea {
+  min-height: calc(9.0em + 0.75rem + 2px) !important;
+}
+
+.project-desc {
+  margin-top: 40px !important;
+  border-left: 3px solid black;
+  padding-left: 30px !important;
 }
