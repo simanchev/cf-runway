@@ -47,7 +47,7 @@ function FinDataModal() {
             </form>
           </div>
           <div className="modal-footer">
-            <button type="submit" className="btn btn-dark btn-modal">Добавить</button>
+            <button type="submit" className="btn btn-dark btn-modal">{finData.id ? 'Сохранить изменения' : 'Добавить'}</button>
           </div>
         </div>
       </div>

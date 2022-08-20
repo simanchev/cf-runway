@@ -1,65 +1,4 @@
-/* h6 {
-  margin-bottom: 20px;
-}
-
-label {
-  margin: 0   !important;
-  white-space: nowrap;
-}
-
-.data-input-section {
-  display: flex;
-  align-items: center;
-  width: 700px;
-}
-
-.data-input-section > * {
-  margin-right: 10px;
-  font-size: 14px;
-}
-
-.form-check {
-  display: flex;
-  align-items: center;
-}
-
-.flex-check {
-  margin-right: 5px;
-}
-
-.date-control {
-  width: 350px;
-}
-
-.input-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 30px;
-}
-
-table {
-  margin: 0 !important;
-  font-size: 14px;
-}
-
-.number-control {
-  width: 100px;
-}
-
-.btn-update {
-  padding: 0;
-  border: unset;
-}
-
-.btn-update:hover {
-  border: unset;
-}
-
- */
-
-
- .container {
+.container {
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -204,6 +143,7 @@ ul {
   justify-content: left;
   padding: 0;
   padding-top: 20px !important;
+  margin-bottom: 10px;
 }
 
 form .mb-3 {
@@ -244,4 +184,25 @@ textarea {
   margin-top: 40px !important;
   border-left: 3px solid black;
   padding-left: 30px !important;
+}
+
+.navbar {
+  background-color: rgb(241, 238, 238);
+}
+
+.navbar a {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.navbar > .container {
+  margin: 10px 70px;
+}
+
+.navbar button {
+  margin-left: 10px;
+}
+
+.modal-footer button {
+  margin: 0;
 }
