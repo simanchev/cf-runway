@@ -12,4 +12,19 @@ projectRouter.get('/:id', async (req, res) => {
   }
 });
 
+projectRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, industry, description } = req.body;
+
+  try {
+    await Project.update(
+      { title, industry, description },
+      { where: { id } },
+    );
+    res.status(201).json({ updated: true });
+  } catch (err) {
+    res.status(500).json({ updated: false, error: 'Не удалось обновить данные проекта' });
+  }
+});
+
 module.exports = projectRouter;

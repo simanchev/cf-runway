@@ -9,6 +9,7 @@ function ProjectPage({ id }) {
     async function loadProjectData() {
       const response = await fetch(`/api/project/${id}`);
       const data = await response.json();
+      data.industry = data.industry.toLowerCase();
       setProject(data);
     }
     loadProjectData();
@@ -39,7 +40,7 @@ function ProjectPage({ id }) {
               <b>Индустрия</b>
               :
               {' '}
-              {project.industry.toLowerCase()}
+              {project.industry}
             </p>
             <p className="card-text">
               <b>Ежемесячный CF через год</b>
@@ -63,7 +64,7 @@ function ProjectPage({ id }) {
       </div>
       <div className="fin-data-group">
         <RevenueData />
-        <ProjectModal />
+        <ProjectModal project={project} setProject={setProject} />
       </div>
       <button type="submit" className="btn btn-dark">Загрузить отчет о проекте</button>
     </div>
