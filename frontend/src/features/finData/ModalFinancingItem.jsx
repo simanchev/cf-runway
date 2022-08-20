@@ -5,27 +5,43 @@ function FinDataModal() {
   const finData = useSelector((state) => state.finData.curFinData);
   const projectId = useSelector((state) => state.projects.curProject.id);
 
-  async function addNewFinData(event) {
+  async function finDataHandler(event) {
     event.preventDefault();
     const {
-      title, sum, regular, startDate, endDate,
+      title, sum, regular, startDate, endDate, addBtn,
     } = event.target;
 
-    const response = await fetch(`/api/project/${projectId}/findata/new`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'Application/json' },
-      body: JSON.stringify({
-        fin_types_id: 4,
-        title: title.value,
-        sum: sum.value,
-        regular: regular.value,
-        start_date: startDate.value,
-        end_date: endDate.value,
-      }),
-    });
-    const data = await response.json();
-
-    if (data.created) window.location.href = '/';
+    if (addBtn) {
+      const response = await fetch(`/api/project/${projectId}/findata/new`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          fin_types_id: 4,
+          title: title.value,
+          sum: sum.value,
+          regular: regular.value,
+          start_date: startDate.value,
+          end_date: endDate.value,
+        }),
+      });
+      const data = await response.json();
+      if (data.created) window.location.reload();
+    } else {
+      const response = await fetch(`/api/findata/${finData.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          fin_types_id: 4,
+          title: title.value,
+          sum: sum.value,
+          regular: regular.value,
+          start_date: startDate.value,
+          end_date: endDate.value,
+        }),
+      });
+      const data = await response.json();
+      if (data.updated) window.location.reload();
+    }
   }
 
   async function deleteFinData(event) {
@@ -51,7 +67,7 @@ function FinDataModal() {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
           <div className="modal-body">
-            <form className="modal-form" onSubmit={addNewFinData}>
+            <form className="modal-form" onSubmit={finDataHandler}>
               <div className="mb-3">
                 <label className="form-label">Наименование</label>
                 <input type="text" className="form-control" name="title" defaultValue={finData.title} placeholder="продажа товаров или услуг" required />
@@ -80,7 +96,9 @@ function FinDataModal() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-dark btn-modal">{finData.id ? 'Сохранить изменения' : 'Добавить'}</button>
+                {finData.id
+                  ? <button type="submit" className="btn btn-dark btn-modal">Сохранить изменения</button>
+                  : <button type="submit" className="btn btn-dark btn-modal" name="addBtn">Добавить</button>}
                 {finData.id && <button type="button" onClick={deleteFinData} className="btn btn-danger btn-modal">Удалить</button>}
               </div>
             </form>

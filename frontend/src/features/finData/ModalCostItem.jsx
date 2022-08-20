@@ -53,7 +53,7 @@ function FinDataModal() {
     });
     const data = await response.json();
 
-    if (data.deleted) window.location.reload();
+    if (data.deleted) window.location.href = '/';
   }
 
   return (
