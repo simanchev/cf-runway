@@ -6,6 +6,7 @@ const initialState = {
   costData: [],
   investmentData: [],
   financingData: [],
+  curFinData: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -20,6 +21,9 @@ function reducer(state = initialState, action) {
       return {
         ...state, revenueData, costData, investmentData, financingData,
       };
+
+    case actionType.SELECT_FIN_DATA:
+      return { ...state, curFinData: action.payload };
 
     default:
       return state;
