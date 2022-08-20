@@ -2,7 +2,7 @@
 const finDataRouter = require('express').Router();
 const { Fin_data } = require('../../db/models');
 
-finDataRouter.get('/:id/findata', async (req, res) => {
+finDataRouter.get('/project/:id/findata', async (req, res) => {
   const { id } = req.params;
 
   try {
@@ -13,7 +13,7 @@ finDataRouter.get('/:id/findata', async (req, res) => {
   }
 });
 
-finDataRouter.post('/:id/findata/new', async (req, res) => {
+finDataRouter.post('/project/:id/findata/new', async (req, res) => {
   const { id } = req.params;
   const {
     fin_types_id, title, sum, regular, start_date, end_date,
@@ -43,21 +43,6 @@ finDataRouter.delete('/findata/:id', async (req, res) => {
     res.status(200).json({ deleted: true });
   } catch (err) {
     res.status(500).json({ deleted: false, error: 'Не удалось удалить операцию' });
-  }
-
-  try {
-    await Fin_data.create({
-      project_id: id,
-      fin_types_id,
-      title,
-      sum,
-      regular,
-      start_date,
-      end_date,
-    });
-    res.status(201).json({ updated: true });
-  } catch (err) {
-    res.status(500).json({ updated: false, error: 'Не удалось сохранить операцию' });
   }
 });
 

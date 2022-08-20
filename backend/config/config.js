@@ -13,7 +13,7 @@ const config = (app) => {
   app.use(session(sessionConfig));
   app.use('/api', newDataRouter);
   app.use('/api/project', projectRouter);
-  app.use('/api/project', finDataRouter);
+  app.use('/api/', finDataRouter);
 };
 
 module.exports = config;

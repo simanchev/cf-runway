@@ -28,6 +28,18 @@ function FinDataModal() {
     if (data.created) window.location.href = '/';
   }
 
+  async function deleteFinData(event) {
+    event.preventDefault();
+
+    const response = await fetch(`/api/findata/${finData.id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'Application/json' },
+    });
+    const data = await response.json();
+
+    if (data.deleted) window.location.href = '/';
+  }
+
   return (
     <div className="modal fade" id="finDataModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -71,6 +83,7 @@ function FinDataModal() {
               </div>
               <div className="modal-footer">
                 <button type="submit" className="btn btn-dark btn-modal">{finData.id ? 'Сохранить изменения' : 'Добавить'}</button>
+                {finData.id && <button type="button" onClick={deleteFinData} className="btn btn-danger btn-modal">Удалить</button>}
               </div>
             </form>
           </div>
