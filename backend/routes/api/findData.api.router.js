@@ -13,4 +13,52 @@ finDataRouter.get('/:id/findata', async (req, res) => {
   }
 });
 
+finDataRouter.post('/:id/findata/new', async (req, res) => {
+  const { id } = req.params;
+  const {
+    fin_types_id, title, sum, regular, start_date, end_date,
+  } = req.body;
+
+  try {
+    await Fin_data.create({
+      project_id: id,
+      fin_types_id,
+      title,
+      sum,
+      regular,
+      start_date,
+      end_date,
+    });
+    res.status(201).json({ created: true });
+  } catch (err) {
+    res.status(500).json({ created: false, error: 'Не удалось сохранить операцию' });
+  }
+});
+
+finDataRouter.delete('/findata/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Fin_data.destroy({ where: { id } });
+    res.status(200).json({ deleted: true });
+  } catch (err) {
+    res.status(500).json({ deleted: false, error: 'Не удалось удалить операцию' });
+  }
+
+  try {
+    await Fin_data.create({
+      project_id: id,
+      fin_types_id,
+      title,
+      sum,
+      regular,
+      start_date,
+      end_date,
+    });
+    res.status(201).json({ updated: true });
+  } catch (err) {
+    res.status(500).json({ updated: false, error: 'Не удалось сохранить операцию' });
+  }
+});
+
 module.exports = finDataRouter;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import FinDataModal from './FinDataModal';
-import RevenueDataItem from './RevenueDataItem';
+import RevenueDataItem from './FinDataItem';
 import actionType from '../store/actions';
 
 function FinDataList({ category }) {
