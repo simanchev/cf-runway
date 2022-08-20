@@ -1,4 +1,3 @@
-'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Fin_data', {
@@ -23,12 +22,18 @@ module.exports = {
         type: Sequelize.TEXT,
       },
       sum: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      date: {
+      start_date: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      end_date: {
         type: Sequelize.TEXT,
       },
       regular: {
+        allowNull: false,
         type: Sequelize.BOOLEAN,
       },
       createdAt: {
@@ -38,7 +43,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {

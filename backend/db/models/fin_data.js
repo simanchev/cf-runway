@@ -33,12 +33,18 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
     },
     sum: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
-    date: {
+    start_date: {
+      allowNull: false,
+      type: DataTypes.TEXT,
+    },
+    end_date: {
       type: DataTypes.TEXT,
     },
     regular: {
+      allowNull: false,
       type: DataTypes.BOOLEAN,
     },
     createdAt: {
