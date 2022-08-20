@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actionType from '../store/actions';
-// import ProjectModal from './ProjectModal';
+import ProjectModal from './ProjectModal';
 import RevenueData from './RevenueData';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
+  // const finData = useSelector((state) => state.finData);
+
   const dispatch = useDispatch();
 
   const memoLoadProjectData = useCallback(
@@ -18,9 +20,19 @@ function ProjectPage({ id }) {
     [dispatch, id],
   );
 
+  const memoLoadFindData = useCallback(
+    async () => {
+      const response = await fetch(`/api/project/${id}/findata`);
+      const projectFinData = await response.json();
+      dispatch({ type: actionType.LOAD_PROJECT, payload: projectFinData });
+    },
+    [dispatch, id],
+  );
+
   useEffect(() => {
     memoLoadProjectData();
-  }, [id, memoLoadProjectData]);
+    memoLoadFindData();
+  }, [id, memoLoadFindData, memoLoadProjectData]);
 
   return (
     <div className="project-container">
@@ -71,7 +83,7 @@ function ProjectPage({ id }) {
       </div>
       <div className="fin-data-group">
         <RevenueData />
-        {/* <ProjectModal /> */}
+        <ProjectModal />
       </div>
       <button type="submit" className="btn btn-dark">Загрузить отчет о проекте</button>
     </div>

@@ -1,14 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
-function ProjectModal({ project }) {
+function ProjectModal() {
+  const project = useSelector((state) => state.projects.curProject);
   async function updateProject(event) {
     event.preventDefault();
     console.log(event.target);
     const { projectTitle, projectIndustry, projectDescription } = event.target;
-
-    console.log(projectTitle.value);
-    console.log(projectIndustry.value);
-    console.log(projectDescription.value);
 
     const response = await fetch(`/api/project/${project.id}`, {
       method: 'PUT',
