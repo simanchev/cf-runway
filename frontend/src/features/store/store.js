@@ -1,6 +1,6 @@
 import { combineReducers, createStore } from 'redux';
-import projectReducer from '../project/reducers/projectReducer';
-import finDataReducer from '../project/reducers/finDataReducer';
+import projectReducer from '../reducers/projectReducer';
+import finDataReducer from '../reducers/finDataReducer';
 
 const rootReducer = combineReducers({
   projects: projectReducer,

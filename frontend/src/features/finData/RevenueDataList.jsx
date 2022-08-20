@@ -1,7 +1,7 @@
 import React from 'react';
 import FinDataModal from './FinDataModal';
 
-function RevenueData() {
+function RevenueDataList() {
   return (
     <div className="fin-data-section">
       <ul className="nav nav-tabs">
@@ -62,4 +62,4 @@ function RevenueData() {
   );
 }
 
-export default RevenueData;
+export default RevenueDataList;

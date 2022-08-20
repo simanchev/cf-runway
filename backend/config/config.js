@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const sessionConfig = require('./session-config');
 const newDataRouter = require('../routes/api/newData.api.router');
 const projectRouter = require('../routes/api/project.api.router');
+const finDataRouter = require('../routes/api/findData.api.router');
 
 const config = (app) => {
   app.use(express.urlencoded({ extended: true }));
@@ -12,6 +13,7 @@ const config = (app) => {
   app.use(session(sessionConfig));
   app.use('/api', newDataRouter);
   app.use('/api/project', projectRouter);
+  app.use('/api/project', finDataRouter);
 };
 
 module.exports = config;

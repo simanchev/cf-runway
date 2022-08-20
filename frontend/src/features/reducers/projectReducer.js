@@ -1,5 +1,5 @@
 /* eslint-disable no-case-declarations */
-import actionType from '../../store/actions';
+import actionType from '../store/actions';
 
 const initialState = {
   projectList: [],
