@@ -85,7 +85,7 @@ function ProjectPage({ id }) {
         <FinDataSection />
         <ProjectModal />
       </div>
-      <button type="submit" className="btn btn-dark">Загрузить отчет о проекте</button>
+      <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
     </div>
   );
 }

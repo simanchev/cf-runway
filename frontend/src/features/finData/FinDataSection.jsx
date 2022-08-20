@@ -1,5 +1,5 @@
 import React from 'react';
-import RevenueDataList from './RevenueDataList';
+import FinDataList from './FinDataList';
 
 function RevenueDataSection() {
   return (
@@ -19,10 +19,10 @@ function RevenueDataSection() {
         </li>
       </ul>
       <div className="tab-content">
-        <div className="tab-pane fade show active fin-data-wrap" id="revenue-tab-pane" role="tabpanel" aria-labelledby="revenue-tab" tabIndex="0"><RevenueDataList /></div>
-        <div className="tab-pane fade fin-data-wrap" id="cost-tab-pane" role="tabpanel" aria-labelledby="cost-tab" tabIndex="0">...</div>
-        <div className="tab-pane fade fin-data-wrap" id="investment-tab-pane" role="tabpanel" aria-labelledby="investment-tab" tabIndex="0">...</div>
-        <div className="tab-pane fade fin-data-wrap" id="financing-tab-pane" role="tabpanel" aria-labelledby="financing-tab" tabIndex="0">...</div>
+        <div className="tab-pane fade show active fin-data-wrap" id="revenue-tab-pane" role="tabpanel" aria-labelledby="revenue-tab" tabIndex="0"><FinDataList category="revenueData" /></div>
+        <div className="tab-pane fade fin-data-wrap" id="cost-tab-pane" role="tabpanel" aria-labelledby="cost-tab" tabIndex="0"><FinDataList category="costData" /></div>
+        <div className="tab-pane fade fin-data-wrap" id="investment-tab-pane" role="tabpanel" aria-labelledby="investment-tab" tabIndex="0"><FinDataList category="investmentData" /></div>
+        <div className="tab-pane fade fin-data-wrap" id="financing-tab-pane" role="tabpanel" aria-labelledby="financing-tab" tabIndex="0"><FinDataList category="financingData" /></div>
       </div>
     </div>
   );

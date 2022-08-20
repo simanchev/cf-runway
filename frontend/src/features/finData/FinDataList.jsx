@@ -4,8 +4,8 @@ import FinDataModal from './FinDataModal';
 import RevenueDataItem from './RevenueDataItem';
 import actionType from '../store/actions';
 
-function RevenueDataList() {
-  const revenueData = useSelector((state) => state.finData.revenueData);
+function FinDataList({ category }) {
+  const revenueData = useSelector((state) => state.finData[category]);
   const dispatch = useDispatch();
 
   function loadModal() {
@@ -41,4 +41,4 @@ function RevenueDataList() {
   );
 }
 
-export default RevenueDataList;
+export default FinDataList;
