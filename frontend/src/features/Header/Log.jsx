@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Log() {
+  const [log, setLogin] = useState('');
   async function login(e) {
     e.preventDefault();
     const { email, password } = e.target;
@@ -17,6 +18,12 @@ function Log() {
     });
     const data = await response.json();
     console.log(data);
+    if (data.login === false) {
+      setLogin(data.message);
+    }
+    if (data.login === true) {
+      setLogin('');
+    }
   }
   return (
     <div className="modal fade" id="logModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -34,6 +41,7 @@ function Log() {
               <div className="mb-3">
                 <input type="password" className="form-control" name="password" placeholder="Пароль" required />
               </div>
+              <div>{log}</div>
               <div className="modal-footer">
                 <button type="submit" className="btn btn-dark">Вход</button>
               </div>

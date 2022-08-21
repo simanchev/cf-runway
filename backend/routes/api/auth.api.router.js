@@ -48,23 +48,25 @@ authRouter.post('/login', async (req, res) => {
       email,
       password,
     } = req.body;
-    // console.log(password, 'pppaaassss');
+    console.log(password, 'pppaaassss');
 
     const checkedUser = await User.findOne({ where: { email }, raw: true });
-    // console.log(checkedUser, '>>>>>>>');
+    console.log(checkedUser, '>>>>>>>');
     const isSame = await bcrypt.compare(password, checkedUser.password);
-    // console.log(isSame);
+    console.log(isSame);
     // console.log(req.session, 'ssseessssion');
+
     if (checkedUser && isSame) {
       // const isSame = await bcrypt.compare(password, checkedUser.password);
       // console.log(isSame);
+      // TODO не заходит в условие когда чектюзер фолс, выкидывает в catch
 
       req.session.userId = checkedUser.id;
       const { id } = checkedUser;
       req.session.user = { id };
       res.json({ login: true });
     } else {
-      res.status(500).json({ errorMessage: 'Такого пользователя не существует или неверный пароль!' });
+      res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
     }
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
