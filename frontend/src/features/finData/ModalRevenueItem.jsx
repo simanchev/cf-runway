@@ -5,7 +5,7 @@ import updateFinData from './functions/updateFinData copy';
 import deleteFinData from './functions/deleteFinData';
 import actionType from '../store/actions';
 
-function FinDataModal() {
+function ModalRevenueItem() {
   const dispatch = useDispatch();
   const finData = useSelector((state) => state.finData.curFinData);
   const project = useSelector((state) => state.projects.curProject);
@@ -19,7 +19,7 @@ function FinDataModal() {
 
   async function addUpdateDataHandler(event) {
     event.preventDefault();
-    if (event.target.addBtn) {
+    if (!finData.id) {
       await addFinData(event, project.id, finTypeId);
     } else {
       await updateFinData(event, finData.id);
@@ -28,11 +28,10 @@ function FinDataModal() {
     event.target.reset();
   }
 
-  async function deleteDataHandler(event) {
-    event.preventDefault();
+  async function deleteDataHandler() {
     await deleteFinData(finData.id);
     reloadFinData();
-    event.target.reset();
+    document.querySelector('.modal-form').reset();
   }
 
   return (
@@ -88,4 +87,4 @@ function FinDataModal() {
   );
 }
 
-export default FinDataModal;
+export default ModalRevenueItem;

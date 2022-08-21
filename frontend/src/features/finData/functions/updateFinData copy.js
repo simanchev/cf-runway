@@ -6,7 +6,6 @@ async function updateFinData(event, finDataId) {
     method: 'PUT',
     headers: { 'Content-Type': 'Application/json' },
     body: JSON.stringify({
-      fin_types_id: 1,
       title: title.value,
       sum: sum.value,
       regular: regular.value,
