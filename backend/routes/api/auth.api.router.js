@@ -64,7 +64,7 @@ authRouter.post('/login', async (req, res) => {
       req.session.user = { id };
       res.json({ login: true });
     } else {
-      res.status(500).json({ errorMessage: 'пользователя не существует' });
+      res.status(500).json({ errorMessage: 'Такого пользователя не существует или неверный пароль!' });
     }
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
