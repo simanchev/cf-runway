@@ -39,10 +39,16 @@ function Reg() {
     });
     const data = await response.json();
     console.log(data);
-    if (!data.isSame) {
+    if (data.isSame === false) {
       setText('Пароли не совпадают!');
     }
     if (data.isSame) {
+      setText('');
+    }
+    if (data.passwordLength === false) {
+      setText('Слишком короткий пароль!');
+    }
+    if (data.passwordLength !== false) {
       setText('');
     }
   }

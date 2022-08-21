@@ -6,51 +6,44 @@ const { User } = require('../../db/models');
 authRouter.post('/registration', async (req, res) => {
   try {
     const {
-      username,
+      name,
       email,
       password,
       passwordConf,
     } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    // console.log(hash);
-    if (password !== passwordConf) {
+    console.log(name);
+
+    if (password !== passwordConf) { // сравниваем пароли на сервере
       res.status(500).json({ isSame: false });
-    } else {
-      res.status(201).json({ isSame: true });
+      return;
     }
 
-    console.log(password.length);
-    if (password.length < 4) {
-      res.status(500).json({ length: false });
+    if (password.length < 4) { // валидация по длинне пароля
+      res.status(500).json({ passwordLength: false });
+      return;
     }
+
+    // ищем юзера. если есть - то "уже зарегистрирован"
     const user = await User.findOne({ where: { email } });
     if (user) {
-      res.json({ user: false });
-    } else {
-      await User.create({
-        name: username,
-        email,
-        password: hash,
-      });
+      res.status(500).json({ registration: false });
+      return;
     }
-    // TODO доделать проверки и варианты выполнения их на клиенте + логаут
+    await User.create({
+      name,
+      email,
+      password: hash,
+    });
+    res.status(201).json({ registration: true });
 
-    //   if (user) {
-    //     res.json({ status: 'falure', errorMessage: 'Пользователь уже зарегистрирован' });
-    //   } else {
-    //     const hash = await bcrypt.hash(password, 10);
-
-    //     await User.create({
-    //       username,
-    //       email,
-    //       password: hash,
-    //     });
-
-  //     res.status(201).json({ registration: true, message: '/auth/login' });
-  //   }
+    // TODO отрисовка на клиенте(корректная), чекбокс!!!!!
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
   }
+});
+authRouter.get('/logout', (req, res)=>{
+  
 });
 
 module.exports = authRouter;
