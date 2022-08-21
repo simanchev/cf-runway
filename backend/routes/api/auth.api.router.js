@@ -11,19 +11,29 @@ authRouter.post('/registration', async (req, res) => {
       password,
       passwordConf,
     } = req.body;
-    console.log(req.body.checked);
     const hash = await bcrypt.hash(password, 10);
     // console.log(hash);
     if (password !== passwordConf) {
       res.status(500).json({ isSame: false });
     } else {
-      let re = /@/
-     let x = re.test( password)
-    
       res.status(201).json({ isSame: true });
     }
 
-    //   const user = await User.findOne({ where: { email } });
+    console.log(password.length);
+    if (password.length < 4) {
+      res.status(500).json({ length: false });
+    }
+    const user = await User.findOne({ where: { email } });
+    if (user) {
+      res.json({ user: false });
+    } else {
+      await User.create({
+        name: username,
+        email,
+        password: hash,
+      });
+    }
+    // TODO доделать проверки и варианты выполнения их на клиенте + логаут
 
     //   if (user) {
     //     res.json({ status: 'falure', errorMessage: 'Пользователь уже зарегистрирован' });

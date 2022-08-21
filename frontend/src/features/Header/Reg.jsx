@@ -40,8 +40,11 @@ function Reg() {
     const data = await response.json();
     console.log(data);
     if (!data.isSame) {
-      setText((prev) => prev += 'Пароли не совпадают!!!');
-    }if()
+      setText('Пароли не совпадают!');
+    }
+    if (data.isSame) {
+      setText('');
+    }
   }
 
   return (
@@ -70,7 +73,7 @@ function Reg() {
                 <input type="checkbox" className="form-check-input" id="autolog-check" name="autolog" />
                 <label className="form-check-label" htmlFor="autolog-check">Войти при регистрации</label>
               </div>
-              <div>{text}</div>
+              <div className="isSame">{text}</div>
               <div className="modal-footer">
                 <button type="submit" className="btn btn-dark">Создать аккаунт</button>
               </div>
