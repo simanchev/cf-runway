@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import addFinData from './functions/addFinData';
-import updateFinData from './functions/updateFinData copy';
+import updateFinData from './functions/updateFinData';
 import deleteFinData from './functions/deleteFinData';
 import actionType from '../store/actions';
 

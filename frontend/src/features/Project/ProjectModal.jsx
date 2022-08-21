@@ -1,11 +1,20 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import actionType from '../store/actions';
 
 function ProjectModal() {
   const project = useSelector((state) => state.projects.curProject);
+  const dispatch = useDispatch();
+
+  async function showUpdatedProject() {
+    const updateResponse = await fetch(`/api/project/${project.id}`);
+    const projectData = await updateResponse.json();
+    projectData.industry = projectData.industry.toLowerCase();
+    dispatch({ type: actionType.LOAD_PROJECT, payload: projectData });
+  }
+
   async function updateProject(event) {
     event.preventDefault();
-    console.log(event.target);
     const { projectTitle, projectIndustry, projectDescription } = event.target;
 
     const response = await fetch(`/api/project/${project.id}`, {
@@ -18,8 +27,7 @@ function ProjectModal() {
       }),
     });
     const data = await response.json();
-
-    if (data.updated) window.location.href = '/';
+    if (data.updated) showUpdatedProject();
   }
 
   return (
@@ -45,7 +53,7 @@ function ProjectModal() {
                 <textarea className="form-control" name="projectDescription" defaultValue={project.description} />
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-dark btn-modal">Сохранить изменения</button>
+                <button type="submit" className="btn btn-dark btn-modal" data-bs-dismiss="modal">Сохранить изменения</button>
               </div>
             </form>
           </div>
