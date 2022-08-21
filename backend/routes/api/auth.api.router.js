@@ -42,8 +42,41 @@ authRouter.post('/registration', async (req, res) => {
     res.status(500).json({ errorMessage: err.message });
   }
 });
-authRouter.get('/logout', (req, res)=>{
-  
+authRouter.post('/login', async (req, res) => {
+  try {
+    const {
+      email,
+      password,
+    } = req.body;
+    // console.log(password, 'pppaaassss');
+
+    const checkedUser = await User.findOne({ where: { email }, raw: true });
+    // console.log(checkedUser, '>>>>>>>');
+    const isSame = await bcrypt.compare(password, checkedUser.password);
+    // console.log(isSame);
+    // console.log(req.session, 'ssseessssion');
+    if (checkedUser && isSame) {
+      // const isSame = await bcrypt.compare(password, checkedUser.password);
+      // console.log(isSame);
+
+      req.session.userId = checkedUser.id;
+      const { id } = checkedUser;
+      req.session.user = { id };
+      res.json({ login: true });
+    } else {
+      res.status(500).json({ errorMessage: 'пользователя не существует' });
+    }
+  } catch (err) {
+    res.status(500).json({ errorMessage: err.message });
+  }
+});
+authRouter.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.clearCookie('user_sid');
+  res.json({ logout: true });
 });
 
 module.exports = authRouter;
+// TODO сделать формы умными - условный рендеринг, поправить кнопки
+// положить юзера в стейт, сделать валидацию
+// доделать чекбокс

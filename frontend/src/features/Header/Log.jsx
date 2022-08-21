@@ -1,6 +1,23 @@
 import React from 'react';
 
 function Log() {
+  async function login(e) {
+    e.preventDefault();
+    const { email, password } = e.target;
+    const response = await fetch('/api/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value,
+
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+  }
   return (
     <div className="modal fade" id="logModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -10,7 +27,7 @@ function Log() {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
           <div className="modal-body" style={{ paddingBottom: '0' }}>
-            <form id="log-form">
+            <form id="log-form" onSubmit={login}>
               <div className="mb-3">
                 <input type="email" className="form-control" name="email" placeholder="Email адрес" required />
               </div>
