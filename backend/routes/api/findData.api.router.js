@@ -6,7 +6,13 @@ finDataRouter.get('/project/:id/findata', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const finData = await Fin_data.findAll({ raw: true, where: { project_id: id } });
+    const finData = await Fin_data.findAll({
+      raw: true,
+      where: { project_id: id },
+      order: [
+        ['createdAt', 'ASC'],
+      ],
+    });
     res.status(201).json(finData);
   } catch (err) {
     res.status(500).json({ error: 'Проект не найден' });
