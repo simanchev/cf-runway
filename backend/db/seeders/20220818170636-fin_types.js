@@ -1,14 +1,12 @@
-'use strict';
-
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface) {
     await queryInterface.bulkInsert('Fin_types', [{
-      title: 'Поступление(доходы)',
+      title: 'Поступления от продаж',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
-      title: 'Оплаты(расходы)',
+      title: 'Оплата товаров и услуг',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -24,7 +22,7 @@ module.exports = {
     }], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.bulkDelete('Fin_types', null, {});
   },
 };

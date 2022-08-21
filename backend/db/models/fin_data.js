@@ -5,10 +5,9 @@ const {
 module.exports = (sequelize, DataTypes) => {
   // eslint-disable-next-line camelcase
   class Fin_data extends Model {
-    static associate({ Project, Fin_types, Schedule }) {
+    static associate({ Project, Fin_types}) {
       Fin_data.belongsTo(Project, { foreignKey: 'project_id' }),
-      Fin_data.belongsTo(Fin_types, { foreignKey: 'fin_types_id' }),
-      Fin_data.hasOne(Schedule, { foreignKey: 'fin_data_id' });
+      Fin_data.belongsTo(Fin_types, { foreignKey: 'fin_types_id' });
     }
   }
   Fin_data.init({
@@ -33,12 +32,66 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
     },
     sum: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
-    date: {
+    1: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    2: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    3: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    4: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    5: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    6: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    7: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    8: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    9: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    10: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    11: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    12: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+    },
+    start_date: {
+      allowNull: false,
+      type: DataTypes.TEXT,
+    },
+    end_date: {
       type: DataTypes.TEXT,
     },
     regular: {
+      allowNull: false,
       type: DataTypes.BOOLEAN,
     },
     createdAt: {

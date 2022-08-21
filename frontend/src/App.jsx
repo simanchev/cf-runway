@@ -1,11 +1,15 @@
 import React from 'react';
 import './App.css';
-import FinDataForm from './features/finData/FinDataForm';
+import Header from './features/Header/Header';
+import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
   return (
-    <div className="container">
-      <FinDataForm />
+    <div className="App">
+      <Header />
+      <div className="container" style={{ marginTop: '60px' }}>
+        <ProjectPage id={1} />
+      </div>
     </div>
   );
 }
