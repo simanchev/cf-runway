@@ -55,6 +55,7 @@ function ProjectPage({ id }) {
   }
 
   const cfAverage = Math.round((cfSchedule[9] + cfSchedule[10] + cfSchedule[11]) / 3);
+
   let cashDeficit = null;
   cfCumulativeSchedule.forEach((cf) => {
     if (cf < 0 && cf < cashDeficit) cashDeficit = cf;
@@ -101,7 +102,7 @@ function ProjectPage({ id }) {
         <p>{project.description}</p>
       </div>
       <div className="project-resume">
-        <div className="card text-bg-warning mb-3" style={{ maxWidth: '18rem' }}>
+        <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'} style={{ maxWidth: '18rem' }}>
           <div className="card-header">
             <h5>Резюме</h5>
           </div>
@@ -122,12 +123,16 @@ function ProjectPage({ id }) {
             </p>
             <p className="card-text">
               Потребность в дополнительном финансировании:
+              {cashDeficit
+                ? (
+                  <b>
+                    {' '}
+                    {Math.abs(cashDeficit).toLocaleString()}
+                    {' '}
+                    руб
+                  </b>
+                ) : <b> отсутствует</b>}
               {' '}
-              <b>
-                {Math.abs(cashDeficit).toLocaleString()}
-                {' '}
-                руб
-              </b>
             </p>
           </div>
         </div>
@@ -151,27 +156,27 @@ function ProjectPage({ id }) {
         <tbody>
           <tr>
             <td className="row-name">Поступления от продаж</td>
-            {revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
           <tr>
             <td className="row-name">Оплата товаров и услуг</td>
-            {costSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {costSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
           <tr>
             <td className="row-name">Инвестиции</td>
-            {investmentSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {investmentSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
           <tr>
             <td className="row-name">Финансирование</td>
-            {financingSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {financingSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
           <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
             <td className="row-name">Денежный поток</td>
-            {cfSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {cfSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
           <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
             <td className="row-name">Денежный поток, накопленный</td>
-            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
+            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
         </tbody>
       </table>
