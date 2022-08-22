@@ -5,6 +5,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 500000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1, 
   },
 
   {
@@ -13,6 +15,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 700000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -21,6 +25,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 900000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -29,6 +35,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 1100000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -37,6 +45,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 1500000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -45,6 +55,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 2000000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -53,6 +65,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 2500000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -61,6 +75,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 2900000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -69,6 +85,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 3300000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -77,6 +95,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 3500000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -85,6 +105,8 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 4000000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 
   {
@@ -93,5 +115,7 @@ export const UserData = [
     year: 2022,
     income: Math.floor(Math.random() * 1000000) + 1,
     cost: Math.floor(Math.random() * 1000000) - 1,
+    companyPrice: 4700000,
+    cashFlow: Math.floor(Math.random() * 1000000) + 1,
   },
 ]
