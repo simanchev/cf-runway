@@ -7,7 +7,7 @@ async function updateFinData(event, finDataId) {
     headers: { 'Content-Type': 'Application/json' },
     body: JSON.stringify({
       title: title.value,
-      sum: sum.value,
+      sum: Math.abs(sum.value),
       regular: regular.value,
       start_date: startDate.value,
       end_date: endDate.value,
