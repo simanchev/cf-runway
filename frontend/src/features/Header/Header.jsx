@@ -8,7 +8,9 @@ function Header() {
     if (e) {
       const response = await fetch('/api/auth/logout');
       const data = await response.json();
-      console.log(data);
+      if (data.logout) {
+        window.location.replace('/');
+      }
     }
   }
   return (

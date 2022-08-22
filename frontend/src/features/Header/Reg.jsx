@@ -3,26 +3,16 @@ import React, { useState } from 'react';
 function Reg() {
   const [text, setText] = useState('');
 
-  // function checkChange(e) {
-  //   if (e && text === 0) {
-  //     setText((pr) => pr = 1);
-  //   }
-  //   if (e && text === 1) {
-  //     setText((pr) => pr = 0);
-  //   }
-  // }
-
-  // TODO не передается стейт на сервер
-  // console.log(text);
   async function registration(event) {
     event.preventDefault();
     const {
-      name, email, password, passwordConf,
+      name, email, password, passwordConf, autolog,
     } = event.target;
     // console.log(name.value);
     // console.log(email.value);
     // console.log(password.value);
     // console.log(passwordConf.value);
+    console.log(autolog.checked);
 
     const response = await fetch('/api/auth/registration', {
       method: 'POST',
@@ -31,6 +21,7 @@ function Reg() {
         email: email.value,
         password: password.value,
         passwordConf: passwordConf.value,
+        autolog: autolog.checked,
 
       }),
       headers: {
@@ -39,10 +30,10 @@ function Reg() {
     });
     const data = await response.json();
     console.log(data);
-    if (data.isSame === false) {
+    if (data.isSame === false) { // TODO не работают когда разные пароли(не отображается стейт)
       setText('Пароли не совпадают!');
     }
-    if (data.isSame) {
+    if (data.isSame === true) {
       setText('');
     }
     if (data.passwordLength === false) {
@@ -50,6 +41,12 @@ function Reg() {
     }
     if (data.passwordLength !== false) {
       setText('');
+    }
+    if (data.registration === false) {
+      setText('Пользователь с таким email уже существует');
+    }
+    if (data.registration === true) {
+      window.location.replace('/');
     }
   }
 

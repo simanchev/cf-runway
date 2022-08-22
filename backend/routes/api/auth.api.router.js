@@ -10,9 +10,10 @@ authRouter.post('/registration', async (req, res) => {
       email,
       password,
       passwordConf,
+      autolog,
     } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    console.log(name);
+    console.log(autolog, '++++++++++++++');
 
     if (password !== passwordConf) { // сравниваем пароли на сервере
       res.status(500).json({ isSame: false });
@@ -52,6 +53,10 @@ authRouter.post('/login', async (req, res) => {
 
     const checkedUser = await User.findOne({ where: { email }, raw: true });
     console.log(checkedUser, '>>>>>>>');
+    if (checkedUser === null) {
+      res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
+      return;
+    }
     const isSame = await bcrypt.compare(password, checkedUser.password);
     console.log(isSame);
     // console.log(req.session, 'ssseessssion');
@@ -59,7 +64,6 @@ authRouter.post('/login', async (req, res) => {
     if (checkedUser && isSame) {
       // const isSame = await bcrypt.compare(password, checkedUser.password);
       // console.log(isSame);
-      // TODO не заходит в условие когда чектюзер фолс, выкидывает в catch
 
       req.session.userId = checkedUser.id;
       const { id } = checkedUser;
@@ -79,6 +83,8 @@ authRouter.get('/logout', (req, res) => {
 });
 
 module.exports = authRouter;
-// TODO сделать формы умными - условный рендеринг, поправить кнопки
-// положить юзера в стейт, сделать валидацию
+// TODO сделать формы умными - условный рендеринг, поправить кнопки, отрубить модалки
+// положить юзера в стейт, сделать валидацию, сделать хорошую аутентификацию
 // доделать чекбокс
+// сделать личный кабинет
+// куда лучше положить пользователя?

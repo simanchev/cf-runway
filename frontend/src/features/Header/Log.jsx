@@ -17,12 +17,12 @@ function Log() {
       },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.login === false) {
       setLogin(data.message);
     }
     if (data.login === true) {
-      setLogin('');
+      window.location.replace('/');
     }
   }
   return (
