@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
+import { useDispatch } from 'react-redux';
 import Header from './features/Header/Header';
 import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetch('/api/auth/authenticate')
+      .then((result) => result.json())
+      .then((data) => {
+        dispatch({ type: 'AUTHENTIC', payload: data });
+        console.log(data);
+      });
+  });
+
   return (
     <div className="App">
       <Header />

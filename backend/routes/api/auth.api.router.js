@@ -3,6 +3,19 @@ const bcrypt = require('bcrypt');
 
 const { User } = require('../../db/models');
 
+authRouter.get('/authenticate', (req, res) => {
+  try {
+    const { user } = req.session;
+    if (user) {
+      res.json({ auth: true, username: user.username });
+    } else {
+      res.json({ auth: false });
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 authRouter.post('/registration', async (req, res) => {
   try {
     const {
@@ -66,8 +79,8 @@ authRouter.post('/login', async (req, res) => {
       // console.log(isSame);
 
       req.session.userId = checkedUser.id;
-      const { id } = checkedUser;
-      req.session.user = { id };
+      const { id, name } = checkedUser;
+      req.session.user = { id, name };
       res.json({ login: true });
     } else {
       res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
@@ -83,7 +96,7 @@ authRouter.get('/logout', (req, res) => {
 });
 
 module.exports = authRouter;
-// TODO сделать формы умными - условный рендеринг, поправить кнопки, отрубить модалки
+// TODO сделать формы умными - условный рендеринг, поправить кнопки
 // положить юзера в стейт, сделать валидацию, сделать хорошую аутентификацию
 // доделать чекбокс
 // сделать личный кабинет

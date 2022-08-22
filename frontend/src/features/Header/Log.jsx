@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 function Log() {
+  const dispatch = useDispatch();
   const [log, setLogin] = useState('');
   async function login(e) {
     e.preventDefault();
@@ -22,7 +24,8 @@ function Log() {
       setLogin(data.message);
     }
     if (data.login === true) {
-      window.location.replace('/');
+      dispatch({ type: 'AUTH', payload: data });// понять, что положить в стейт с сервера!!!!!
+      window.location.assign('/');
     }
   }
   return (

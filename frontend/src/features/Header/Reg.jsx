@@ -30,19 +30,20 @@ function Reg() {
     });
     const data = await response.json();
     console.log(data);
-    if (data.isSame === false) { // TODO не работают когда разные пароли(не отображается стейт)
+    if (data.isSame === false) {
       setText('Пароли не совпадают!');
+      console.log(text, 'ttteeexxxxtt');
     }
-    if (data.isSame === true) {
+    if (data.isSame !== false) {
       setText('');
     }
     if (data.passwordLength === false) {
+      console.log(text, '4');
       setText('Слишком короткий пароль!');
     }
-    if (data.passwordLength !== false) {
-      setText('');
-    }
+
     if (data.registration === false) {
+      console.log(text, '3');
       setText('Пользователь с таким email уже существует');
     }
     if (data.registration === true) {
