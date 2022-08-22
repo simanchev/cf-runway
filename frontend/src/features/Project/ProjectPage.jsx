@@ -1,12 +1,23 @@
+/* eslint-disable no-plusplus */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
+import curMonthNames from './months';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
-  // const finData = useSelector((state) => state.finData);
+  const revenueData = useSelector((state) => state.finData.revenueData);
+
+  const revenueSchedule = new Array(12).fill(0);
+  for (let i = 0; i < revenueSchedule.length; i++) {
+    for (let j = 0; j < revenueData.length; j++) {
+      revenueSchedule[i] += revenueData[j][i + 1];
+    }
+  }
+
+  // const finDataPack = useSelector((state) => state.finData[category]);
 
   const dispatch = useDispatch();
 
@@ -81,6 +92,39 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
+      <table className="table results-table">
+        <thead>
+          <tr>
+            <th style={{ textAlign: 'left' }}>Сумма, тыс. руб</th>
+            {// eslint-disable-next-line react/no-array-index-key
+              curMonthNames.map((month, index) => <th key={index}>{month}</th>)
+            }
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Поступления от продаж</td>
+            {// eslint-disable-next-line react/no-array-index-key
+              revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data}</td>)
+            }
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Оплата товаров и услуг</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Инвестиции</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Финансирование</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Денежный поток</td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: 'left' }}>Денежный поток, накопленный</td>
+          </tr>
+        </tbody>
+      </table>
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />

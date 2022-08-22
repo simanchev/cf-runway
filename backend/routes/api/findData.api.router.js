@@ -49,9 +49,9 @@ finDataRouter.post('/project/:id/findata/new', async (req, res) => {
         lastFillMonth = userEndMonth - curMonth + 1;
       } else if (userEndYear - curYear === 1 && userEndMonth < curMonth) {
         lastFillMonth = 12 - curMonth + 1 + userEndMonth;
+      } else {
+        lastFillMonth = 12;
       }
-    } else {
-      lastFillMonth = 12;
     }
 
     const newFinData = {
@@ -122,9 +122,9 @@ finDataRouter.put('/findata/:id', async (req, res) => {
         lastFillMonth = userEndMonth - curMonth + 1;
       } else if (userEndYear - curYear === 1 && userEndMonth < curMonth) {
         lastFillMonth = 12 - curMonth + 1 + userEndMonth;
+      } else {
+        lastFillMonth = 12;
       }
-    } else {
-      lastFillMonth = 12;
     }
 
     const newFinData = {

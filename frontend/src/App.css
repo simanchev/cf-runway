@@ -211,3 +211,7 @@ textarea {
   display: flex;
   justify-content: space-between;
 }
+
+.results-table {
+  margin-bottom: 70px;
+}
