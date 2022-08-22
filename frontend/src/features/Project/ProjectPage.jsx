@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useReactToPrint } from 'react-to-print';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
@@ -34,8 +35,13 @@ function ProjectPage({ id }) {
     memoLoadFindData();
   }, [id, memoLoadFindData, memoLoadProjectData]);
 
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
-    <div className="project-container">
+    <div className="project-container" ref={componentRef}>
       <h4>
         {project.title}
         {' '}
@@ -85,7 +91,7 @@ function ProjectPage({ id }) {
         <FinDataSection />
         <ProjectModal />
       </div>
-      <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
+      <button type="submit" className="btn btn-dark" onClick={handlePrint}>Скачать отчет о проекте</button>
     </div>
   );
 }
