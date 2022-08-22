@@ -1,6 +1,6 @@
 const authRouter = require('express').Router();
 const bcrypt = require('bcrypt');
-const nodemailer = require('nodemailer');
+const transporter = require('../nodemailer');
 
 const { User } = require('../../db/models');
 
@@ -53,20 +53,6 @@ authRouter.post('/registration', async (req, res) => {
     /// ///////////////////////////////////
     // здесь должна быть рассылка start
     // console.log('мыло пользователя', email);
-    const transporter = nodemailer.createTransport(
-      {
-        host: 'smtp.yandex.ru',
-        port: 465,
-        secure: true,
-        auth: {
-          user: 'cfrunway@yandex.ru',
-          pass: '1QazXsw2/',
-        },
-      },
-      {
-        from: 'Mailer Test <cfrunway@yandex.ru>',
-      },
-    );
 
     const mail = {
       from: '<cfrunway@yandex.ru>',

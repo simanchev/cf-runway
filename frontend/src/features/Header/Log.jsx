@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-
 function Log() {
- 
   const dispatch = useDispatch();
   const [log, setLogin] = useState('');
   async function login(e) {
