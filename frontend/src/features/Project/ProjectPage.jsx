@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
+import Report_Charts from '../chartsJs/Report_Charts/Report_Charts.jsx';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
@@ -81,6 +82,7 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
+      <Report_Charts />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
