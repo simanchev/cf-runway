@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function Reg() {
   const [text, setText] = useState('');
-  const navigate = useNavigate('/');
+  // const navigate = useNavigate('/');
   async function registration(event) {
     event.preventDefault();
     const {
@@ -30,24 +30,21 @@ function Reg() {
       },
     });
     const data = await response.json();
-    // console.log(data);
+
     if (data.isSame === false) {
       setText('Пароли не совпадают!');
-      // console.log(text, 'ttteeexxxxtt');
     }
     if (data.isSame !== false) {
       setText('');
     }
     if (data.passwordLength === false) {
-      // console.log(text, '4');
       setText('Слишком короткий пароль!');
     }
 
     if (data.registration === false) {
-      // console.log(text, '3');
       setText('Пользователь с таким email уже существует');
     }
-    if (data.registration === true) {
+    if (data.registration === true) { // TODO переделать на переход в модалку с авторизацией
       window.location.replace('/');
     }
     if (data.login === 'now') {
