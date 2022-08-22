@@ -10,10 +10,8 @@ function App() {
     fetch('/api/auth/authenticate')
       .then((result) => result.json())
       .then((data) => {
-        console.log(data, '--------------------');
         dispatch({ type: 'AUTHENTIC', payload: data });
-        console.log(data);
-      }, []);
+      }, [dispatch]);
   });
 
   return (

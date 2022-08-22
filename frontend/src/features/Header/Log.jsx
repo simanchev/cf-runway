@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
 
 function Log() {
- 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [log, setLogin] = useState('');
   async function login(e) {
@@ -21,14 +21,14 @@ function Log() {
       },
     });
     const data = await response.json();
-    // console.log(data);
+    console.log(data, '++++++++++++++++++++++++++++++');
     if (data.login === false) {
       setLogin(data.message);
     }
     if (data.login === true) {
-      dispatch({ type: 'AUTH', payload: data });
-      window.location.reload();// ???????????????????????
-    }
+      dispatch({ type: 'AUTHENTIC', payload: data });
+      navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
+}
   }
   return (
     <div className="modal fade" id="logModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,3 +60,14 @@ function Log() {
 
 export default Log;
 // TODO доделать аутентификацию
+// "react/jsx-filename-extension": [
+//   1,
+//   {
+//     "extensions": [
+//       ".js",
+//       ".jsx"
+//     ]
+//   }
+// ],
+
+// "max-len": 0
