@@ -7,7 +7,7 @@ authRouter.get('/authenticate', (req, res) => {
   try {
     const { user } = req.session;
     if (user) {
-      res.json({ auth: true, username: user.username });
+      res.json({ auth: true, username: user.name });
     } else {
       res.json({ auth: false });
     }

@@ -12,7 +12,7 @@ function Reg() {
     // console.log(email.value);
     // console.log(password.value);
     // console.log(passwordConf.value);
-    console.log(autolog.checked);
+    // console.log(autolog.checked);
 
     const response = await fetch('/api/auth/registration', {
       method: 'POST',
@@ -29,21 +29,21 @@ function Reg() {
       },
     });
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
     if (data.isSame === false) {
       setText('Пароли не совпадают!');
-      console.log(text, 'ttteeexxxxtt');
+      // console.log(text, 'ttteeexxxxtt');
     }
     if (data.isSame !== false) {
       setText('');
     }
     if (data.passwordLength === false) {
-      console.log(text, '4');
+      // console.log(text, '4');
       setText('Слишком короткий пароль!');
     }
 
     if (data.registration === false) {
-      console.log(text, '3');
+      // console.log(text, '3');
       setText('Пользователь с таким email уже существует');
     }
     if (data.registration === true) {
