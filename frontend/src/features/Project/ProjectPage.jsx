@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-plusplus */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,6 +10,9 @@ import curMonthNames from './months';
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
   const revenueData = useSelector((state) => state.finData.revenueData);
+  const costData = useSelector((state) => state.finData.costData);
+  const investmentData = useSelector((state) => state.finData.investmentData);
+  const financingData = useSelector((state) => state.finData.financingData);
 
   const revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
@@ -17,7 +21,38 @@ function ProjectPage({ id }) {
     }
   }
 
-  // const finDataPack = useSelector((state) => state.finData[category]);
+  const costSchedule = new Array(12).fill(0);
+  for (let i = 0; i < costSchedule.length; i++) {
+    for (let j = 0; j < costData.length; j++) {
+      costSchedule[i] += costData[j][i + 1];
+    }
+  }
+
+  const investmentSchedule = new Array(12).fill(0);
+  for (let i = 0; i < investmentSchedule.length; i++) {
+    for (let j = 0; j < investmentData.length; j++) {
+      investmentSchedule[i] += investmentData[j][i + 1];
+    }
+  }
+
+  const financingSchedule = new Array(12).fill(0);
+  for (let i = 0; i < financingSchedule.length; i++) {
+    for (let j = 0; j < financingData.length; j++) {
+      financingSchedule[i] += financingData[j][i + 1];
+    }
+  }
+
+  const cfSchedule = new Array(12).fill(0);
+  for (let i = 0; i < cfSchedule.length; i++) {
+    cfSchedule[i] = revenueSchedule[i] - costSchedule[i] - investmentSchedule[i] + financingSchedule[i];
+  }
+
+  const cfCumulativeSchedule = new Array(12).fill(0);
+  // eslint-disable-next-line prefer-destructuring
+  cfCumulativeSchedule[0] = cfSchedule[0];
+  for (let i = 1; i < cfCumulativeSchedule.length; i++) {
+    cfCumulativeSchedule[i] = cfCumulativeSchedule[i - 1] + cfSchedule[i];
+  }
 
   const dispatch = useDispatch();
 
@@ -96,32 +131,33 @@ function ProjectPage({ id }) {
         <thead>
           <tr>
             <th style={{ textAlign: 'left' }}>Сумма, тыс. руб</th>
-            {// eslint-disable-next-line react/no-array-index-key
-              curMonthNames.map((month, index) => <th key={index}>{month}</th>)
-            }
+            {curMonthNames.map((month, index) => <th key={index}>{month}</th>)}
           </tr>
         </thead>
         <tbody>
           <tr>
             <td style={{ textAlign: 'left' }}>Поступления от продаж</td>
-            {// eslint-disable-next-line react/no-array-index-key
-              revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data}</td>)
-            }
+            {revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
           <tr>
             <td style={{ textAlign: 'left' }}>Оплата товаров и услуг</td>
+            {costSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
           <tr>
             <td style={{ textAlign: 'left' }}>Инвестиции</td>
+            {investmentSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
           <tr>
             <td style={{ textAlign: 'left' }}>Финансирование</td>
+            {financingSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
           <tr>
             <td style={{ textAlign: 'left' }}>Денежный поток</td>
+            {cfSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
           <tr>
             <td style={{ textAlign: 'left' }}>Денежный поток, накопленный</td>
+            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000) : '-'}</td>)}
           </tr>
         </tbody>
       </table>
