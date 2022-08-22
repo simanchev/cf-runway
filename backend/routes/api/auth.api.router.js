@@ -19,7 +19,7 @@ authRouter.get('/authenticate', (req, res) => {
 authRouter.post('/registration', async (req, res) => {
   try {
     const {
-      name,
+      username,
       email,
       password,
       passwordConf,
@@ -45,12 +45,42 @@ authRouter.post('/registration', async (req, res) => {
       return;
     }
     await User.create({
-      name,
+      name: username,
       email,
       password: hash,
     });
-    res.status(201).json({ registration: true });
+    /// ///////////////////////////////////
+    if (autolog) {
+      try {
+        const checkedUser = await User.findOne({ where: { email }, raw: true });
+        console.log(checkedUser, '>>>>>>>');
+        if (checkedUser === null) {
+          res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
+          return;
+        }
+        const isSame = await bcrypt.compare(password, checkedUser.password);
+        // console.log(isSame);
+        // console.log(req.session, 'ssseessssion');
 
+        if (checkedUser && isSame) {
+        // const isSame = await bcrypt.compare(password, checkedUser.password);
+        // console.log(isSame);
+
+          req.session.userId = checkedUser.id;
+          const { id, name } = checkedUser;
+          req.session.user = { id, name };
+          res.json({ login: 'now' });
+        } else {
+          res.status(500).json({ message: 'Такого пользователя не существует или неверный пароль!' });
+        }
+      } catch (err) {
+        res.status(500).json({ errorMessage: err.message });
+      }
+    } else {
+    /// ///////////////////////////////////////////
+
+      res.status(201).json({ registration: true });
+    }
     // TODO отрисовка на клиенте(корректная), чекбокс!!!!!
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
@@ -62,7 +92,6 @@ authRouter.post('/login', async (req, res) => {
       email,
       password,
     } = req.body;
-    console.log(password, 'pppaaassss');
 
     const checkedUser = await User.findOne({ where: { email }, raw: true });
     console.log(checkedUser, '>>>>>>>');
@@ -71,7 +100,7 @@ authRouter.post('/login', async (req, res) => {
       return;
     }
     const isSame = await bcrypt.compare(password, checkedUser.password);
-    console.log(isSame);
+    // console.log(isSame);
     // console.log(req.session, 'ssseessssion');
 
     if (checkedUser && isSame) {
@@ -96,8 +125,8 @@ authRouter.get('/logout', (req, res) => {
 });
 
 module.exports = authRouter;
-// TODO сделать формы умными - условный рендеринг, поправить кнопки
-// положить юзера в стейт, сделать валидацию, сделать хорошую аутентификацию
-// доделать чекбокс
-// сделать личный кабинет
-// куда лучше положить пользователя?
+// TODO сделать поправить кнопки+-!!!!!!
+// положить юзера в стейт, сделать хорошую аутентификацию +-!!!!!!
+// доделать чекбокс при регистрации сразу кидать на главную!!!!!!!
+// сделать личный кабинет!!!!!!!
+// куда лучше положить пользователя?!!!!!!!!!!!!!!!!!!!!!!!!!!1
