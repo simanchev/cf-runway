@@ -16,9 +16,9 @@ function Bar_Line_Chart() {
     datasets: [
       {
       type: 'bar',
-      label: "Sales in $",
+      label: "Company Price in $",
       yAxisId:'dollars',
-      data: UserData.map((data) => data.income),
+      data: UserData.map((data) => data.companyPrice),
       backgroundColor: ['orange'],
       borderRadius: 25,
       order: 2, // уровень на котором находится график дальше-глубже 1-передний план
@@ -45,9 +45,9 @@ function Bar_Line_Chart() {
 
     {
       type: 'line',
-      label: "Sales Volume",
+      label: "Cash Flow",
       yAxisID:'volume',
-      data: UserData.map((data) => data.sales),
+      data: UserData.map((data) => data.cashFlow),
       backgroundColor: ['blue'],
       pointStyle: 'circle',
       radius: 9,
