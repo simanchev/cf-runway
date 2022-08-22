@@ -12,15 +12,17 @@ function Report_Charts() {
   return (
     
     <>
-    <div id="charts_style" >
-      <Bar_Line_Chart />
-      <br />
-      <Doughnut_Chart_Income />
-      <br />
-      <Doughnut_Chart_Costs />
-      <br />
-      <br />
-      <br />
+    <div >
+        <Bar_Line_Chart />
+        <br />
+        <div id="doughnut_charts_style">
+          <Doughnut_Chart_Income />
+          <br />
+          <Doughnut_Chart_Costs />
+        </div>
+        <br />
+        <br />
+        <br />
     </div>
       
     </>
