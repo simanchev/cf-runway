@@ -3,7 +3,7 @@ const UserData = [{
   month: 'January',
   year: 2022,
   income: Math.floor(Math.random() * 1000000) + 1,
-  cost: Math.floor(Math.random() * 1000000) - 1
+  cost: Math.floor(Math.random() * 1000000) - 1,
 },
 {
   id: 2,

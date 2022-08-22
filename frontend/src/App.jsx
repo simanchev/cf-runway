@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './features/Header/Header';
-import ProjectPage from './features/project/ProjectPage';
+import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
   return (
