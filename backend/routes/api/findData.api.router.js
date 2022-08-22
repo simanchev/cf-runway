@@ -169,6 +169,7 @@ finDataRouter.put('/findata/:id', async (req, res) => {
 
 finDataRouter.delete('/findata/:id', async (req, res) => {
   const { id } = req.params;
+  console.log(id);
 
   try {
     await Fin_data.destroy({ where: { id } });
