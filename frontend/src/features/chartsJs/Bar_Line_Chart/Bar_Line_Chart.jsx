@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Bar } from "react-chartjs-2";
 import { UserData } from '../../../data.js'; // подрубаем наши данные из файла дата жс
+import '../Bar_Line_Chart/Bar_Line_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto"
 
 
@@ -88,7 +89,7 @@ function Bar_Line_Chart() {
   return (
     
     <>
-      <div id="bar_style" >
+      <div id="bar_line_style" >
         <Bar data={barlineData} options={barlineData.options} />
       </div>
     </>
