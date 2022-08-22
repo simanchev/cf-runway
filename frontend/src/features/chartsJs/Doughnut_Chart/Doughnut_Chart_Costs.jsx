@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { UserData } from '../../../data.js'; // подрубаем наши данные из файла дата жс
-import './Doughnut_Chart_Style.css';
+// import './Doughnut_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto"
 
 
@@ -32,7 +32,7 @@ function Doughnut_Chart_Costs() {
   return (
     
     <>
-    <div id="pie_style" >
+    <div id="doughnut_style" >
       <Doughnut  data={doughnutDataCost} /> 
     </div>
       
