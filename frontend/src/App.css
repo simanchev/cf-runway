@@ -1,64 +1,213 @@
-h6 {
-  margin-bottom: 20px;
-}
-
-label {
-  margin: 0   !important;
-  white-space: nowrap;
-}
-
 .container {
   margin-top: 50px;
   margin-bottom: 50px;
 }
 
-.data-input-section {
-  display: flex;
-  align-items: center;
-  width: 700px;
+th, td {
+  padding-left: 0 !important;
+  font-size: 13px;
+  text-align: center;
 }
 
-.data-input-section > * {
-  margin-right: 10px;
-  font-size: 14px;
+.btn-edit {
+  padding: 0 5px;
+  border: unset;
 }
 
-.form-check {
-  display: flex;
-  align-items: center;
+.btn-edit:hover {
+  border: unset;
+  color: #0d6efd;
 }
 
-.flex-check {
-  margin-right: 5px;
+.fin-data {
+  padding: 20px 20px 40px 20px;
+  border-left: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
 
-.date-control {
-  width: 350px;
+.nav-tabs {
+  border-radius: 0 !important;
+  font-size: 15px;
 }
 
-.input-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-right: 30px;
+h6 {
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
-table {
+.fin-data-wrap {
+  margin-bottom: 50px;
+}
+
+.btn-add {
+  border: unset;
+  padding: unset;
+  box-shadow: unset !important;
+}
+
+.btn-add:hover, .btn-add:focus {
+  background-color: white;
+  color: black;
+}
+
+.check-black:checked {
+  background-color: black;
+  border-color: black;
+}
+
+.nav-tabs > li > a {
+  padding: 10px 20px;
+}
+
+button {
+  font-size: 15px !important;
+}
+
+th {
+  padding-bottom: 15px !important;
+}
+
+h4, h5 {
   margin: 0 !important;
-  font-size: 14px;
 }
 
-.number-control {
-  width: 100px;
+.card {
+  margin: 40px 20px 50px 0 !important;
 }
 
-.btn-update {
+.project-resume {
+  display: flex;
+}
+
+.card-header {
+  font-weight: 700;
+}
+
+p {
+  font-size: 13px;
+}
+
+.card-info {
+  background-color: unset !important;
+  border: 1px dashed lightgrey;
+}
+
+ul {
+  list-style-type: square;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.card-text {
+  margin-bottom: 10px !important;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  margin: 0 !important;
+}
+
+.card-text:last-child {
+  margin-bottom: 5px !important;
+}
+
+.modal-dialog {
+  width: 500px !important;
+}
+
+.modal-content {
+  padding: 30px 40px !important;
+}
+
+.modal-content > div {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.modal-header {
+  padding: 0 0 20px 0;
+}
+
+.modal-body {
+  padding: 40px 0 20px 0;
+}
+
+.modal-footer {
+  border: unset;
+  justify-content: left;
   padding: 0;
-  border: unset;
+  padding-top: 20px !important;
+  margin-bottom: 10px;
 }
 
-.btn-update:hover {
-  border: unset;
+form .mb-3 {
+  margin-bottom: 30px !important;
 }
 
+label, input, select, textarea {
+  font-size: 15px !important;
+}
 
+.modal-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-flex input, .modal-flex select {
+  width: 190px !important;
+}
+
+form .mb-3:last-child {
+  margin-bottom: 0 !important;
+}
+
+.btn-modal {
+  margin: 0;
+}
+
+textarea {
+  min-height: calc(9.0em + 0.75rem + 2px) !important;
+}
+
+.project-desc {
+  margin-top: 40px !important;
+  border-left: 3px solid black;
+  padding-left: 30px !important;
+}
+
+.navbar {
+  background-color: rgb(241, 238, 238);
+}
+
+.navbar a {
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.navbar > .container {
+  margin: 10px 70px;
+}
+
+.navbar button {
+  margin-left: 10px;
+}
+
+.modal-footer button {
+  margin: 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}

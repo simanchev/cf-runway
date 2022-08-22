@@ -17,6 +17,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
+      industry: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+      },
+      description: {
+        type: Sequelize.TEXT,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
