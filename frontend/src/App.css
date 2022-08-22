@@ -215,3 +215,8 @@ textarea {
 .results-table {
   margin-bottom: 70px;
 }
+
+.row-name {
+  text-align: left;
+  padding-left: 10px !important;
+}

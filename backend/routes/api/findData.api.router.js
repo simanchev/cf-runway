@@ -151,6 +151,8 @@ finDataRouter.put('/findata/:id', async (req, res) => {
       if (i === firstFillMonth) {
         newFinData[i] = sum;
       // eslint-disable-next-line max-len
+      } else if (i > firstFillMonth && !lastFillMonth && regular === 'true') {
+        newFinData[i] = sum;
       } else if (i > firstFillMonth && i <= lastFillMonth && userStartYear - curYear <= 1 && regular === 'true') {
         newFinData[i] = sum;
       }
