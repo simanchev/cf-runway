@@ -216,7 +216,15 @@ textarea {
   margin-bottom: 70px;
 }
 
+.results-table td {
+  padding: 8px !important;
+}
+
 .row-name {
   text-align: left;
   padding-left: 10px !important;
+}
+
+.negative {
+  background-color: #ffc107 !important;
 }

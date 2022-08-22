@@ -176,7 +176,7 @@ function ProjectPage({ id }) {
           </tr>
           <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
             <td className="row-name">Денежный поток, накопленный</td>
-            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`} className={data < 0 ? 'negative' : 'positive'}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
           </tr>
         </tbody>
       </table>
