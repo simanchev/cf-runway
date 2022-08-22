@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Reg() {
   const [text, setText] = useState('');
-
+  const navigate = useNavigate('/');
   async function registration(event) {
     event.preventDefault();
     const {
@@ -17,7 +18,7 @@ function Reg() {
     const response = await fetch('/api/auth/registration', {
       method: 'POST',
       body: JSON.stringify({
-        name: name.value,
+        username: name.value,
         email: email.value,
         password: password.value,
         passwordConf: passwordConf.value,
@@ -47,6 +48,9 @@ function Reg() {
       setText('Пользователь с таким email уже существует');
     }
     if (data.registration === true) {
+      window.location.replace('/');
+    }
+    if (data.login === 'now') {
       window.location.replace('/');
     }
   }

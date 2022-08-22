@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+
 function Log() {
+ 
   const dispatch = useDispatch();
   const [log, setLogin] = useState('');
   async function login(e) {
@@ -24,8 +26,8 @@ function Log() {
       setLogin(data.message);
     }
     if (data.login === true) {
-      dispatch({ type: 'AUTH', payload: data });// понять, что положить в стейт с сервера!!!!!
-      window.location.assign('/');
+      dispatch({ type: 'AUTH', payload: data });
+      window.location.reload();// ???????????????????????
     }
   }
   return (
@@ -57,3 +59,4 @@ function Log() {
 }
 
 export default Log;
+// TODO доделать аутентификацию, доделать чекбокс

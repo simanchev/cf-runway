@@ -20,7 +20,7 @@ authRouter.get('/authenticate', (req, res) => {
 authRouter.post('/registration', async (req, res) => {
   try {
     const {
-      name,
+      username,
       email,
       password,
       passwordConf,
@@ -46,48 +46,11 @@ authRouter.post('/registration', async (req, res) => {
       return;
     }
     await User.create({
-      name,
+      name: username,
       email,
       password: hash,
     });
     res.status(201).json({ registration: true });
-
-    // отправка письма start
-    // console.log('мыло пользователя', email);
-
-    const transporter = nodemailer.createTransport(
-      {
-        host: 'smtp.yandex.ru',
-        port: 465,
-        secure: true,
-        auth: {
-          user: 'cfrunway@yandex.ru',
-          pass: '1QazXsw2/',
-        },
-      },
-      {
-        from: 'Mailer Test <cfrunway@yandex.ru>',
-      },
-    );
-
-    const mail = {
-      from: '<cfrunway@yandex.ru>',
-      to: email,
-      subject: `Hi ${name}! You are a member of CF-Runway!`,
-      text: `Dear ${name}!`,
-      html: '<b>Thank you for registration on CF-Runway!</b>',
-    };
-
-    transporter.sendMail(mail, (error, response) => {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log(`Message sent: ${response.message}`);
-      }
-
-      transporter.close();
-    });
-    // отправка письма finish
 
     // TODO отрисовка на клиенте(корректная), чекбокс!!!!!
   } catch (err) {
@@ -100,7 +63,6 @@ authRouter.post('/login', async (req, res) => {
       email,
       password,
     } = req.body;
-    console.log(password, 'pppaaassss');
 
     const checkedUser = await User.findOne({ where: { email }, raw: true });
     console.log(checkedUser, '>>>>>>>');
@@ -109,7 +71,7 @@ authRouter.post('/login', async (req, res) => {
       return;
     }
     const isSame = await bcrypt.compare(password, checkedUser.password);
-    console.log(isSame);
+    // console.log(isSame);
     // console.log(req.session, 'ssseessssion');
 
     if (checkedUser && isSame) {
@@ -134,8 +96,8 @@ authRouter.get('/logout', (req, res) => {
 });
 
 module.exports = authRouter;
-// TODO сделать формы умными - условный рендеринг, поправить кнопки
-// положить юзера в стейт, сделать валидацию, сделать хорошую аутентификацию
-// доделать чекбокс
-// сделать личный кабинет
-// куда лучше положить пользователя?
+// TODO сделать поправить кнопки+-!!!!!!
+// положить юзера в стейт, сделать хорошую аутентификацию +-!!!!!!
+// доделать чекбокс при регистрации сразу кидать на главную!!!!!!!
+// сделать личный кабинет!!!!!!!
+// куда лучше положить пользователя?!!!!!!!!!!!!!!!!!!!!!!!!!!1
