@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Log from './Log';
 import Reg from './Reg';
 
 function Header() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispacth = useDispatch();
   const datas = useSelector((state) => state.auth);
   const { name } = datas;
@@ -33,11 +33,15 @@ function Header() {
             ? (
               <>
                 <li className="nav-item">
+                  <button type="button" className="btn btn-dark btn-header" onClick={() => navigate('/profile')}>Личный кабинет</button>
+                </li>
+                <li className="nav-item">
                   <button type="button" className="btn btn-dark btn-header" id="logout">На главную</button>
                 </li>
                 <li className="nav-item">
                   <button type="button" className="btn btn-dark btn-header" id="logout" onClick={logout}>Выход</button>
                 </li>
+
               </>
             ) : (
               <>
