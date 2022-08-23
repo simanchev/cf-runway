@@ -6,7 +6,13 @@ finDataRouter.get('/project/:id/findata', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const finData = await Fin_data.findAll({ raw: true, where: { project_id: id } });
+    const finData = await Fin_data.findAll({
+      raw: true,
+      where: { project_id: id },
+      order: [
+        ['createdAt', 'ASC'],
+      ],
+    });
     res.status(201).json(finData);
   } catch (err) {
     res.status(500).json({ error: 'Проект не найден' });
@@ -43,9 +49,9 @@ finDataRouter.post('/project/:id/findata/new', async (req, res) => {
         lastFillMonth = userEndMonth - curMonth + 1;
       } else if (userEndYear - curYear === 1 && userEndMonth < curMonth) {
         lastFillMonth = 12 - curMonth + 1 + userEndMonth;
+      } else {
+        lastFillMonth = 12;
       }
-    } else {
-      lastFillMonth = 12;
     }
 
     const newFinData = {
@@ -116,9 +122,9 @@ finDataRouter.put('/findata/:id', async (req, res) => {
         lastFillMonth = userEndMonth - curMonth + 1;
       } else if (userEndYear - curYear === 1 && userEndMonth < curMonth) {
         lastFillMonth = 12 - curMonth + 1 + userEndMonth;
+      } else {
+        lastFillMonth = 12;
       }
-    } else {
-      lastFillMonth = 12;
     }
 
     const newFinData = {
@@ -145,6 +151,8 @@ finDataRouter.put('/findata/:id', async (req, res) => {
       if (i === firstFillMonth) {
         newFinData[i] = sum;
       // eslint-disable-next-line max-len
+      } else if (i > firstFillMonth && !lastFillMonth && regular === 'true') {
+        newFinData[i] = sum;
       } else if (i > firstFillMonth && i <= lastFillMonth && userStartYear - curYear <= 1 && regular === 'true') {
         newFinData[i] = sum;
       }

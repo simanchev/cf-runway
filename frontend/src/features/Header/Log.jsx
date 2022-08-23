@@ -28,7 +28,8 @@ function Log() {
     }
     if (data.login === true) {
       dispatch({ type: 'AUTHENTIC', payload: data });
-
+const userLocal = { localUserName: data.username, id: data.id };
+localStorage.setItem('user', JSON.stringify(userLocal));
       navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
 }
 // aria-hidden="true"

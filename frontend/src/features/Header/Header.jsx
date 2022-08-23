@@ -9,13 +9,14 @@ function Header() {
   const dispacth = useDispatch();
   const datas = useSelector((state) => state.auth);
   const { name } = datas;
-  console.log(name, 'nameeeeeeee');
+
   async function logout(e) {
     e.preventDefault();
     if (e) {
       const response = await fetch('/api/auth/logout');
       const data = await response.json();
       if (data.logout) {
+        localStorage.clear();
         dispacth({ type: 'AUTHENTIC', payload: data.auth });
         window.location.replace('/');
       }

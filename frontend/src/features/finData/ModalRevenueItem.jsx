@@ -1,59 +1,37 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import addFinData from './functions/addFinData';
+import updateFinData from './functions/updateFinData';
+import deleteFinData from './functions/deleteFinData';
+import actionType from '../store/actions';
 
-function FinDataModal() {
+function ModalRevenueItem() {
+  const dispatch = useDispatch();
   const finData = useSelector((state) => state.finData.curFinData);
-  const projectId = useSelector((state) => state.projects.curProject.id);
+  const project = useSelector((state) => state.projects.curProject);
+  const finTypeId = 1;
 
-  async function finDataHandler(event) {
-    event.preventDefault();
-    const {
-      title, sum, regular, startDate, endDate, addBtn,
-    } = event.target;
-
-    if (addBtn) {
-      const response = await fetch(`/api/project/${projectId}/findata/new`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'Application/json' },
-        body: JSON.stringify({
-          fin_types_id: 1,
-          title: title.value,
-          sum: sum.value,
-          regular: regular.value,
-          start_date: startDate.value,
-          end_date: endDate.value,
-        }),
-      });
-      const data = await response.json();
-      if (data.created) window.location.reload();
-    } else {
-      const response = await fetch(`/api/findata/${finData.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'Application/json' },
-        body: JSON.stringify({
-          fin_types_id: 1,
-          title: title.value,
-          sum: sum.value,
-          regular: regular.value,
-          start_date: startDate.value,
-          end_date: endDate.value,
-        }),
-      });
-      const data = await response.json();
-      if (data.updated) window.location.reload();
-    }
+  async function reloadFinData() {
+    const response = await fetch(`/api/project/${project.id}/findata`);
+    const projectFinData = await response.json();
+    dispatch({ type: actionType.LOAD_FIN_DATA, payload: projectFinData });
   }
 
-  async function deleteFinData(event) {
+  async function addUpdateDataHandler(event) {
     event.preventDefault();
+    if (!finData.id) {
+      await addFinData(event, project.id, finTypeId);
+    } else {
+      await updateFinData(event, finData.id);
+    }
+    reloadFinData();
+    event.target.reset();
+  }
 
-    const response = await fetch(`/api/findata/${finData.id}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'Application/json' },
-    });
-    const data = await response.json();
-
-    if (data.deleted) window.location.href = '/';
+  async function deleteDataHandler() {
+    await deleteFinData(finData.id);
+    reloadFinData();
+    document.querySelector('.modal-form').reset();
   }
 
   return (
@@ -67,7 +45,7 @@ function FinDataModal() {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
           <div className="modal-body">
-            <form className="modal-form" onSubmit={finDataHandler}>
+            <form className="modal-form" onSubmit={addUpdateDataHandler}>
               <div className="mb-3">
                 <label className="form-label">Наименование</label>
                 <input type="text" className="form-control" name="title" defaultValue={finData.title} placeholder="продажа товаров или услуг" required />
@@ -97,9 +75,9 @@ function FinDataModal() {
               </div>
               <div className="modal-footer">
                 {finData.id
-                  ? <button type="submit" className="btn btn-dark btn-modal">Сохранить изменения</button>
-                  : <button type="submit" className="btn btn-dark btn-modal" name="addBtn">Добавить</button>}
-                {finData.id && <button type="button" onClick={deleteFinData} className="btn btn-danger btn-modal">Удалить</button>}
+                  ? <button type="submit" className="btn btn-dark btn-modal" data-bs-dismiss="modal">Сохранить изменения</button>
+                  : <button type="submit" className="btn btn-dark btn-modal" name="addBtn" data-bs-dismiss="modal">Добавить</button>}
+                {finData.id && <button type="button" onClick={deleteDataHandler} className="btn btn-danger btn-modal" data-bs-dismiss="modal">Удалить</button>}
               </div>
             </form>
           </div>
@@ -109,4 +87,4 @@ function FinDataModal() {
   );
 }
 
-export default FinDataModal;
+export default ModalRevenueItem;

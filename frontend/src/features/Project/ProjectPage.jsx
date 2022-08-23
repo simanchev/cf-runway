@@ -1,12 +1,65 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-plusplus */
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
+import curMonthNames from './months';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
-  // const finData = useSelector((state) => state.finData);
+  const revenueData = useSelector((state) => state.finData.revenueData);
+  const costData = useSelector((state) => state.finData.costData);
+  const investmentData = useSelector((state) => state.finData.investmentData);
+  const financingData = useSelector((state) => state.finData.financingData);
+
+  const revenueSchedule = new Array(12).fill(0);
+  for (let i = 0; i < revenueSchedule.length; i++) {
+    for (let j = 0; j < revenueData.length; j++) {
+      revenueSchedule[i] += revenueData[j][i + 1];
+    }
+  }
+
+  const costSchedule = new Array(12).fill(0);
+  for (let i = 0; i < costSchedule.length; i++) {
+    for (let j = 0; j < costData.length; j++) {
+      costSchedule[i] += costData[j][i + 1];
+    }
+  }
+
+  const investmentSchedule = new Array(12).fill(0);
+  for (let i = 0; i < investmentSchedule.length; i++) {
+    for (let j = 0; j < investmentData.length; j++) {
+      investmentSchedule[i] += investmentData[j][i + 1];
+    }
+  }
+
+  const financingSchedule = new Array(12).fill(0);
+  for (let i = 0; i < financingSchedule.length; i++) {
+    for (let j = 0; j < financingData.length; j++) {
+      financingSchedule[i] += financingData[j][i + 1];
+    }
+  }
+
+  const cfSchedule = new Array(12).fill(0);
+  for (let i = 0; i < cfSchedule.length; i++) {
+    cfSchedule[i] = revenueSchedule[i] - costSchedule[i] - investmentSchedule[i] + financingSchedule[i];
+  }
+
+  const cfCumulativeSchedule = new Array(12).fill(0);
+  // eslint-disable-next-line prefer-destructuring
+  cfCumulativeSchedule[0] = cfSchedule[0];
+  for (let i = 1; i < cfCumulativeSchedule.length; i++) {
+    cfCumulativeSchedule[i] = cfCumulativeSchedule[i - 1] + cfSchedule[i];
+  }
+
+  const cfAverage = Math.round((cfSchedule[9] + cfSchedule[10] + cfSchedule[11]) / 3);
+
+  let cashDeficit = null;
+  cfCumulativeSchedule.forEach((cf) => {
+    if (cf < 0 && cf < cashDeficit) cashDeficit = cf;
+  });
 
   const dispatch = useDispatch();
 
@@ -49,25 +102,37 @@ function ProjectPage({ id }) {
         <p>{project.description}</p>
       </div>
       <div className="project-resume">
-        <div className="card text-bg-warning mb-3" style={{ maxWidth: '18rem' }}>
+        <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'} style={{ maxWidth: '18rem' }}>
           <div className="card-header">
             <h5>Резюме</h5>
-            <p style={{ margin: '0' }}>(руб)</p>
           </div>
           <div className="card-body">
             <p className="card-text">
-              <b>Индустрия</b>
-              :
+              Индустрия:
               {' '}
-              {project.industry}
+              <b>{project.industry}</b>
             </p>
             <p className="card-text">
-              <b>Ежемесячный CF через год</b>
-              : 100,000
+              Среднемесячный CF в последний квартал прогноза:
+              {' '}
+              <b>
+                {cfAverage.toLocaleString()}
+                {' '}
+                руб
+              </b>
             </p>
             <p className="card-text">
-              <b>Потребность в доп финансировании (сумма / месяц)</b>
-              : 100,000 / 02.2023
+              Потребность в дополнительном финансировании:
+              {cashDeficit
+                ? (
+                  <b>
+                    {' '}
+                    {Math.abs(cashDeficit).toLocaleString()}
+                    {' '}
+                    руб
+                  </b>
+                ) : <b> отсутствует</b>}
+              {' '}
             </p>
           </div>
         </div>
@@ -75,12 +140,46 @@ function ProjectPage({ id }) {
           <div className="card-body">
             <ul>
               <li><p className="card-text">CF (Cash Flow) - денежный поток</p></li>
-              <li><p className="card-text">Прогнозный прериод - 12 месяцев, включая текущий</p></li>
+              <li><p className="card-text">Прогнозный период - 12 месяцев, включая текущий</p></li>
               <li><p className="card-text">Результаты расчитаны на основе данных, предоставленных пользователем</p></li>
             </ul>
           </div>
         </div>
       </div>
+      <table className="table results-table">
+        <thead>
+          <tr>
+            <th className="row-name">Сумма, тыс. руб</th>
+            {curMonthNames.map((month, index) => <th key={index}>{month}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="row-name">Поступления от продаж</td>
+            {revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Оплата товаров и услуг</td>
+            {costSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Инвестиции</td>
+            {investmentSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Финансирование</td>
+            {financingSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
+            <td className="row-name">Денежный поток</td>
+            {cfSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
+            <td className="row-name">Денежный поток, накопленный</td>
+            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`} className={data < 0 ? 'negative' : 'positive'}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+        </tbody>
+      </table>
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />

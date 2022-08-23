@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import actionType from '../store/actions';
 
-function RevenueDataItem({ data }) {
+function FinDataItem({ data }) {
   const modals = {
     1: 'modalRevenueItem',
     2: 'modalCostItem',
@@ -38,4 +38,4 @@ function RevenueDataItem({ data }) {
   );
 }
 
-export default RevenueDataItem;
+export default FinDataItem;
