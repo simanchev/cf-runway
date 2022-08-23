@@ -5,6 +5,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import './Doughnut_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto";
+import Center_Label_Income_Chart from './Center_Label_Income_Chart';
 
 function Doughnut_Chart_Income({ revenueChartData }) {
   const doughnutDataIncome = {
@@ -25,7 +26,12 @@ function Doughnut_Chart_Income({ revenueChartData }) {
   };
 
   return (
-    <Doughnut data={doughnutDataIncome} options={doughnutDataIncome.options} />
+
+    <div id="pie_style" >
+      <Doughnut data={doughnutDataIncome} options={doughnutDataIncome.options} />
+      <Center_Label_Income_Chart revenueChartData={revenueChartData} />
+    </div>
+    
   );
 }
 
