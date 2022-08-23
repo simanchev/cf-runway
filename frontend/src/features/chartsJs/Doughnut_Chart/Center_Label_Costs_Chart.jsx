@@ -20,7 +20,7 @@ function Center_Label_Costs_Chart({ costChartData }) {
       <div id='Center_Label'>
         Оплаты:
         <br />
-        {`${sumCosts} ₽`}
+        {`${sumCosts.toLocaleString()} ₽`}
       </div>
     </>
   );
