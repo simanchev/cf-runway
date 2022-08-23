@@ -4,6 +4,7 @@ const config = require('./config/config');
 
 const app = express();
 const PORT = process.env.PORT ?? 4000;
+// app.use(express.static(path.join(__dirname, '../../frontend/build')));
 config(app);
 
 // app.listen(PORT, () => console.log(`Server started at ${PORT} port`));
