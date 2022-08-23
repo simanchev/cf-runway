@@ -1,4 +1,4 @@
-// import './Center_Label_Style.css';
+import './Center_Label_Style.css';
 import { Chart as ChartJS } from "chart.js/auto"
 
 
@@ -18,7 +18,7 @@ function Center_Label_Income_Chart({ revenueChartData }) {
     
     <>
       <div id='Center_Label'>
-        Поступления:
+        Приток
         <br />
         {`${sumIncome.toLocaleString()} ₽`}
       </div>
