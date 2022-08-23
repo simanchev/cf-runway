@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 function Log() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [log, setLogin] = useState(true);
   async function login(e) {
@@ -22,15 +22,16 @@ function Log() {
     });
     const data = await response.json();
 
-    console.log(data, '++++++++++++++++++++++++++++++');
+    // console.log(data, '++++++++++++++++++++++++++++++');
     if (data.login === false) {
       setLogin(data.message);
     }
     if (data.login === true) {
-      dispatch({ type: 'AUTHENTIC', payload: data });
+      dispatch({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
 const userLocal = { localUserName: data.username, id: data.id };
 localStorage.setItem('user', JSON.stringify(userLocal));
-      navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
+window.location.replace('/');
+      // navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
 }
 // aria-hidden="true"
   }

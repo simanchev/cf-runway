@@ -70,7 +70,9 @@ authRouter.post('/registration', async (req, res) => {
           // req.session.userId = checkedUser.id;
           const { id, name } = checkedUser;
           req.session.user = { id, name };
-          res.json({ login: 'now', username: name, id });
+          res.json({
+            login: 'now', username: name, id, auth: true,
+          });
         } else {
           res.status(500).json({ message: 'Такого пользователя не существует или неверный пароль!' });
         }
@@ -111,7 +113,9 @@ authRouter.post('/login', async (req, res) => {
       // req.session.userId = checkedUser.id;
       const { id, name } = checkedUser;
       req.session.user = { id, name };
-      res.json({ login: true, username: name, id });
+      res.json({
+        login: true, username: name, id, auth: true,
+      });
     } else {
       res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
     }
@@ -122,7 +126,7 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('user_sid');
-  res.json({ logout: true, auth: false });// дописать dispatch чтобы статус в стейте поменять
+  res.json({ logout: true, auth: false, name: '' });// дописать dispatch чтобы статус в стейте поменять
 });
 
 module.exports = authRouter;

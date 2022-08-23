@@ -13,7 +13,7 @@ function App() {
         dispatch({ type: 'AUTHENTIC', payload: data });
       }, [dispatch]);
   });
-
+// передает все правильно {auth, name}
   return (
     <div className="App">
       <Header />

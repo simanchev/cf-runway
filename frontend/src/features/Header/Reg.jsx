@@ -51,7 +51,7 @@ function Reg() {
     if (data.login === 'now') {
       const userLocal = { localUserName: data.username, id: data.id };
       localStorage.setItem('user', JSON.stringify(userLocal));
-      dispacth({ type: 'AUTHENTIC', payload: data });
+      dispacth({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
       window.location.replace('/');
     }
   }

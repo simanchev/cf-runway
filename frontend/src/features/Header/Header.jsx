@@ -17,7 +17,7 @@ function Header() {
       const data = await response.json();
       if (data.logout) {
         localStorage.clear();
-        dispacth({ type: 'AUTHENTIC', payload: data.auth });
+        dispacth({ type: 'LOGOUT', payload: data });
         window.location.replace('/');
       }
     }
