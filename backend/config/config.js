@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const sessionConfig = require('./session-config');
 const projectRouter = require('../routes/api/project.api.router');
 const finDataRouter = require('../routes/api/findData.api.router');
+const path = require('path');
 
 const config = (app) => {
   app.use(express.urlencoded({ extended: true }));
@@ -12,6 +13,7 @@ const config = (app) => {
   app.use(session(sessionConfig));
   app.use('/api/project', projectRouter);
   app.use('/api/', finDataRouter);
+  app.use(express.static(path.join(__dirname, '../../frontend/build')));
 };
 
 module.exports = config;

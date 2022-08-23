@@ -33,6 +33,7 @@
       "no-console": "off",
       "react/prop-types": "off",
       "arrow-body-style": "off",
+      "linebreak-style": ["error", "windows"],
       "react/jsx-filename-extension": [
         1,
         {
