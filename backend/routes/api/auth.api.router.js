@@ -57,9 +57,9 @@ authRouter.post('/registration', async (req, res) => {
     const mail = {
       from: '<cfrunway@yandex.ru>',
       to: email,
-      subject: `Hi ${username}! You are a member of CF-Runway!`,
+      subject: `Здравствуйте, ${username}! Добро пожаловать на платформу CF-Runway!`,
       text: `Dear ${username}!`,
-      html: '<b>Thank you for registration on CF-Runway!</b>',
+      html: '<b>Благодарим Вас за выбор приложения для финансового планирования CF-Runway!</b>',
     };
 
     transporter.sendMail(mail, (error, response) => {
