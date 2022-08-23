@@ -1,0 +1,9 @@
+#bar_line_style {
+ width: 70%;
+}
+
+.chart-div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}

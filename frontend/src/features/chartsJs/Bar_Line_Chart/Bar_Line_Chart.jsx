@@ -1,0 +1,102 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable quotes */
+/* eslint-disable camelcase */
+import React, { useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+import './Bar_Line_Chart_Style.css';
+import { Chart as ChartJS } from "chart.js/auto";
+
+function Bar_Line_Chart({ barChartData }) {
+  // console.log(barChartData);
+  // const [barlineData] = useState({
+  //   labels: barChartData.map((data) => data.month),
+  //   datasets: [
+  //     {
+  //       type: 'bar',
+  //       label: 'Денежный поток, накопленный',
+  //       yAxisID: 'par1',
+  //       data: barChartData.map((data) => data.sum),
+  //       backgroundColor: ['orange'],
+  //       borderRadius: 25,
+  //       order: 2, // уровень на котором находится график дальше-глубже 1-передний план
+  //     },
+  //     {
+  //       type: 'line',
+  //       label: 'Денежный поток',
+  //       yAxisID: 'par2',
+  //       data: barChartData.map((data) => data.cumulativeSum),
+  //       backgroundColor: ['blue'],
+  //       pointStyle: 'circle',
+  //       radius: 9,
+  //       order: 1,
+  //     },
+  //   ],
+  //   options: {
+  //     scales: {
+  //       par1: { // айдишник yAxisID в лайне это ключ в настройках
+  //         beginAtZero: true,
+  //         type: 'linear',
+  //         position: 'left',
+  //       },
+  //       par2: { // айдишник yAxisID в лайне это ключ в настройках
+  //         beginAtZero: true,
+  //         type: 'linear',
+  //         position: 'right',
+  //         grid: {
+  //           drawOnChartArea: false, // only want the grid lines for one axis to show up
+  //         },
+  //       },
+  //     },
+  //   },
+  // });
+
+  const barlineData = {
+    labels: barChartData.map((data) => data.month),
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Денежный поток, накопленный',
+        yAxisID: 'par1',
+        data: barChartData.map((data) => data.sum),
+        backgroundColor: ['lightblue'],
+        borderRadius: 5,
+        order: 2, // уровень на котором находится график дальше-глубже 1-передний план
+      },
+      {
+        type: 'line',
+        label: 'Денежный поток',
+        yAxisID: 'par2',
+        data: barChartData.map((data) => data.cumulativeSum),
+        backgroundColor: ['blue'],
+        pointStyle: 'circle',
+        radius: 4,
+        order: 1,
+      },
+    ],
+    options: {
+      scales: {
+        par1: { // айдишник yAxisID в лайне это ключ в настройках
+          beginAtZero: true,
+          type: 'linear',
+          position: 'left',
+        },
+        par2: { // айдишник yAxisID в лайне это ключ в настройках
+          beginAtZero: true,
+          type: 'linear',
+          position: 'right',
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+      },
+    },
+  };
+
+  return (
+    <div id="bar_line_style">
+      <Bar data={barlineData} options={barlineData.options} />
+    </div>
+  );
+}
+
+export default Bar_Line_Chart;

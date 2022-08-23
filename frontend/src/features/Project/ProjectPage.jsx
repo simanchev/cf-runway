@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-pascal-case */
+/* eslint-disable camelcase */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-plusplus */
 import React, { useCallback, useEffect } from 'react';
@@ -6,6 +8,7 @@ import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
+import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
@@ -93,6 +96,12 @@ function ProjectPage({ id }) {
     }
   }
 
+  const chartData = {
+    barChartData,
+    revenueDonutChartData,
+    costDonutChartData,
+  };
+
   const memoLoadProjectData = useCallback(
     async () => {
       const response = await fetch(`/api/project/${id}`);
@@ -115,7 +124,6 @@ function ProjectPage({ id }) {
   useEffect(() => {
     memoLoadProjectData();
     memoLoadFindData();
-    dispatch({ type: actionType.UPDATE_BARLINE_CHART, payload: barChartConfig });
   }, [id, memoLoadFindData, memoLoadProjectData]);
 
   return (
@@ -211,6 +219,7 @@ function ProjectPage({ id }) {
           </tr>
         </tbody>
       </table>
+      <Report_Charts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
