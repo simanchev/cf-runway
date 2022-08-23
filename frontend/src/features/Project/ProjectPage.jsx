@@ -14,6 +14,8 @@ function ProjectPage({ id }) {
   const investmentData = useSelector((state) => state.finData.investmentData);
   const financingData = useSelector((state) => state.finData.financingData);
 
+  const dispatch = useDispatch();
+
   const revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
     for (let j = 0; j < revenueData.length; j++) {
@@ -61,7 +63,35 @@ function ProjectPage({ id }) {
     if (cf < 0 && cf < cashDeficit) cashDeficit = cf;
   });
 
-  const dispatch = useDispatch();
+  // data for charts
+  const barChartData = [];
+  for (let i = 0; i < 12; i++) {
+    barChartData.push({
+      month: curMonthNames[i],
+      sum: cfSchedule[i],
+      cumulativeSum: cfCumulativeSchedule[i],
+    });
+  }
+
+  const revenueDonutChartData = [];
+  for (let i = 0; i < revenueData.length; i++) {
+    if (revenueData[i][12] !== 0) {
+      revenueDonutChartData.push({
+        title: revenueData[i].title,
+        sum: revenueData[i][12],
+      });
+    }
+  }
+
+  const costDonutChartData = [];
+  for (let i = 0; i < costData.length; i++) {
+    if (costData[i][12] !== 0) {
+      costDonutChartData.push({
+        title: costData[i].title,
+        sum: costData[i][12],
+      });
+    }
+  }
 
   const memoLoadProjectData = useCallback(
     async () => {
@@ -85,6 +115,7 @@ function ProjectPage({ id }) {
   useEffect(() => {
     memoLoadProjectData();
     memoLoadFindData();
+    dispatch({ type: actionType.UPDATE_BARLINE_CHART, payload: barChartConfig });
   }, [id, memoLoadFindData, memoLoadProjectData]);
 
   return (
