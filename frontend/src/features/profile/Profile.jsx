@@ -1,30 +1,31 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Header from '../Header/Header';
 
 function Profile() {
-const state = useSelector((st) => st.auth);
-  console.log(state, 'profile');
+const dispatch = useDispatch();
+  useEffect(() => {
+    fetch('/api/user/profile')
+    .then((res) => res.json())
+    .then((data) => dispatch({ type: 'LOAD_PROJECTS', payload: data.result }));
+  }, []);
+ const { projectsForMap } = useSelector((st) => st.projectCards);
+ console.log(projectsForMap, 'needState');
   return (
-    <>
+    <div>
       <Header />
-      <div>Profile
-        <p>{state.name}</p>
-        {/* <ul>
-        {(state.rest.length === 0) ? (<div>Список пуст</div>)
+      {/* {(projectsForMap.length === 0) ? (<div>Список пуст</div>)
         : (
           <ul>
-            {state.rest.map((el) => <li><Restr /></li>)}
+            {projectsForMap.map((el) => <li><Restr /></li>)}
           </ul>
-        )}
-        </ul> */}
-      </div>
-    </>
+        )} */}
+    </div>
+
   );
 }
 export default Profile;
-
-// доделать модалку
+// TODO доделать map карточек
+// data.result - массив с обьектами console.log(data.result[0])dispatch({type, action}
 // сделать личный кабинет!! 20%
-// пользователь криво летит в стейт, нужно сделать проверки
 //  подружить с миддлваркой resLocals

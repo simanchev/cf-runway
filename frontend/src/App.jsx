@@ -1,14 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { useDispatch } from 'react-redux';
+import Header from './features/Header/Header';
+import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
+  const user = localStorage.getItem('user');
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetch('/api/auth/authenticate')
+      .then((result) => result.json())
+      .then((data) => {
+        if ((data.auth === false) && (!user)) {
+          localStorage.clear();
+          dispatch({ type: 'AUTHENTIC', payload: data });
+        } else {
+          dispatch({ type: 'AUTHENTIC', payload: data });
+        }
+      });
+  }, [dispatch]);
+// передает все правильно {auth, name}
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>CF Runway Project</p>
-      </header>
+      <Header />
+      <div className="container" style={{ marginTop: '60px' }}>
+        <ProjectPage id={1} />
+      </div>
     </div>
   );
 }
