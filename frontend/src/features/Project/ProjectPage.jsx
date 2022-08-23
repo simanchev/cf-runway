@@ -109,25 +109,37 @@ function ProjectPage({ id }) {
         <p>{project.description}</p>
       </div>
       <div className="project-resume">
-        <div className="card text-bg-warning mb-3" style={{ maxWidth: '18rem' }}>
+        <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'} style={{ maxWidth: '18rem' }}>
           <div className="card-header">
             <h5>Резюме</h5>
-            <p style={{ margin: '0' }}>(руб)</p>
           </div>
           <div className="card-body">
             <p className="card-text">
-              <b>Индустрия</b>
-              :
+              Индустрия:
               {' '}
-              {project.industry}
+              <b>{project.industry}</b>
             </p>
             <p className="card-text">
-              <b>Ежемесячный CF через год</b>
-              : 100,000
+              Среднемесячный CF в последний квартал прогноза:
+              {' '}
+              <b>
+                {cfAverage.toLocaleString()}
+                {' '}
+                руб
+              </b>
             </p>
             <p className="card-text">
-              <b>Потребность в доп финансировании (сумма / месяц)</b>
-              : 100,000 / 02.2023
+              Потребность в дополнительном финансировании:
+              {cashDeficit
+                ? (
+                  <b>
+                    {' '}
+                    {Math.abs(cashDeficit).toLocaleString()}
+                    {' '}
+                    руб
+                  </b>
+                ) : <b> отсутствует</b>}
+              {' '}
             </p>
           </div>
         </div>
@@ -135,12 +147,46 @@ function ProjectPage({ id }) {
           <div className="card-body">
             <ul>
               <li><p className="card-text">CF (Cash Flow) - денежный поток</p></li>
-              <li><p className="card-text">Прогнозный прериод - 12 месяцев, включая текущий</p></li>
+              <li><p className="card-text">Прогнозный период - 12 месяцев, включая текущий</p></li>
               <li><p className="card-text">Результаты расчитаны на основе данных, предоставленных пользователем</p></li>
             </ul>
           </div>
         </div>
       </div>
+      <table className="table results-table">
+        <thead>
+          <tr>
+            <th className="row-name">Сумма, тыс. руб</th>
+            {curMonthNames.map((month, index) => <th key={index}>{month}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="row-name">Поступления от продаж</td>
+            {revenueSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Оплата товаров и услуг</td>
+            {costSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Инвестиции</td>
+            {investmentSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr>
+            <td className="row-name">Финансирование</td>
+            {financingSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
+            <td className="row-name">Денежный поток</td>
+            {cfSchedule.map((data, index) => <td key={`1-${index}`}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+          <tr style={{ backgroundColor: 'rgb(245, 245, 245)' }}>
+            <td className="row-name">Денежный поток, накопленный</td>
+            {cfCumulativeSchedule.map((data, index) => <td key={`1-${index}`} className={data < 0 ? 'negative' : 'positive'}>{data ? Math.round(data / 1000).toLocaleString() : '-'}</td>)}
+          </tr>
+        </tbody>
+      </table>
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
