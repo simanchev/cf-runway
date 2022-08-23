@@ -52,7 +52,7 @@ function ModalInvestmentItem() {
               </div>
               <div className="mb-3 modal-flex">
                 <div>
-                  <label className="form-label">Сумма, руб</label>
+                  <label className="form-label">Сумма, ₽</label>
                   <input type="number" className="form-control" defaultValue={finData.sum} name="sum" placeholder="000" required />
                 </div>
                 <div>

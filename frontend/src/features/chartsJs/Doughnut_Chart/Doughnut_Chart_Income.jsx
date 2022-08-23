@@ -6,9 +6,9 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import './Doughnut_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto";
-import Center_Label_Income_Chart from './Center_Label_Income_Chart';
 
 function Doughnut_Chart_Income({ revenueChartData }) {
+  const sumIncome = revenueChartData.reduce((acc, b) => acc + b.sum, 0);
   const doughnutDataIncome = {
     labels: revenueChartData.map((data) => data.title),
     datasets: [
@@ -18,6 +18,7 @@ function Doughnut_Chart_Income({ revenueChartData }) {
         backgroundColor: ['#020122', '#ff521b', '#fc9e4f', '#edd382', '#f2f3ae'],
       }],
     options: {
+      esponsive: true,
       plugins: {
         legend: {
           display: false,
@@ -29,7 +30,11 @@ function Doughnut_Chart_Income({ revenueChartData }) {
   return (
     <div id="pie_style">
       <Doughnut data={doughnutDataIncome} options={doughnutDataIncome.options} />
-      <Center_Label_Income_Chart revenueChartData={revenueChartData} />
+      <div className="label-text">
+        Приток
+        <br />
+        {`${(sumIncome / 1000).toLocaleString()} тыс. ₽`}
+      </div>
     </div>
   );
 }

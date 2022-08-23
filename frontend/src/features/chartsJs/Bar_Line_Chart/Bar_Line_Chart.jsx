@@ -12,7 +12,7 @@ function Bar_Line_Chart({ barChartData }) {
     datasets: [
       {
         type: 'bar',
-        label: 'Денежный поток, накопленный',
+        label: 'Накопленный денежный поток, ₽',
         yAxisID: 'par1',
         data: barChartData.map((data) => data.cumulativeSum),
         backgroundColor: ['lightblue'],
@@ -21,7 +21,7 @@ function Bar_Line_Chart({ barChartData }) {
       },
       {
         type: 'line',
-        label: 'Денежный поток в месяц',
+        label: 'Денежный поток в месяц, ₽',
         yAxisID: 'par2',
         data: barChartData.map((data) => data.sum),
         backgroundColor: ['darkblue'],

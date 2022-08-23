@@ -1,6 +1,5 @@
 .container {
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin: 50px 70px;
 }
 
 th, td {
@@ -196,7 +195,8 @@ textarea {
 }
 
 .navbar > .container {
-  margin: 10px 70px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .navbar button {

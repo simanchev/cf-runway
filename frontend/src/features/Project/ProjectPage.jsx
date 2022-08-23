@@ -157,7 +157,7 @@ function ProjectPage({ id }) {
               <b>
                 {(cfAverage / 1000).toLocaleString()}
                 {' '}
-                тыс. руб
+                тыс. ₽
               </b>
             </p>
             <p className="card-text">
@@ -168,7 +168,7 @@ function ProjectPage({ id }) {
                     {' '}
                     {(Math.abs(cashDeficit) / 1000).toLocaleString()}
                     {' '}
-                    тыс. руб
+                    тыс. ₽
                   </b>
                 ) : <b> отсутствует</b>}
               {' '}
@@ -193,7 +193,7 @@ function ProjectPage({ id }) {
       <table className="table results-table">
         <thead>
           <tr>
-            <th className="row-name">Сумма, тыс. руб</th>
+            <th className="row-name">Сумма, тыс. ₽</th>
             {curMonthNames.map((month, index) => <th key={index}>{month}</th>)}
           </tr>
         </thead>
