@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function Reg() {
+  const dispacth = useDispatch();
   const [text, setText] = useState('');
-  // const navigate = useNavigate('/');
+  // const navigate = useNavigate();
   async function registration(event) {
     event.preventDefault();
     const {
@@ -40,14 +42,16 @@ function Reg() {
     if (data.passwordLength === false) {
       setText('Слишком короткий пароль!');
     }
-
     if (data.registration === false) {
       setText('Пользователь с таким email уже существует');
     }
     if (data.registration === true) { // TODO переделать на переход в модалку с авторизацией
-      window.location.replace('/');
+      window.location.reload();
     }
     if (data.login === 'now') {
+      const userLocal = { localUserName: data.username, id: data.id };
+      localStorage.setItem('user', JSON.stringify(userLocal));
+      dispacth({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
       window.location.replace('/');
     }
   }

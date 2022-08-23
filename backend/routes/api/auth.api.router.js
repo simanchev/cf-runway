@@ -27,7 +27,7 @@ authRouter.post('/registration', async (req, res) => {
       autolog,
     } = req.body;
     const hash = await bcrypt.hash(password, 10);
-    console.log(autolog, '++++++++++++++');
+    // console.log(autolog, '++++++++++++++');
 
     if (password !== passwordConf) { // сравниваем пароли на сервере
       res.status(500).json({ isSame: false });
@@ -75,7 +75,7 @@ authRouter.post('/registration', async (req, res) => {
     if (autolog) {
       try {
         const checkedUser = await User.findOne({ where: { email }, raw: true });
-        console.log(checkedUser, '>>>>>>>');
+        // console.log(checkedUser, '>>>>>>>');
         if (checkedUser === null) {
           res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
           return;
@@ -88,10 +88,12 @@ authRouter.post('/registration', async (req, res) => {
         // const isSame = await bcrypt.compare(password, checkedUser.password);
         // console.log(isSame);
 
-          req.session.userId = checkedUser.id;
+          // req.session.userId = checkedUser.id;
           const { id, name } = checkedUser;
           req.session.user = { id, name };
-          res.json({ login: 'now' });
+          res.json({
+            login: 'now', username: name, id, auth: true,
+          });
         } else {
           res.status(500).json({ message: 'Такого пользователя не существует или неверный пароль!' });
         }
@@ -101,7 +103,7 @@ authRouter.post('/registration', async (req, res) => {
     } else {
     /// ///////////////////////////////////////////
 
-      res.status(201).json({ registration: true });
+      res.status(201).json({ registration: true });// правильный вариант
     }
     // TODO отрисовка на клиенте(корректная), чекбокс!!!!!
   } catch (err) {
@@ -130,10 +132,12 @@ authRouter.post('/login', async (req, res) => {
       // const isSame = await bcrypt.compare(password, checkedUser.password);
       // console.log(isSame);
 
-      req.session.userId = checkedUser.id;
+      // req.session.userId = checkedUser.id;
       const { id, name } = checkedUser;
       req.session.user = { id, name };
-      res.json({ login: true });
+      res.json({
+        login: true, username: name, id, auth: true,
+      });
     } else {
       res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
     }
@@ -144,12 +148,8 @@ authRouter.post('/login', async (req, res) => {
 authRouter.get('/logout', (req, res) => {
   req.session.destroy();
   res.clearCookie('user_sid');
-  res.json({ logout: true });
+  res.json({ logout: true, auth: false, name: '' });// дописать dispatch чтобы статус в стейте поменять
 });
 
 module.exports = authRouter;
-
-// сделать переход на логу при вырубленном чекбоксе
-// сделать личный кабинет!!!!!!!
-// куда лучше положить пользователя?!!!!!!!!!!!!!!!!!!!!!1 проверить корректность работы use effect,
-//  подружить с миддлваркой resLocals
+<<<<<<< HEAD

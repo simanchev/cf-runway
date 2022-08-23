@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
 const sessionConfig = require('./session-config');
 const projectRouter = require('../routes/api/project.api.router');
 const finDataRouter = require('../routes/api/findData.api.router');
@@ -8,6 +9,10 @@ const authRouter = require('../routes/api/auth.api.router');
 // const isAuth = require('../middlewares/isAuth');
 
 const config = (app) => {
+  app.use(helmet.hidePoweredBy());
+  app.use(helmet.xssFilter());
+  app.use(helmet.referrerPolicy());
+  app.use(helmet.permittedCrossDomainPolicies());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cookieParser());

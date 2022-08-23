@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 function Log() {
   const dispatch = useDispatch();
-  const [log, setLogin] = useState('');
+  const [log, setLogin] = useState(true);
   async function login(e) {
     e.preventDefault();
     const { email, password } = e.target;
@@ -19,14 +19,19 @@ function Log() {
       },
     });
     const data = await response.json();
-    // console.log(data);
+
+    // console.log(data, '++++++++++++++++++++++++++++++');
     if (data.login === false) {
       setLogin(data.message);
     }
     if (data.login === true) {
-      dispatch({ type: 'AUTH', payload: data });
-      window.location.reload();// ???????????????????????
-    }
+      dispatch({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
+const userLocal = { localUserName: data.username, id: data.id };
+localStorage.setItem('user', JSON.stringify(userLocal));
+window.location.replace('/');
+      // navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
+}
+// aria-hidden="true"
   }
   return (
     <div className="modal fade" id="logModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -57,4 +62,3 @@ function Log() {
 }
 
 export default Log;
-// TODO доделать аутентификацию
