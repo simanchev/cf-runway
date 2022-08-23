@@ -46,11 +46,13 @@ function Reg() {
       setText('Пользователь с таким email уже существует');
     }
     if (data.registration === true) { // TODO переделать на переход в модалку с авторизацией
-      dispacth({ type: 'AUTHENTIC', payload: data });
       window.location.reload();
     }
     if (data.login === 'now') {
-      window.location.reload();
+      const userLocal = { localUserName: data.username, id: data.id };
+      localStorage.setItem('user', JSON.stringify(userLocal));
+      dispacth({ type: 'AUTHENTIC', payload: data });
+      window.location.replace('/');
     }
   }
 

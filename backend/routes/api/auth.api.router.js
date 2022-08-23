@@ -70,7 +70,7 @@ authRouter.post('/registration', async (req, res) => {
           // req.session.userId = checkedUser.id;
           const { id, name } = checkedUser;
           req.session.user = { id, name };
-          res.json({ login: 'now', username: name });
+          res.json({ login: 'now', username: name, id });
         } else {
           res.status(500).json({ message: 'Такого пользователя не существует или неверный пароль!' });
         }
