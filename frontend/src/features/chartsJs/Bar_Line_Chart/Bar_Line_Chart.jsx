@@ -14,7 +14,7 @@ function Bar_Line_Chart({ barChartData }) {
         type: 'bar',
         label: 'Денежный поток, накопленный',
         yAxisID: 'par1',
-        data: barChartData.map((data) => data.sum),
+        data: barChartData.map((data) => data.cumulativeSum),
         backgroundColor: ['lightblue'],
         borderRadius: 3,
         order: 2, // уровень на котором находится график дальше-глубже 1-передний план
@@ -23,7 +23,7 @@ function Bar_Line_Chart({ barChartData }) {
         type: 'line',
         label: 'Денежный поток в месяц',
         yAxisID: 'par2',
-        data: barChartData.map((data) => data.cumulativeSum),
+        data: barChartData.map((data) => data.sum),
         backgroundColor: ['darkblue'],
         pointStyle: 'circle',
         radius: 4,
