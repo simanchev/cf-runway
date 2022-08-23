@@ -7,6 +7,8 @@ const initialState = {
   investmentData: [],
   financingData: [],
   curFinData: {},
+  CF: {},
+  cumulativeCF: {},
 };
 
 // eslint-disable-next-line default-param-last

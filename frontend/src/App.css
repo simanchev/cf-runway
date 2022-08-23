@@ -2,9 +2,6 @@
   margin-top: 50px;
   margin-bottom: 50px;
 }
-.isSame{
-  color:red;
-}
 
 th, td {
   padding-left: 0 !important;
@@ -213,4 +210,20 @@ textarea {
 .modal-footer {
   display: flex;
   justify-content: space-between;
+}
+.results-table {
+  margin-bottom: 70px;
+}
+
+.results-table td {
+  padding: 8px !important;
+}
+
+.row-name {
+  text-align: left;
+  padding-left: 10px !important;
+}
+
+.negative {
+  background-color: #ffc107 !important;
 }
