@@ -9,6 +9,7 @@ function Header() {
   const dispacth = useDispatch();
   const datas = useSelector((state) => state.auth);
   const { name } = datas;
+  const user = localStorage.getItem('user');
 
   async function logout(e) {
     e.preventDefault();
@@ -22,6 +23,8 @@ function Header() {
       }
     }
   }
+  console.log(name, 'HEADER');
+  console.log(user, 'LOCAL');
   return (
     <nav className="navbar">
       <div className="container">
@@ -30,14 +33,14 @@ function Header() {
           {/* <a type="button" className="navbar-brand" onClick={() => navigate('/')}>CF Runway</a> */}
         </div>
         <ul className="nav justify-content-end">
-          {name
+          {(name && (user !== null))
             ? (
               <>
                 <li className="nav-item">
                   <button type="button" className="btn btn-dark btn-header" onClick={() => navigate('/profile')}>Личный кабинет</button>
                 </li>
                 <li className="nav-item">
-                  <button type="button" className="btn btn-dark btn-header" id="logout">На главную</button>
+                  <button type="button" className="btn btn-dark btn-header" id="logout" onClick={() => navigate('/')}>На главную</button>
                 </li>
                 <li className="nav-item">
                   <button type="button" className="btn btn-dark btn-header" id="logout" onClick={logout}>Выход</button>
