@@ -1,0 +1,28 @@
+#pie_style
+{
+  position: relative;
+}
+
+#Center_Label {
+  z-index: 2;
+  position: relative;
+  text-align: center;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -115px;
+}
+
+#pie_style > canvas {
+  position: relative;
+  z-index: 1;
+}
+
+#pie_style {
+  display: flex;
+  flex-direction:column;
+  /* justify-content: center; */
+  align-items: center;
+  margin-bottom: 20px;
+}

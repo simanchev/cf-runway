@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 /* eslint-disable no-unused-vars */
 /* eslint-disable quotes */
 /* eslint-disable camelcase */
@@ -5,6 +6,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import './Doughnut_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto";
+import Center_Label_Costs_Chart from './Center_Label_Costs_Chart';
 
 function Doughnut_Chart_Costs({ costChartData }) {
   const doughnutDataCost = {
@@ -25,7 +27,10 @@ function Doughnut_Chart_Costs({ costChartData }) {
   };
 
   return (
-    <Doughnut data={doughnutDataCost} options={doughnutDataCost.options} />
+    <div id="pie_style">
+      <Doughnut data={doughnutDataCost} options={doughnutDataCost.options} />
+      <Center_Label_Costs_Chart costChartData={costChartData} />
+    </div>
   );
 }
 
