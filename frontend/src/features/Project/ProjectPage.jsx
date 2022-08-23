@@ -76,20 +76,20 @@ function ProjectPage({ id }) {
     });
   }
 
-  const revenueDonutChartData = [];
+  const revenueChartData = [];
   for (let i = 0; i < revenueData.length; i++) {
     if (revenueData[i][12] !== 0) {
-      revenueDonutChartData.push({
+      revenueChartData.push({
         title: revenueData[i].title,
         sum: revenueData[i][12],
       });
     }
   }
 
-  const costDonutChartData = [];
+  const costChartData = [];
   for (let i = 0; i < costData.length; i++) {
     if (costData[i][12] !== 0) {
-      costDonutChartData.push({
+      costChartData.push({
         title: costData[i].title,
         sum: costData[i][12],
       });
@@ -98,9 +98,10 @@ function ProjectPage({ id }) {
 
   const chartData = {
     barChartData,
-    revenueDonutChartData,
-    costDonutChartData,
+    revenueChartData,
+    costChartData,
   };
+  console.log(chartData);
 
   const memoLoadProjectData = useCallback(
     async () => {
@@ -185,6 +186,11 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
+      <Report_Charts chartData={chartData} />
+      <div className="fin-data-group">
+        <FinDataSection />
+        <ProjectModal />
+      </div>
       <table className="table results-table">
         <thead>
           <tr>
@@ -219,11 +225,6 @@ function ProjectPage({ id }) {
           </tr>
         </tbody>
       </table>
-      <Report_Charts chartData={chartData} />
-      <div className="fin-data-group">
-        <FinDataSection />
-        <ProjectModal />
-      </div>
       <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
     </div>
   );

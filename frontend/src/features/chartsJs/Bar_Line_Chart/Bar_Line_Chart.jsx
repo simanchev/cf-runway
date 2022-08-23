@@ -7,49 +7,6 @@ import './Bar_Line_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto";
 
 function Bar_Line_Chart({ barChartData }) {
-  // console.log(barChartData);
-  // const [barlineData] = useState({
-  //   labels: barChartData.map((data) => data.month),
-  //   datasets: [
-  //     {
-  //       type: 'bar',
-  //       label: 'Денежный поток, накопленный',
-  //       yAxisID: 'par1',
-  //       data: barChartData.map((data) => data.sum),
-  //       backgroundColor: ['orange'],
-  //       borderRadius: 25,
-  //       order: 2, // уровень на котором находится график дальше-глубже 1-передний план
-  //     },
-  //     {
-  //       type: 'line',
-  //       label: 'Денежный поток',
-  //       yAxisID: 'par2',
-  //       data: barChartData.map((data) => data.cumulativeSum),
-  //       backgroundColor: ['blue'],
-  //       pointStyle: 'circle',
-  //       radius: 9,
-  //       order: 1,
-  //     },
-  //   ],
-  //   options: {
-  //     scales: {
-  //       par1: { // айдишник yAxisID в лайне это ключ в настройках
-  //         beginAtZero: true,
-  //         type: 'linear',
-  //         position: 'left',
-  //       },
-  //       par2: { // айдишник yAxisID в лайне это ключ в настройках
-  //         beginAtZero: true,
-  //         type: 'linear',
-  //         position: 'right',
-  //         grid: {
-  //           drawOnChartArea: false, // only want the grid lines for one axis to show up
-  //         },
-  //       },
-  //     },
-  //   },
-  // });
-
   const barlineData = {
     labels: barChartData.map((data) => data.month),
     datasets: [
@@ -59,15 +16,15 @@ function Bar_Line_Chart({ barChartData }) {
         yAxisID: 'par1',
         data: barChartData.map((data) => data.sum),
         backgroundColor: ['lightblue'],
-        borderRadius: 5,
+        borderRadius: 3,
         order: 2, // уровень на котором находится график дальше-глубже 1-передний план
       },
       {
         type: 'line',
-        label: 'Денежный поток',
+        label: 'Денежный поток в месяц',
         yAxisID: 'par2',
         data: barChartData.map((data) => data.cumulativeSum),
-        backgroundColor: ['blue'],
+        backgroundColor: ['darkblue'],
         pointStyle: 'circle',
         radius: 4,
         order: 1,
@@ -87,6 +44,11 @@ function Bar_Line_Chart({ barChartData }) {
           grid: {
             drawOnChartArea: false, // only want the grid lines for one axis to show up
           },
+        },
+      },
+      plugins: {
+        legend: {
+          position: 'bottom',
         },
       },
     },

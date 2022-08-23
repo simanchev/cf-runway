@@ -2,20 +2,19 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import Bar_Line_Chart from '../Bar_Line_Chart/Bar_Line_Chart';
-// import Doughnut_Chart_Costs from "../Doughnut_Chart/Doughnut_Chart_Costs.jsx";
-// import Doughnut_Chart_Income from "../Doughnut_Chart/Doughnut_Chart_Income.jsx";
+import Doughnut_Chart_Costs from '../Doughnut_Chart/Doughnut_Chart_Costs';
+import Doughnut_Chart_Income from '../Doughnut_Chart/Doughnut_Chart_Income';
 import './Report_Charts_Style.css';
 // import { Chart as ChartJS } from "chart.js/auto"
 
 function Report_Charts({ chartData }) {
-  const { barChartData } = chartData;
+  const { barChartData, revenueChartData, costChartData } = chartData;
   return (
     <div className="chart-div">
-      <Bar_Line_Chart barChartData={barChartData} options={{ maintainAspectRatio: false }} />
+      <Bar_Line_Chart barChartData={barChartData} />
       <div id="doughnut_charts_style">
-        {/* <Doughnut_Chart_Income /> */}
-        <br />
-        {/* <Doughnut_Chart_Costs /> */}
+        <Doughnut_Chart_Income revenueChartData={revenueChartData} />
+        <Doughnut_Chart_Costs costChartData={costChartData} />
       </div>
     </div>
   );

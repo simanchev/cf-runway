@@ -72,7 +72,7 @@ module.exports = {
     {
       fin_types_id: 2,
       project_id: 1,
-      title: 'Себестоимость - Косметика - опт',
+      title: 'COGS - Косметика - опт',
       sum: 80000,
       start_date: '2022-09',
       end_date: '2023-07',
@@ -95,7 +95,7 @@ module.exports = {
     {
       fin_types_id: 2,
       project_id: 1,
-      title: 'Себестоимость - Косметика - розница',
+      title: 'COGS - Косметика - розница',
       sum: 110000,
       start_date: '2022-11',
       end_date: '2023-08',
@@ -118,7 +118,7 @@ module.exports = {
     {
       fin_types_id: 2,
       project_id: 1,
-      title: 'Себестоимость - Одежда - опт',
+      title: 'COGS - Одежда - опт',
       sum: 105000,
       start_date: '2023-02',
       end_date: '2023-05',
