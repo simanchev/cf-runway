@@ -101,7 +101,6 @@ function ProjectPage({ id }) {
     revenueChartData,
     costChartData,
   };
-  console.log(chartData);
 
   const memoLoadProjectData = useCallback(
     async () => {
@@ -156,9 +155,9 @@ function ProjectPage({ id }) {
               Среднемесячный CF в последний квартал прогноза:
               {' '}
               <b>
-                {cfAverage.toLocaleString()}
+                {(cfAverage / 1000).toLocaleString()}
                 {' '}
-                руб
+                тыс. руб
               </b>
             </p>
             <p className="card-text">
@@ -167,9 +166,9 @@ function ProjectPage({ id }) {
                 ? (
                   <b>
                     {' '}
-                    {Math.abs(cashDeficit).toLocaleString()}
+                    {(Math.abs(cashDeficit) / 1000).toLocaleString()}
                     {' '}
-                    руб
+                    тыс. руб
                   </b>
                 ) : <b> отсутствует</b>}
               {' '}
