@@ -1,27 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../Header/Header';
-import ProfileButtons from './ProfileButtons';
+import ProjectCard from './ProjectCard';
+import actionType from '../store/actions';
 
 function Profile() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    fetch('/api/user/profile')
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: 'LOAD_PROJECTS', payload: data.result }));
-  }, []);
-  const { projectsForMap } = useSelector((st) => st.projectCards);
-  return (
-    <div>
-      <Header />
-      {(projectsForMap.length === 0) ? (<div>Список пуст</div>)
-        : (
-          <ul>
-            {projectsForMap.map((el) => <li><ProfileButtons key={el.id} el={el} /></li>)}
-          </ul>
-        )}
-    </div>
+const dispatch = useDispatch();
 
+  const memoLoadProjectCards = useCallback(
+    async () => {
+      const response = await fetch('/api/user/profile');
+      const projects = await response.json();
+      dispatch({ type: actionType.LOAD_PROJECT_CARDS, payload: projects.result });
+    },
+    [dispatch],
+  );
+
+  useEffect(() => {
+    memoLoadProjectCards();
+  }, [memoLoadProjectCards]);
+
+ const { projectCards } = useSelector((state) => state.projects);
+
+  return (
+    <div className="container card-list-container">
+      {(projectCards.length === 0) ? <div>Список пуст</div>
+        : <div className="card-list row">{projectCards.map((proj) => <ProjectCard key={[proj.id]} proj={proj} />)}</div>}
+      <button type="button" className="btn btn-success btn-add-project">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+        </svg>
+        Добавить новый проект
+      </button>
+    </div>
   );
 }
 export default Profile;
