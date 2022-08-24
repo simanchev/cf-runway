@@ -26,13 +26,16 @@ function ProjectPage({ id }) {
       revenueSchedule[i] += revenueData[j][i + 1];
     }
   }
-
+  const range = useSelector((st) => st.projects.revenueAdj);
+  const range2 = useSelector((st) => st.projects.costAdj);
+   console.log(range2, 'COST');
+   console.log(range, 'REVENUE');
   const costSchedule = new Array(12).fill(0);
   for (let i = 0; i < costSchedule.length; i++) {
     for (let j = 0; j < costData.length; j++) {
       costSchedule[i] += costData[j][i + 1];
     }
-  }
+  }// прогнать по массиву, переприсвоить новые значения с моими данными с ренджа
 
   const investmentSchedule = new Array(12).fill(0);
   for (let i = 0; i < investmentSchedule.length; i++) {

@@ -10,10 +10,8 @@ const initialState = {
     industry: '',
     description: '',
   },
-  projectScenario: {
     revenueAdj: 0,
     costAdj: 0,
-  }
 };
 
 // eslint-disable-next-line default-param-last
@@ -36,6 +34,16 @@ function reducer(state = initialState, action) {
         ...state,
         projectList: state.projectList.map((project) => (project.id === id ? updatedProject : project)),
       };
+      case 'revenue':
+        return {
+          ...state,
+            revenueAdj: action.payload
+        };
+        case 'cost':
+          return {
+            ...state,
+              costAdj: action.payload,
+          };
 
     default:
       return state;
