@@ -10,7 +10,7 @@ import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
 import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
-// import Range from '../Range/Range';
+import Range from '../Range/Range';
 
 function ProjectPage() {
   const { id } = useParams();
@@ -145,9 +145,6 @@ function ProjectPage() {
           </svg>
         </button>
       </h4>
-      {/* <div className="col-sm-6 project-desc">
-        <p>{project.description}</p>
-      </div> */}
       <div className="project-resume">
         <div className="col-sm-4">
           <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'}>
@@ -199,20 +196,11 @@ function ProjectPage() {
           </div>
           <div className="info-wrap">
             <p className="card-text">* CF (Cash Flow) - денежный поток</p>
-            <p className="card-text">* Прогнозный период для расчетов - 12 месяцев, включая текущий</p>
+            <p className="card-text">* прогнозный период для расчетов - 12 месяцев, включая текущий</p>
           </div>
         </div>
-        {/* <div className="card text-bg-warning mb-3 card-info" style={{ maxWidth: '18rem' }}>
-          <div className="card-body">
-            <ul>
-              <li><p className="card-text">CF (Cash Flow) - денежный поток</p></li>
-              <li><p className="card-text">Прогнозный период - 12 месяцев, включая текущий</p></li>
-              <li><p className="card-text">Результаты расчитаны на основе данных, предоставленных пользователем</p></li>
-            </ul>
-          </div>
-        </div> */}
       </div>
-      {/* <Range /> */}
+      <Range />
       <Report_Charts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />

@@ -37,6 +37,17 @@ th, td {
   color: #0d6efd;
 }
 
+.fin-data-section {
+  background-color: rgb(249, 249, 249);
+  /* padding: 30px; */
+  margin-bottom: 50px;
+}
+
+.nav-link.active {
+  background-color: rgb(249, 249, 249) !important;
+  border-bottom: 1px solid rgb(249, 249, 249) !important;
+}
+
 .fin-data {
   padding: 20px 20px 40px 20px;
   border-left: 1px solid #dee2e6;
@@ -47,15 +58,13 @@ th, td {
 .nav-tabs {
   border-radius: 0 !important;
   font-size: 15px;
+  background-color: white;
 }
+
 
 h6 {
   margin-bottom: 20px;
   font-weight: 700;
-}
-
-.fin-data-wrap {
-  margin-bottom: 50px;
 }
 
 .btn-add {
@@ -97,7 +106,7 @@ h4, h5 {
 .project-resume {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
 .card-additional-wrap {
@@ -385,4 +394,59 @@ textarea {
 
 .card-list-container .card {
   margin: 0 !important;
+}
+
+.range-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.range-wrap > .col-sm-4 > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 30px;
+}
+
+.range-wrap > .col-sm-8 {
+  display: flex;
+  align-items: center;
+}
+
+.range-wrap {
+  padding-bottom: 10px;
+}
+
+.range-wrap p {
+  margin-bottom: 0;
+}
+
+.range-value {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #0d6efd;
+  color: white;
+  font-weight: 700;
+  width: 55px;
+  text-align: center;
+}
+
+.range-container {
+  margin-bottom: 30px;
+}
+
+.btn-range {
+  margin-bottom: 30px;
+}
+
+.btn-restore {
+  margin: 20px 0 30px 0;
+}
+
+.range-section {
+  background-color: rgb(249, 249, 249);
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
 }
