@@ -50,7 +50,7 @@ function FinDataList({ category }) {
           <thead>
             <tr>
               <th style={{ textAlign: 'left' }}>Наименование</th>
-              <th>Сумма, руб</th>
+              <th>Сумма, ₽</th>
               <th>Ежемесячно</th>
               <th>Начало</th>
               <th>Окончание</th>

@@ -26,7 +26,5 @@ const dispatch = useDispatch();
   );
 }
 export default Profile;
-// TODO доделать map карточек
 // data.result - массив с обьектами console.log(data.result[0])dispatch({type, action}
-// сделать личный кабинет!! 20%
 //  подружить с миддлваркой resLocals
