@@ -76,20 +76,20 @@ function ProjectPage({ id }) {
     });
   }
 
-  const revenueDonutChartData = [];
+  const revenueChartData = [];
   for (let i = 0; i < revenueData.length; i++) {
     if (revenueData[i][12] !== 0) {
-      revenueDonutChartData.push({
+      revenueChartData.push({
         title: revenueData[i].title,
         sum: revenueData[i][12],
       });
     }
   }
 
-  const costDonutChartData = [];
+  const costChartData = [];
   for (let i = 0; i < costData.length; i++) {
     if (costData[i][12] !== 0) {
-      costDonutChartData.push({
+      costChartData.push({
         title: costData[i].title,
         sum: costData[i][12],
       });
@@ -98,8 +98,8 @@ function ProjectPage({ id }) {
 
   const chartData = {
     barChartData,
-    revenueDonutChartData,
-    costDonutChartData,
+    revenueChartData,
+    costChartData,
   };
 
   const memoLoadProjectData = useCallback(
@@ -155,9 +155,9 @@ function ProjectPage({ id }) {
               Среднемесячный CF в последний квартал прогноза:
               {' '}
               <b>
-                {cfAverage.toLocaleString()}
+                {(cfAverage / 1000).toLocaleString()}
                 {' '}
-                руб
+                тыс. ₽
               </b>
             </p>
             <p className="card-text">
@@ -166,9 +166,9 @@ function ProjectPage({ id }) {
                 ? (
                   <b>
                     {' '}
-                    {Math.abs(cashDeficit).toLocaleString()}
+                    {(Math.abs(cashDeficit) / 1000).toLocaleString()}
                     {' '}
-                    руб
+                    тыс. ₽
                   </b>
                 ) : <b> отсутствует</b>}
               {' '}
@@ -185,10 +185,15 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
+      <Report_Charts chartData={chartData} />
+      <div className="fin-data-group">
+        <FinDataSection />
+        <ProjectModal />
+      </div>
       <table className="table results-table">
         <thead>
           <tr>
-            <th className="row-name">Сумма, тыс. руб</th>
+            <th className="row-name">Сумма, тыс. ₽</th>
             {curMonthNames.map((month, index) => <th key={index}>{month}</th>)}
           </tr>
         </thead>
@@ -219,11 +224,6 @@ function ProjectPage({ id }) {
           </tr>
         </tbody>
       </table>
-      <Report_Charts chartData={chartData} />
-      <div className="fin-data-group">
-        <FinDataSection />
-        <ProjectModal />
-      </div>
       <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
     </div>
   );
