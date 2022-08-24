@@ -12,7 +12,7 @@ function Report_Charts({ chartData }) {
   return (
     <div className="chart-div">
       <Bar_Line_Chart barChartData={barChartData} />
-      <div id="doughnut_charts_style">
+      <div className="doughnut_charts_style">
         <Doughnut_Chart_Income revenueChartData={revenueChartData} />
         <Doughnut_Chart_Costs costChartData={costChartData} />
       </div>
