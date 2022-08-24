@@ -12,6 +12,7 @@ projectRouter.get('/:id', async (req, res) => {
   }
 });
 
+
 projectRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { title, industry, description } = req.body;

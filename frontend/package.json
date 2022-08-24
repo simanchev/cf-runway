@@ -28,11 +28,23 @@
       "react-app",
       "react-app/jest",
       "airbnb"
-    ],
+    ], 
     "rules": {
-      "no-console": "off",
-      "react/prop-types": "off",
-      "arrow-body-style": "off",
+      "comma-dangle": 0,
+      "no-use-before-define": 0,
+      "implicit-arrow-linebreak": 0,
+      "function-paren-newline": 0,
+      "no-param-reassign": 0,
+      "no-confusing-arrow": 0,
+      "object-curly-newline": 0,
+      "no-nested-ternary": 0,
+      "jsx-a11y/anchor-is-valid": 0,
+      "react/jsx-one-expression-per-line": 0,
+      "jsx-a11y/label-has-associated-control": 0,
+      "operator-linebreak": 0,
+      "indent": 0,
+      "react/prop-types": 0,
+      "default-param-last": 0,
       "react/jsx-filename-extension": [
         1,
         {
@@ -42,7 +54,7 @@
           ]
         }
       ],
-      "jsx-a11y/label-has-associated-control": "off",
+      
       "max-len": 0
     }
   },

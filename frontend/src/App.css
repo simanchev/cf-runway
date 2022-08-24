@@ -1,6 +1,9 @@
 .container {
   margin: 50px 70px;
 }
+.isSame{
+  color:red;
+}
 
 th, td {
   padding-left: 0 !important;
