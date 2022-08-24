@@ -83,6 +83,8 @@ finDataRouter.post('/project/:id/findata/new', async (req, res) => {
       // eslint-disable-next-line max-len
       } else if (i > firstFillMonth && i <= lastFillMonth && userStartYear - curYear <= 1 && regular === 'true') {
         newFinData[i] = sum;
+      } else if (i > firstFillMonth && !lastFillMonth && regular === 'true') {
+        newFinData[i] = sum;
       }
     }
 
