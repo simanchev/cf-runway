@@ -4,7 +4,9 @@ import ProjectCard from './ProjectCard';
 import actionType from '../store/actions';
 
 function Profile() {
-const dispatch = useDispatch();
+  if (!localStorage.user) window.location.replace('/');
+
+  const dispatch = useDispatch();
 
   const memoLoadProjectCards = useCallback(
     async () => {
@@ -15,15 +17,15 @@ const dispatch = useDispatch();
     [dispatch],
   );
 
-  useEffect(() => {
-    memoLoadProjectCards();
-  }, [memoLoadProjectCards]);
+    useEffect(() => {
+      memoLoadProjectCards();
+    }, [memoLoadProjectCards]);
 
- const { projectCards } = useSelector((state) => state.projects);
+  const { projectCards } = useSelector((state) => state.projects);
 
   return (
     <div className="container card-list-container">
-      {(projectCards.length === 0) ? <div>Список пуст</div>
+      {(projectCards.length === 0) ? <p style={{ marginBottom: '50px' }}>Список проектов пока пуст</p>
         : <div className="card-list row">{projectCards.map((proj) => <ProjectCard key={[proj.id]} proj={proj} />)}</div>}
       <button type="button" className="btn btn-success btn-add-project">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">

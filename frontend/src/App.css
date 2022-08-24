@@ -287,11 +287,62 @@ textarea {
   align-items: center;
 }
  
-
 .welcome-wrap {
   margin-top: 100px !important;
   background-color:rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 20px;
-  width: 40%;
+  padding: 30px;
+  width: 45%;
+  padding-bottom: 40px;
+}
+
+.welcome-wrap h6 {
+  font-weight: 500;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.btn-header {
+  background-color: unset !important;
+  border: unset;
+  color: black;
+  display: inline-block;
+  position: relative;
+  box-shadow: unset;
+}
+
+.btn-header:hover, .btn-header:focus, .btn-header:active {
+  color: unset;
+  border: unset;
+  box-shadow: unset !important;
+  outline: 0 !important;
+}
+
+.btn-header:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.btn-header:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.main-title {
+  margin-bottom: 30px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 35px;
+  font-weight: 500;
+}
+
+.btn-welcome {
+  margin-top: 30px;
 }
