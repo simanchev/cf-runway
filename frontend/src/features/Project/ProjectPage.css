@@ -1,11 +1,15 @@
-/* .project-container {
-margin: 15px 50px 0 50px;
-} */
+@media print {
 
-.project-container-ref, .fin-data-group {
-  margin: 0 50px; 
-}
+  .fin-data-group, .btn-dark, .btn-add{
+    display: none;
+  }
 
-.btn-dark {
-  margin-left: 50px;
+  .project-container {
+    margin: 20px 40px;
+  }
+
+  .project-resume {
+    gap: 105px;
+    margin-left: 131px
+  }
 }

@@ -228,3 +228,10 @@ textarea {
 .negative {
   background-color: #ffc107 !important;
 }
+
+@media print {
+  .results-table {
+    /* border: 1px solid black; */
+    transform: translateY(-100px);
+  }
+}

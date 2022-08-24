@@ -1,3 +1,10 @@
 .bar_line_style {
  width: 75%;
 }
+
+@media print {
+  .bar_line_style {
+  /* width: 60%; */
+  transform: scale(0.7) translateX(-150px);
+  }
+}

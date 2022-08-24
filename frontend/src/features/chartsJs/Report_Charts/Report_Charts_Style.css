@@ -1,9 +1,36 @@
 .doughnut_charts_style {
-  width: 17% !important;
+  width: 17% ; /* !important - убрал , потому что не дает нормально вывест ина принт */
 }
 
 .chart-div {
   display: flex;
   justify-content: space-between;
   margin-bottom: 80px;
+}
+
+
+@media print {
+  .chart-div {
+    width: 100%;
+    /* margin-right: 150px; */
+  }
+  .BarLineChart {
+    /* display: flex;
+    justify-content: flex-start; */
+    /* width: 100%; */
+    /* margin-right: 550px; */
+  }
+  .chart-div{
+    /* border: 1px solid black; */
+    transform: translateY(-100px);
+    /* border: 1px solid black; */
+    width: 907px;
+    /* margin: 0 auto; */
+    /* position: absolute; */
+    /* left: 0px; */
+  }
+  .doughnut_charts_style {
+    /* border: 1px solid black; */
+    transform: scale(0.8);
+  }
 }

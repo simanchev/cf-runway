@@ -7,7 +7,9 @@ import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
-import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
+import ReportCharts from '../chartsJs/Report_Charts/Report_Charts';
+// import '../chartsJs/Bar_Line_Chart/Bar_Line_Chart_Style.css';
+// import '../chartsJs/Report_Charts/Report_Charts_Style.css';
 import './ProjectPage.css';
 
 function ProjectPage({ id }) {
@@ -132,7 +134,7 @@ function ProjectPage({ id }) {
   });
 
   return (
-    <div className="project-container">
+    <div className="project-container" ref={componentRef}>
       <h4>
         {project.title}
         {' '}
@@ -190,7 +192,9 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
-      <Report_Charts chartData={chartData} />
+      {/* <div className="reportCharts"> */}
+      <ReportCharts chartData={chartData} />
+      {/* </div> */}
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />

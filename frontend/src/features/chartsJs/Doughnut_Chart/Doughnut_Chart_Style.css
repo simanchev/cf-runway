@@ -19,3 +19,11 @@
   margin-bottom: 20px;
 }
 
+@media print {
+  .pie_style {
+    transform: translateX(-70px);
+  }
+  .label-text {
+    transform: translateX(30px);
+  }
+}
