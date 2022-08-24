@@ -29,17 +29,13 @@ function Header() {
       <div className="container">
         <div>
           <Link className="navbar-brand" to="/">CF Runway</Link>
-          {/* <a type="button" className="navbar-brand" onClick={() => navigate('/')}>CF Runway</a> */}
         </div>
         <ul className="nav justify-content-end">
           {((user !== null) || name)
             ? (
               <>
                 <li className="nav-item">
-                  <button type="button" className="btn btn-dark btn-header" onClick={() => navigate('/profile')}>Личный кабинет</button>
-                </li>
-                <li className="nav-item">
-                  <button type="button" className="btn btn-dark btn-header" id="logout" onClick={() => navigate('/')}>На главную</button>
+                  <button type="button" className="btn btn-dark btn-header" onClick={() => navigate('/profile')}>Мои проекты</button>
                 </li>
                 <li className="nav-item">
                   <button type="button" className="btn btn-dark btn-header" id="logout" onClick={logout}>Выход</button>

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 const finDataRouter = require('express').Router();
 const { Fin_data } = require('../../db/models');
@@ -10,7 +11,7 @@ finDataRouter.get('/project/:id/findata', async (req, res) => {
       raw: true,
       where: { project_id: id },
       order: [
-        ['createdAt', 'ASC'],
+        ['id', 'ASC'],
       ],
     });
     res.status(201).json(finData);

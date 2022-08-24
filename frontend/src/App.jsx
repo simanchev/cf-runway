@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import { useDispatch } from 'react-redux';
-import Header from './features/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import Main from './features/main/Main';
+import MainContent from './features/main/MainContent';
+import Profile from './features/profile/Profile';
 import ProjectPage from './features/Project/ProjectPage';
+// import ProjectPage from './features/Project/ProjectPage';
 
 function App() {
   const user = localStorage.getItem('user');
@@ -18,14 +22,16 @@ function App() {
           dispatch({ type: 'AUTHENTIC', payload: data });
         }
       });
-  }, [dispatch]);
-// передает все правильно {auth, name}
+  }, [dispatch, user]);
   return (
     <div className="App">
-      <Header />
-      <div className="container" style={{ marginTop: '60px' }}>
-        <ProjectPage id={1} />
-      </div>
+      <Routes>
+        <Route element={<Main />}>
+          <Route path="/" element={<MainContent />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/project/:id" element={<ProjectPage />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
