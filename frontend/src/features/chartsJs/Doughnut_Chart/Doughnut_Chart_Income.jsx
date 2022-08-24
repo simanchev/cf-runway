@@ -28,7 +28,7 @@ function Doughnut_Chart_Income({ revenueChartData }) {
   };
 
   return (
-    <div id="pie_style">
+    <div className="pie_style">
       <Doughnut data={doughnutDataIncome} options={doughnutDataIncome.options} />
       <div className="label-text">
         Приток
