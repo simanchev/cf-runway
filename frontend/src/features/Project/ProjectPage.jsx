@@ -162,11 +162,14 @@ function ProjectPage() {
             <p className="card-text">
               Среднемесячный CF в последний квартал прогноза:
               {' '}
-              <b>
-                {(cfAverage / 1000).toLocaleString()}
-                {' '}
-                тыс. ₽
-              </b>
+              {cfAverage
+                ? (
+                  <b>
+                    {(Math.round(cfAverage / 1000)).toLocaleString()}
+                    {' '}
+                    тыс. ₽
+                  </b>
+                  ) : <b> отсутствует</b>}
             </p>
             <p className="card-text">
               Потребность в дополнительном финансировании:
@@ -174,7 +177,7 @@ function ProjectPage() {
                 ? (
                   <b>
                     {' '}
-                    {(Math.abs(cashDeficit) / 1000).toLocaleString()}
+                    {(Math.round(Math.abs(cashDeficit) / 1000)).toLocaleString()}
                     {' '}
                     тыс. ₽
                   </b>
