@@ -467,5 +467,9 @@ textarea {
   flex: 1;
 }
 
+.delete-modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
 
 

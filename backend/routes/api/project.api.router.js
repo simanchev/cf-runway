@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 const projectRouter = require('express').Router();
-const { Project } = require('../../db/models');
+const { Project, Fin_data } = require('../../db/models');
 
 projectRouter.get('/:id', async (req, res) => {
   const { id } = req.params;
@@ -41,6 +42,18 @@ projectRouter.post('/', async (req, res) => {
     res.status(201).json({ created: true });
   } catch (err) {
     res.status(500).json({ created: false, error: 'Не удалось добавить проект' });
+  }
+});
+
+projectRouter.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Fin_data.destroy({ where: { project_id: id } });
+    await Project.destroy({ where: { id } });
+    res.status(201).json({ deleted: true });
+  } catch (err) {
+    res.status(500).json({ deleted: false, error: 'Не удалось удалить проект' });
   }
 });
 
