@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 const finDataRouter = require('express').Router();
 const { Fin_data } = require('../../db/models');

@@ -32,9 +32,6 @@ function App() {
           <Route path="/profile/project/:id" element={<ProjectPage />} />
         </Route>
       </Routes>
-      {/* <div className="container" style={{ marginTop: '60px' }}>
-        <ProjectPage id={1} />
-      </div> */}
     </div>
   );
 }
