@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "postgres",
-    "password": "Postgress",
+    "password": "postgress",
     "database": "cfrunway",
     "host": "127.0.0.1",
     "dialect": "postgres",
