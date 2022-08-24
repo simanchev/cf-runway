@@ -16,6 +16,7 @@ const config = (app) => {
   app.use(helmet.referrerPolicy());
   app.use(helmet.permittedCrossDomainPolicies());
   app.use(express.urlencoded({ extended: true }));
+  app.use(express.static('public'));
   app.use(express.json());
   app.use(cookieParser());
   // app.use(isAuth);

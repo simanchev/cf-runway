@@ -22,18 +22,15 @@ function Log() {
     });
     const data = await response.json();
 
-    // console.log(data, '++++++++++++++++++++++++++++++');
     if (data.login === false) {
       setLogin(data.message);
     }
     if (data.login === true) {
       dispatch({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
-const userLocal = { localUserName: data.username, id: data.id };
-localStorage.setItem('user', JSON.stringify(userLocal));
-window.location.replace('/');
-      // navigate('/');// теперь работает корректно, но не убрать модалку TODO убрать модалку
-}
-// aria-hidden="true"
+      const userLocal = { localUserName: data.username, id: data.id };
+      localStorage.setItem('user', JSON.stringify(userLocal));
+      window.location.replace('/');
+    }
   }
   return (
     <div className="modal fade" id="logModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
