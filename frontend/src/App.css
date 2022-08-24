@@ -6,6 +6,10 @@
   margin-bottom: 50px !important;
 }
 
+.nav {
+  padding-right: 0 !important;
+}
+
 .main-wrap {
   background: url('../public/wall.jpg');
   background-size: cover;
@@ -87,11 +91,19 @@ h4, h5 {
 }
 
 .card {
-  margin: 40px 20px 70px 0 !important;
+  margin: 40px 30px 0 0 !important;
 }
 
 .project-resume {
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 70px;
+}
+
+.card-additional-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-header {
@@ -128,7 +140,15 @@ ul {
 }
 
 .card-text:last-child {
+  margin-bottom: 0 !important;
+}
+
+.info-wrap p {
   margin-bottom: 5px !important;
+}
+
+.info-wrap:last-child {
+  margin-bottom: 0 !important;
 }
 
 .modal-dialog {
@@ -201,7 +221,7 @@ textarea {
 }
 
 .navbar {
-  background-color: rgb(241, 238, 238);
+  background-color: #e8eaea;
 }
 
 .navbar a {
@@ -262,6 +282,10 @@ textarea {
 .card-body h6 {
   margin: 15px 0 !important;
   font-weight: 500;
+}
+
+.card-additional {
+  margin-right: 0 !important;
 }
 
 .project-card-text {
@@ -345,4 +369,20 @@ textarea {
 
 .btn-welcome {
   margin-top: 30px;
+}
+
+.card-header {
+  background-color: transparent;
+}
+
+.card-list.row {
+  margin-bottom: 70px;
+}
+
+.card-list-container .card-body {
+  padding: 30px;
+}
+
+.card-list-container .card {
+  margin: 0 !important;
 }
