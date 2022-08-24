@@ -27,4 +27,21 @@ projectRouter.put('/:id', async (req, res) => {
   }
 });
 
+projectRouter.post('/', async (req, res) => {
+  const { id } = req.session.user;
+  const { title, industry, description } = req.body;
+
+  try {
+    await Project.create({
+      user_id: id,
+      title,
+      industry,
+      description,
+    });
+    res.status(201).json({ created: true });
+  } catch (err) {
+    res.status(500).json({ created: false, error: 'Не удалось добавить проект' });
+  }
+});
+
 module.exports = projectRouter;

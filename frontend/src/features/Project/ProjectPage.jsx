@@ -22,6 +22,8 @@ function ProjectPage() {
 
   const dispatch = useDispatch();
 
+  document.querySelector('#project-modal-form').reset();
+
   let revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
     for (let j = 0; j < revenueData.length; j++) {
@@ -188,7 +190,7 @@ function ProjectPage() {
         <div className="col-sm-8 card-additional-wrap">
           <div className="card text-bg-warning mb-6 card-info card-additional">
             <div className="card-header">
-              <h5>Справочная информация</h5>
+              <h5>Описание проекта</h5>
             </div>
             <div className="card-body">
               <p className="card-text">{project.description}</p>

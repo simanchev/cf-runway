@@ -385,7 +385,8 @@ textarea {
 }
 
 .card-list.row {
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+  align-items: stretch;
 }
 
 .card-list-container .card-body {
@@ -450,3 +451,21 @@ textarea {
   border: 1px solid #dee2e6;
   border-radius: 5px;
 }
+
+.card-list-container .col-sm-6 {
+  margin-bottom: 20px !important;
+}
+
+.card-list-container .col-sm-6 {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.card-list-container .col-sm-6 .card {
+  flex: 1;
+}
+
+
+
