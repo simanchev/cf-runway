@@ -10,6 +10,10 @@ const initialState = {
     industry: '',
     description: '',
   },
+  projectScenario: {
+    revenueAdj: 0,
+    costAdj: 0,
+  }
 };
 
 // eslint-disable-next-line default-param-last

@@ -9,6 +9,7 @@ import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
 import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
+import Range from '../Range/Range';
 
 function ProjectPage({ id }) {
   const project = useSelector((state) => state.projects.curProject);
@@ -185,6 +186,7 @@ function ProjectPage({ id }) {
           </div>
         </div>
       </div>
+      <Range />
       <Report_Charts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />

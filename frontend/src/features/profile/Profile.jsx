@@ -4,14 +4,13 @@ import Header from '../Header/Header';
 import ProfileButtons from './ProfileButtons';
 
 function Profile() {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch('/api/user/profile')
-    .then((res) => res.json())
-    .then((data) => dispatch({ type: 'LOAD_PROJECTS', payload: data.result }));
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: 'LOAD_PROJECTS', payload: data.result }));
   }, []);
- const { projectsForMap } = useSelector((st) => st.projectCards);
- console.log(projectsForMap, 'needState');
+  const { projectsForMap } = useSelector((st) => st.projectCards);
   return (
     <div>
       <Header />
@@ -26,5 +25,3 @@ const dispatch = useDispatch();
   );
 }
 export default Profile;
-// data.result - массив с обьектами console.log(data.result[0])dispatch({type, action}
-//  подружить с миддлваркой resLocals

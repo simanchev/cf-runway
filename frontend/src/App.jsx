@@ -19,7 +19,7 @@ function App() {
         }
       });
   }, [dispatch]);
-// передает все правильно {auth, name}
+  // передает все правильно {auth, name}
   return (
     <div className="App">
       <Header />

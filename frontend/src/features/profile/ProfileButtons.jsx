@@ -8,7 +8,7 @@ function ProfileButtons({ el }) {
         <h5 className="card-title">{el.title}</h5>
         <h6 className="card-text">{el.industry}</h6>
         <p className="card-text">{el.description}</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
+        <a href="/" className="btn btn-primary">Go somewhere</a>
       </div>
     </div>
   );

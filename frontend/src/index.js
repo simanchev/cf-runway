@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import Profile from './features/profile/Profile';
 import store from './features/store/store';
+import Range from './features/Range/Range';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +16,7 @@ root.render(
       <Routes>
 
         <Route path="/" element={<App />} />
+        <Route path="/range" element={<Range />} />
         <Route path="/profile" element={<Profile />} />
 
       </Routes>
