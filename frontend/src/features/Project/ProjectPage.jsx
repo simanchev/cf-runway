@@ -20,22 +20,24 @@ function ProjectPage({ id }) {
 
   const dispatch = useDispatch();
 
-  const revenueSchedule = new Array(12).fill(0);
+  let revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
     for (let j = 0; j < revenueData.length; j++) {
       revenueSchedule[i] += revenueData[j][i + 1];
     }
   }
-  const range = useSelector((st) => st.projects.revenueAdj);
-  const range2 = useSelector((st) => st.projects.costAdj);
-   console.log(range2, 'COST');
-   console.log(range, 'REVENUE');
-  const costSchedule = new Array(12).fill(0);
+  const { revenueAdj } = useSelector((st) => st.projects);
+  const { costAdj } = useSelector((st) => st.projects);
+  //  console.log(range2, 'COST');
+  //  console.log(range, 'REVENUE');
+  let costSchedule = new Array(12).fill(0);
   for (let i = 0; i < costSchedule.length; i++) {
     for (let j = 0; j < costData.length; j++) {
       costSchedule[i] += costData[j][i + 1];
     }
   }// прогнать по массиву, переприсвоить новые значения с моими данными с ренджа
+  costSchedule = costSchedule.map((el) => el * (1 + costAdj / 100));
+  revenueSchedule = revenueSchedule.map((el) => el * (1 + revenueAdj / 100));
 
   const investmentSchedule = new Array(12).fill(0);
   for (let i = 0; i < investmentSchedule.length; i++) {

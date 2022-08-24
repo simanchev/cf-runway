@@ -34,12 +34,12 @@ function reducer(state = initialState, action) {
         ...state,
         projectList: state.projectList.map((project) => (project.id === id ? updatedProject : project)),
       };
-      case 'revenue':
+      case 'REVENUE':
         return {
           ...state,
             revenueAdj: action.payload
         };
-        case 'cost':
+        case 'COST':
           return {
             ...state,
               costAdj: action.payload,
