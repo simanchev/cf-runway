@@ -2,6 +2,7 @@
 import actionType from '../store/actions';
 
 const initialState = {
+  projectCards: [],
   projectList: [],
   curProject: {
     id: null,
@@ -15,6 +16,9 @@ const initialState = {
 // eslint-disable-next-line default-param-last
 function reducer(state = initialState, action) {
   switch (action.type) {
+    case actionType.LOAD_PROJECT_CARDS:
+      return { ...state, projectCards: action.payload };
+
     case actionType.LOAD_PROJECT:
       return { ...state, curProject: action.payload };
 
