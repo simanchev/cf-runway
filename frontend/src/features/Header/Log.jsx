@@ -29,7 +29,7 @@ function Log() {
       dispatch({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
       const userLocal = { localUserName: data.username, id: data.id };
       localStorage.setItem('user', JSON.stringify(userLocal));
-      window.location.replace('/');
+      window.location.replace('/profile');
     }
   }
   return (
