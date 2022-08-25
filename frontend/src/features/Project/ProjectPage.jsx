@@ -94,21 +94,21 @@ function ProjectPage() {
   }
 
   const revenueChartData = [];
-  for (let i = 0; i < revenueData.length; i++) {
-    if (revenueData[i][12] !== 0) {
+  for (let i = 0; i < revenueScheduledData.length; i++) {
+    if (revenueScheduledData[i].schedule[12] !== 0) {
       revenueChartData.push({
-        title: revenueData[i].title,
-        sum: revenueData[i][12],
+        title: revenueScheduledData[i].title,
+        sum: revenueScheduledData[i].schedule[12],
       });
     }
   }
 
   const costChartData = [];
   for (let i = 0; i < costData.length; i++) {
-    if (costData[i][12] !== 0) {
+    if (costScheduledData[i].schedule[12] !== 0) {
       costChartData.push({
-        title: costData[i].title,
-        sum: costData[i][12],
+        title: costScheduledData[i].title,
+        sum: costScheduledData[i].schedule[12],
       });
     }
   }
