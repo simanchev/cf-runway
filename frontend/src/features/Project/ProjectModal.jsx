@@ -59,9 +59,9 @@ function ProjectModal({ newProject }) {
           <div className="modal-header">
             {newProject
               ?
-                <h5 className="modal-title">Добавить новый проект</h5>
+                <h5 className="modal-title">Добавить новый проект*</h5>
               :
-                <h5 className="modal-title">Изменить описание проекта</h5>}
+                <h5 className="modal-title">Изменить описание проекта*</h5>}
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
           <div className="modal-body">

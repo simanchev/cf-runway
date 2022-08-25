@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 function Reg() {
   const dispacth = useDispatch();
-  const [text, setText] = useState('');
+  const [regMsg, setRegMsg] = useState('');
   // const navigate = useNavigate();
   async function registration(event) {
     event.preventDefault();
@@ -34,16 +34,13 @@ function Reg() {
     const data = await response.json();
 
     if (data.isSame === false) {
-      setText('Пароли не совпадают!');
-    }
-    if (data.isSame !== false) {
-      setText('');
+      setRegMsg('Пароли не совпадают');
     }
     if (data.passwordLength === false) {
-      setText('Слишком короткий пароль!');
+      setRegMsg('Пароль должен быть не менее 4 символов');
     }
     if (data.registration === false) {
-      setText('Пользователь с таким email уже существует');
+      setRegMsg('Пользователь с таким email уже существует');
     }
     if (data.registration === true) { // TODO переделать на переход в модалку с авторизацией
       window.location.reload();
@@ -52,7 +49,7 @@ function Reg() {
       const userLocal = { localUserName: data.username, id: data.id };
       localStorage.setItem('user', JSON.stringify(userLocal));
       dispacth({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
-      window.location.replace('/');
+      window.location.replace('/profile');
     }
   }
 
@@ -82,7 +79,7 @@ function Reg() {
                 <input type="checkbox" className="form-check-input" id="autolog-check" name="autolog" />
                 <label className="form-check-label" htmlFor="autolog-check">Войти при регистрации</label>
               </div>
-              <div className="isSame">{text}</div>
+              {regMsg && <div className="alert alert-danger" role="alert">{regMsg}</div>}
               <div className="modal-footer">
                 <button type="submit" className="btn btn-dark">Создать аккаунт</button>
               </div>
