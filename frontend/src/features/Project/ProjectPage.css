@@ -1,5 +1,4 @@
 @media print {
-
   .fin-data-group, .btn-dark, .btn-add{
     display: none;
   }

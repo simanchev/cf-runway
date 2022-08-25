@@ -5,8 +5,6 @@ import Bar_Line_Chart from '../Bar_Line_Chart/Bar_Line_Chart';
 import Doughnut_Chart_Costs from '../Doughnut_Chart/Doughnut_Chart_Costs';
 import Doughnut_Chart_Income from '../Doughnut_Chart/Doughnut_Chart_Income';
 import './Report_Charts_Style.css';
-// import '../Bar_Line_Chart/Bar_Line_Chart_Style.css';
-// import { Chart as ChartJS } from "chart.js/auto"
 
 function Report_Charts({ chartData }) {
   const { barChartData, revenueChartData, costChartData } = chartData;
