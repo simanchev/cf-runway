@@ -35,7 +35,7 @@ function Doughnut_Chart_Income({ revenueChartData }) {
           <div className="label-text">
             Приток
             <br />
-            {`${(sumIncome / 1000).toLocaleString()} тыс. ₽`}
+            {`${Math.round((sumIncome / 1000)).toLocaleString()} тыс. ₽`}
           </div>
         ) : ''}
     </div>

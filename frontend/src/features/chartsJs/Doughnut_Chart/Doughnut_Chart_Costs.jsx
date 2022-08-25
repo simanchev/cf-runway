@@ -34,7 +34,7 @@ function Doughnut_Chart_Costs({ costChartData }) {
           <div className="label-text">
             Отток
             <br />
-            {`${(sumCost / 1000).toLocaleString()} тыс. ₽`}
+            {`${Math.round((sumCost / 1000)).toLocaleString()} тыс. ₽`}
           </div>
         ) : ''}
     </div>
