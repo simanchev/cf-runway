@@ -211,7 +211,7 @@ function ProjectPage() {
         </div>
       </div>
       <Range />
-      <Report_Charts chartData={chartData} />
+      <ReportCharts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
