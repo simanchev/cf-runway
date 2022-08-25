@@ -4,6 +4,7 @@
 
 @media print {
   .bar_line_style {
-  transform: scale(0.7) translateX(-150px);
+    /* margin-top: 20px; */
+  transform: scale(0.9) translateX(-80px);
   }
 }

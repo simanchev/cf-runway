@@ -1,14 +1,23 @@
 @media print {
-  .fin-data-group, .btn-dark, .btn-add{
+  .fin-data-group, .btn-dark, .btn-add, .btn-danger{
     display: none;
   }
 
-  .project-container {
-    margin: 20px 40px;
+  .container {
+    /* border: 1px solid black; */
+    margin-top: 50px;
+    width: 90%;
   }
-
+  .col-sm-4{
+    /* border: 1px solid black; */
+  }
+  .mb-3{
+    /* border: 1px solid black; */
+    width: 300px;
+    /* margin: 0px; */
+  }
   .project-resume {
-    gap: 105px;
-    margin-left: 131px
+    /* gap: 105px; */
+    /* margin-left: 131px */
   }
 }

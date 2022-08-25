@@ -145,7 +145,7 @@ function ProjectPage() {
   });
 
   return (
-    <div className="project-container" ref={componentRef}>
+    <div className="container" ref={componentRef}>
       <h4>
         {project.title}
         {' '}
@@ -260,6 +260,9 @@ function ProjectPage() {
           </svg>
           Удалить проект
         </button>
+      </div>
+      <div className="logo-link">
+        <p>Здесь должен быть логотип компании и краткое и ссылка на сайт</p>
       </div>
     </div>
   );

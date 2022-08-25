@@ -11,15 +11,16 @@
 
 @media print {
   .chart-div {
-    width: 100%;
+    /* width: 100%; */
   }
   .chart-div{
     /* border: 1px solid black; */
-    transform: translateY(-100px);
+    /* transform: translateY(-25px); */
     width: 907px;
   }
   .doughnut_charts_style {
+    width: 90%;
     /* border: 1px solid black; */
-    transform: scale(0.8);
+    transform: translateX(-70px);
   }
 }

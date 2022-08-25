@@ -21,9 +21,9 @@
 
 @media print {
   .pie_style {
-    transform: translateX(-70px);
+    /* transform: translateX(-70px); */
   }
   .label-text {
-    transform: translateX(30px);
+    /* transform: translateX(100px); */
   }
 }
