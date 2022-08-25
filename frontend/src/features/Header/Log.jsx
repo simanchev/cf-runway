@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { useNavigate } from 'react-router-dom';
 
 function Log() {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const [logMsg, setLogMsg] = useState();
   async function login(e) {

@@ -27,7 +27,7 @@ function Doughnut_Chart_Costs({ costChartData }) {
   };
 
   return (
-    <div id="pie_style">
+    <div className="pie_style">
       <Doughnut data={doughnutDataCost} options={doughnutDataCost.options} />
       {sumCost
         ? (

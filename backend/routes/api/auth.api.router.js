@@ -1,5 +1,6 @@
 const authRouter = require('express').Router();
 const bcrypt = require('bcrypt');
+const transporter = require('../nodemailer');
 
 const { User } = require('../../db/models');
 
@@ -48,7 +49,28 @@ authRouter.post('/registration', async (req, res) => {
       email,
       password: hash,
     });
+    /// ///////////////////////////////////
+    // здесь должна быть рассылка start
+    // console.log('мыло пользователя', email);
 
+    const mail = {
+      from: '<cfrunway@yandex.ru>',
+      to: email,
+      subject: `Здравствуйте, ${username}! Добро пожаловать на платформу CF-Runway!`,
+      text: `Dear ${username}!`,
+      html: '<b>Благодарим Вас за выбор приложения для финансового планирования CF-Runway!</b>',
+    };
+
+    transporter.sendMail(mail, (error, response) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Message sent: ${response.message}`);
+      }
+
+      transporter.close();
+    });
+    // здесь должна быть рассылка finish
     if (autolog) {
       try {
         const checkedUser = await User.findOne({ where: { email }, raw: true });
@@ -77,6 +99,7 @@ authRouter.post('/registration', async (req, res) => {
     res.status(500).json({ errorMessage: err.message });
   }
 });
+
 authRouter.post('/login', async (req, res) => {
   try {
     const {

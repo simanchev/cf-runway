@@ -478,3 +478,13 @@ textarea {
 }
 
 
+
+@media print {
+  .results-table {
+    transform: translateY(10px);
+  }
+
+  .range-section {
+    display: none;
+  }
+}

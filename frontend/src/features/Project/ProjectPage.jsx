@@ -1,18 +1,19 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable camelcase */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-plusplus */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useReactToPrint } from 'react-to-print';
 import { useParams } from 'react-router-dom';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
-import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
+import ReportCharts from '../chartsJs/Report_Charts/Report_Charts';
 import Range from '../Range/Range';
 import DeleteModal from './DeleteModal';
 import getSchedule from './schedule';
+import './ProjectPage.css';
+import logo from './logo-report.jpeg';
 
 function ProjectPage() {
   if (!localStorage.user) window.location.replace('/');
@@ -143,8 +144,13 @@ function ProjectPage() {
     memoLoadFindData();
   }, [id, memoLoadFindData, memoLoadProjectData]);
 
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
-    <div className="container">
+    <div className="container" ref={componentRef}>
       <h4>
         {project.title}
         {' '}
@@ -210,7 +216,7 @@ function ProjectPage() {
         </div>
       </div>
       <Range />
-      <Report_Charts chartData={chartData} />
+      <ReportCharts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
@@ -251,7 +257,7 @@ function ProjectPage() {
         </tbody>
       </table>
       <div className="footer-buttons">
-        <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
+        <button type="submit" className="btn btn-dark" onClick={handlePrint}>Скачать отчет о проекте</button>
         <button type="button" className="btn btn-danger btn-delete-project" data-bs-toggle="modal" data-bs-target="#deleteModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -260,6 +266,15 @@ function ProjectPage() {
           Удалить проект
         </button>
       </div>
+      {/* <div style={{ display: 'none' }}> */}
+      <div className="logo-link" style={{ display: 'none' }}>
+        <div>
+          <img id="logo-report" src={logo} alt="" />
+          <p><b>CF Runway.</b> Онлайн-сервис для прогнозирования денежных потоков бизнеса</p>
+        </div>
+        <p>https://cfrunway.herokuapp.com/</p>
+      </div>
+      {/* </div> */}
     </div>
   );
 }
