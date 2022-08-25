@@ -54,11 +54,11 @@ authRouter.post('/registration', async (req, res) => {
     // console.log('мыло пользователя', email);
 
     const mail = {
-      from: '<cfrunway@yandex.ru>',
+      from: '<cfrunway@mail.ru>',
       to: email,
-      subject: `Здравствуйте, ${username}! Добро пожаловать на платформу CF-Runway!`,
+      subject: `Здравствуйте, ${username}! Вас приветствует CF-Runway!`,
       text: `Dear ${username}!`,
-      html: '<b>Благодарим Вас за выбор приложения для финансового планирования CF-Runway!</b>',
+      html: '<b>Благодарим за выбор CF Runway - удобного онлайн помощника для планирования денежных потоков вашего бизнеса! https://cfrunway.herokuapp.com </b>',
     };
 
     transporter.sendMail(mail, (error, response) => {
