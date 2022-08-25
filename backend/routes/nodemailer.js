@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport(
   {
-    host: 'smtp.yandex.ru',
+    host: 'smtp.mail.ru',
     port: 465,
     secure: true,
     auth: {
-      user: 'cfrunway@yandex.ru',
-      pass: '1QazXsw2/',
+      user: 'cfrunway@mail.ru',
+      pass: '8vbxrR0Tkn3RjsZrWKXt',
     },
   },
   // {
