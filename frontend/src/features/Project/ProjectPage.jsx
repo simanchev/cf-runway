@@ -3,16 +3,20 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useReactToPrint } from 'react-to-print';
+import { useParams } from 'react-router-dom';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
 import ReportCharts from '../chartsJs/Report_Charts/Report_Charts';
+import Range from '../Range/Range';
+import DeleteModal from './DeleteModal';
 // import '../chartsJs/Bar_Line_Chart/Bar_Line_Chart_Style.css';
 // import '../chartsJs/Report_Charts/Report_Charts_Style.css';
 import './ProjectPage.css';
 
-function ProjectPage({ id }) {
+function ProjectPage() {
+  const { id } = useParams();
   const project = useSelector((state) => state.projects.curProject);
   const revenueData = useSelector((state) => state.finData.revenueData);
   const costData = useSelector((state) => state.finData.costData);
@@ -21,19 +25,26 @@ function ProjectPage({ id }) {
 
   const dispatch = useDispatch();
 
-  const revenueSchedule = new Array(12).fill(0);
+  if (document.querySelector('#project-modal-form')) document.querySelector('#project-modal-form').reset();
+
+  let revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
     for (let j = 0; j < revenueData.length; j++) {
       revenueSchedule[i] += revenueData[j][i + 1];
     }
   }
-
-  const costSchedule = new Array(12).fill(0);
+  const { revenueAdj } = useSelector((st) => st.projects);
+  const { costAdj } = useSelector((st) => st.projects);
+  //  console.log(range2, 'COST');
+  //  console.log(range, 'REVENUE');
+  let costSchedule = new Array(12).fill(0);
   for (let i = 0; i < costSchedule.length; i++) {
     for (let j = 0; j < costData.length; j++) {
       costSchedule[i] += costData[j][i + 1];
     }
-  }
+  }// прогнать по массиву, переприсвоить новые значения с моими данными с ренджа
+  costSchedule = costSchedule.map((el) => el * (1 + costAdj / 100));
+  revenueSchedule = revenueSchedule.map((el) => el * (1 + revenueAdj / 100));
 
   const investmentSchedule = new Array(12).fill(0);
   for (let i = 0; i < investmentSchedule.length; i++) {
@@ -144,60 +155,67 @@ function ProjectPage({ id }) {
           </svg>
         </button>
       </h4>
-      <div className="col-sm-6 project-desc">
-        <p>{project.description}</p>
-      </div>
       <div className="project-resume">
-        <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'} style={{ maxWidth: '18rem' }}>
-          <div className="card-header">
-            <h5>Резюме</h5>
-          </div>
-          <div className="card-body">
-            <p className="card-text">
-              Индустрия:
-              {' '}
-              <b>{project.industry}</b>
-            </p>
-            <p className="card-text">
-              Среднемесячный CF в последний квартал прогноза:
-              {' '}
-              <b>
-                {(cfAverage / 1000).toLocaleString()}
+        <div className="col-sm-4">
+          <div className={cashDeficit ? 'card text-bg-warning mb-3' : 'card text-bg-success mb-3'}>
+            <div className="card-header">
+              <h5>Резюме</h5>
+            </div>
+            <div className="card-body">
+              <p className="card-text">
+                Индустрия:
                 {' '}
-                тыс. ₽
-              </b>
-            </p>
-            <p className="card-text">
-              Потребность в дополнительном финансировании:
-              {cashDeficit
-                ? (
-                  <b>
-                    {' '}
-                    {(Math.abs(cashDeficit) / 1000).toLocaleString()}
-                    {' '}
-                    тыс. ₽
-                  </b>
-                ) : <b> отсутствует</b>}
-              {' '}
-            </p>
+                <b>{project.industry}</b>
+              </p>
+              <p className="card-text">
+                Среднемесячный CF в последний квартал прогноза:
+                {' '}
+                {cfAverage
+                  ? (
+                    <b>
+                      {(Math.round(cfAverage / 1000)).toLocaleString()}
+                      {' '}
+                      тыс. ₽
+                    </b>
+                    ) : <b> отсутствует</b>}
+              </p>
+              <p className="card-text">
+                Потребность в дополнительном объеме финансирования:
+                {cashDeficit
+                  ? (
+                    <b>
+                      {' '}
+                      {(Math.round(Math.abs(cashDeficit) / 1000)).toLocaleString()}
+                      {' '}
+                      тыс. ₽
+                    </b>
+                  ) : <b> отсутствует</b>}
+                {' '}
+              </p>
+            </div>
           </div>
         </div>
-        <div className="card text-bg-warning mb-3 card-info" style={{ maxWidth: '18rem' }}>
-          <div className="card-body">
-            <ul>
-              <li><p className="card-text">CF (Cash Flow) - денежный поток</p></li>
-              <li><p className="card-text">Прогнозный период - 12 месяцев, включая текущий</p></li>
-              <li><p className="card-text">Результаты расчитаны на основе данных, предоставленных пользователем</p></li>
-            </ul>
+        <div className="col-sm-8 card-additional-wrap">
+          <div className="card text-bg-warning mb-6 card-info card-additional">
+            <div className="card-header">
+              <h5>Описание проекта</h5>
+            </div>
+            <div className="card-body">
+              <p className="card-text">{project.description}</p>
+            </div>
+          </div>
+          <div className="info-wrap">
+            <p className="card-text">* CF (Cash Flow) - денежный поток</p>
+            <p className="card-text">* прогнозный период для расчетов - 12 месяцев, включая текущий</p>
           </div>
         </div>
       </div>
-      {/* <div className="reportCharts"> */}
-      <ReportCharts chartData={chartData} />
-      {/* </div> */}
+      <Range />
+      <Report_Charts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
+        <DeleteModal />
       </div>
       <table className="table results-table">
         <thead>
@@ -233,7 +251,16 @@ function ProjectPage({ id }) {
           </tr>
         </tbody>
       </table>
-      <button type="submit" className="btn btn-dark" onClick={handlePrint}>Скачать отчет о проекте</button>
+      <div className="footer-buttons">
+        <button type="submit" className="btn btn-dark" onClick={handlePrint}>Скачать отчет о проекте</button>
+        <button type="button" className="btn btn-danger btn-delete-project" data-bs-toggle="modal" data-bs-target="#deleteModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+          </svg>
+          Удалить проект
+        </button>
+      </div>
     </div>
   );
 }

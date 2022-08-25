@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
 const finDataRouter = require('express').Router();
 const { Fin_data } = require('../../db/models');
@@ -10,7 +11,7 @@ finDataRouter.get('/project/:id/findata', async (req, res) => {
       raw: true,
       where: { project_id: id },
       order: [
-        ['createdAt', 'ASC'],
+        ['id', 'ASC'],
       ],
     });
     res.status(201).json(finData);
@@ -81,6 +82,8 @@ finDataRouter.post('/project/:id/findata/new', async (req, res) => {
         newFinData[i] = sum;
       // eslint-disable-next-line max-len
       } else if (i > firstFillMonth && i <= lastFillMonth && userStartYear - curYear <= 1 && regular === 'true') {
+        newFinData[i] = sum;
+      } else if (i > firstFillMonth && !lastFillMonth && regular === 'true') {
         newFinData[i] = sum;
       }
     }

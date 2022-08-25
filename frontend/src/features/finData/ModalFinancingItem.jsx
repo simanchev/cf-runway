@@ -69,7 +69,7 @@ function ModalFinancingItem() {
                   <input type="month" defaultValue={finData.start_date} className="form-control" name="startDate" required />
                 </div>
                 <div>
-                  <label className="form-label">Месяц окончания*</label>
+                  <label className="form-label">Месяц окончания</label>
                   <input type="month" defaultValue={finData.end_date} className="form-control" name="endDate" />
                 </div>
               </div>

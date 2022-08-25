@@ -8,7 +8,7 @@ import './Doughnut_Chart_Style.css';
 import { Chart as ChartJS } from "chart.js/auto";
 
 function Doughnut_Chart_Costs({ costChartData }) {
-  const sumIncome = costChartData.reduce((acc, b) => acc + b.sum, 0);
+  const sumCost = costChartData.reduce((acc, b) => acc + b.sum, 0);
   const doughnutDataCost = {
     labels: costChartData.map((data) => data.title),
     datasets: [
@@ -29,11 +29,14 @@ function Doughnut_Chart_Costs({ costChartData }) {
   return (
     <div className="pie_style">
       <Doughnut data={doughnutDataCost} options={doughnutDataCost.options} />
-      <div className="label-text">
-        Отток
-        <br />
-        {`${(sumIncome / 1000).toLocaleString()} тыс. ₽`}
-      </div>
+      {sumCost
+        ? (
+          <div className="label-text">
+            Отток
+            <br />
+            {`${(sumCost / 1000).toLocaleString()} тыс. ₽`}
+          </div>
+        ) : ''}
     </div>
   );
 }

@@ -1,0 +1,24 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+function ProjectCard({ proj }) {
+  const navigate = useNavigate();
+  return (
+    <div className="col-sm-6">
+      <div className="card" id={proj.id}>
+        <div className="card-body">
+          <div className="card-title-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" className="bi bi-file-bar-graph-fill" viewBox="0 0 16 16">
+              <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm-2 11.5v-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-2.5.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1zm-3 0a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-1z" />
+            </svg>
+            <h5 className="card-title">{proj.title}</h5>
+          </div>
+          <h6>- {proj.industry} -</h6>
+          <p className="card-text project-card-text">{proj.description}</p>
+          <button type="button" className="btn btn-dark" onClick={() => navigate(`/profile/project/${proj.id}`)}>Подробнее</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+export default ProjectCard;

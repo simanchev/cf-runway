@@ -1,13 +1,9 @@
 export const initialState = {
-
   auth: false,
   name: '',
 };
 
-// eslint-disable-next-line default-param-last
 export default function authReducer(state = initialState, action) {
-  console.log(state, 'state');
-  console.log(action.payload, 'payyyyllloooaaaadddd');
   switch (action.type) {
     // case 'AUTH':
     //   return {
@@ -21,12 +17,12 @@ export default function authReducer(state = initialState, action) {
         auth: action.payload.auth,
         name: action.payload.username,
       };
-      case 'LOGOUT':
-        return {
-          ...state,
-          auth: action.payload.auth,
-          name: action.payload.name
-        };
+    case 'LOGOUT':
+      return {
+        ...state,
+        auth: action.payload.auth,
+        name: action.payload.name,
+      };
 
     default:
       return state;
