@@ -476,7 +476,6 @@ textarea {
 
 @media print {
   .results-table {
-    /* border: 1px solid black; */
-    /* transform: translateY(-80px); */
+    transform: translateY(10px);
   }
 }

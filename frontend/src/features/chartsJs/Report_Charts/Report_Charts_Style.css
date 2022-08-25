@@ -1,5 +1,5 @@
 .doughnut_charts_style {
-  width: 17% !important; /* !important - убрал , потому что не дает нормально вывест ина принт */
+  width: 17% !important;
 }
 
 .chart-div {
@@ -11,16 +11,11 @@
 
 @media print {
   .chart-div {
-    /* width: 100%; */
+    width: 900px;
+    height: 300px;
   }
-  .chart-div{
-    /* border: 1px solid black; */
-    /* transform: translateY(-25px); */
-    width: 907px;
-  }
+
   .doughnut_charts_style {
-    width: 90%;
-    /* border: 1px solid black; */
-    transform: translateX(-70px);
+    transform: scale(0.7) translateX(-115px) translateY(-80px);
   }
 }

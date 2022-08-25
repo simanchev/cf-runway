@@ -11,9 +11,8 @@ import curMonthNames from './months';
 import ReportCharts from '../chartsJs/Report_Charts/Report_Charts';
 import Range from '../Range/Range';
 import DeleteModal from './DeleteModal';
-// import '../chartsJs/Bar_Line_Chart/Bar_Line_Chart_Style.css';
-// import '../chartsJs/Report_Charts/Report_Charts_Style.css';
 import './ProjectPage.css';
+import logo from './logo-report.jpeg';
 
 function ProjectPage() {
   if (!localStorage.user) window.location.replace('/');
@@ -262,9 +261,15 @@ function ProjectPage() {
           Удалить проект
         </button>
       </div>
-      <div className="logo-link">
-        <p>Здесь должен быть логотип компании и краткое и ссылка на сайт</p>
+      {/* <div style={{ display: 'none' }}> */}
+      <div className="logo-link" style={{ display: 'none' }}>
+        <div>
+          <img id="logo-report" src={logo} alt="" />
+          <p><b>CF Runway.</b> Онлайн-сервис для прогнозирования денежных потоков бизнеса</p>
+        </div>
+        <p>https://cfrunway.herokuapp.com/</p>
       </div>
+      {/* </div> */}
     </div>
   );
 }

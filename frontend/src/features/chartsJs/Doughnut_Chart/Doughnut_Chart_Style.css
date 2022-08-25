@@ -20,10 +20,7 @@
 }
 
 @media print {
-  .pie_style {
-    /* transform: translateX(-70px); */
-  }
   .label-text {
-    /* transform: translateX(100px); */
+    transform: translateX(35px);
   }
 }
