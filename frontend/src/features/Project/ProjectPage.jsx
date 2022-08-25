@@ -12,6 +12,7 @@ import curMonthNames from './months';
 import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
 import Range from '../Range/Range';
 import DeleteModal from './DeleteModal';
+import getSchedule from './schedule';
 
 function ProjectPage() {
   if (!localStorage.user) window.location.replace('/');
@@ -26,36 +27,40 @@ function ProjectPage() {
 
   if (document.querySelector('#project-modal-form')) document.querySelector('#project-modal-form').reset();
 
+  const revenueScheduledData = getSchedule(revenueData);
+  const costScheduledData = getSchedule(costData);
+  const investmentScheduledData = getSchedule(investmentData);
+  const financingScheduledData = getSchedule(financingData);
+
   let revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
-    for (let j = 0; j < revenueData.length; j++) {
-      revenueSchedule[i] += revenueData[j][i + 1];
+    for (let j = 0; j < revenueScheduledData.length; j++) {
+      revenueSchedule[i] += revenueScheduledData[j].schedule[i + 1];
     }
   }
   const { revenueAdj } = useSelector((st) => st.projects);
   const { costAdj } = useSelector((st) => st.projects);
-  //  console.log(range2, 'COST');
-  //  console.log(range, 'REVENUE');
+
   let costSchedule = new Array(12).fill(0);
   for (let i = 0; i < costSchedule.length; i++) {
-    for (let j = 0; j < costData.length; j++) {
-      costSchedule[i] += costData[j][i + 1];
+    for (let j = 0; j < costScheduledData.length; j++) {
+      costSchedule[i] += costScheduledData[j].schedule[i + 1];
     }
-  }// прогнать по массиву, переприсвоить новые значения с моими данными с ренджа
+  }
   costSchedule = costSchedule.map((el) => el * (1 + costAdj / 100));
   revenueSchedule = revenueSchedule.map((el) => el * (1 + revenueAdj / 100));
 
   const investmentSchedule = new Array(12).fill(0);
   for (let i = 0; i < investmentSchedule.length; i++) {
-    for (let j = 0; j < investmentData.length; j++) {
-      investmentSchedule[i] += investmentData[j][i + 1];
+    for (let j = 0; j < investmentScheduledData.length; j++) {
+      investmentSchedule[i] += investmentScheduledData[j].schedule[i + 1];
     }
   }
 
   const financingSchedule = new Array(12).fill(0);
   for (let i = 0; i < financingSchedule.length; i++) {
-    for (let j = 0; j < financingData.length; j++) {
-      financingSchedule[i] += financingData[j][i + 1];
+    for (let j = 0; j < financingScheduledData.length; j++) {
+      financingSchedule[i] += financingScheduledData[j].schedule[i + 1];
     }
   }
 

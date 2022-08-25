@@ -50,7 +50,7 @@ module.exports = {
       fin_types_id: 1,
       project_id: 1,
       title: 'Одежда - опт',
-      sum: 150000,
+      sum: 200000,
       start_date: '2023-02',
       end_date: '2023-07',
       regular: true,
