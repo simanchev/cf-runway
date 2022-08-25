@@ -2,9 +2,11 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import actionType from '../store/actions';
 
-function ProjectModal() {
-  const project = useSelector((state) => state.projects.curProject);
+function ProjectModal({ newProject }) {
+  let project = useSelector((state) => state.projects.curProject);
   const dispatch = useDispatch();
+
+  if (newProject) project = {};
 
   async function showUpdatedProject() {
     const updateResponse = await fetch(`/api/project/${project.id}`);
@@ -13,21 +15,41 @@ function ProjectModal() {
     dispatch({ type: actionType.LOAD_PROJECT, payload: projectData });
   }
 
-  async function updateProject(event) {
+  async function showUpdatedProjectList() {
+    const response = await fetch('/api/user/profile');
+    const projects = await response.json();
+    dispatch({ type: actionType.LOAD_PROJECT_CARDS, payload: projects.result });
+  }
+
+  async function addUpdateProject(event) {
     event.preventDefault();
     const { projectTitle, projectIndustry, projectDescription } = event.target;
 
-    const response = await fetch(`/api/project/${project.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'Application/json' },
-      body: JSON.stringify({
-        title: projectTitle.value,
-        industry: projectIndustry.value,
-        description: projectDescription.value,
-      }),
-    });
-    const data = await response.json();
-    if (data.updated) showUpdatedProject();
+    if (newProject) {
+      const response = await fetch('/api/project/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          title: projectTitle.value,
+          industry: projectIndustry.value,
+          description: projectDescription.value,
+        }),
+      });
+      const data = await response.json();
+      if (data.created) showUpdatedProjectList();
+    } else {
+      const response = await fetch(`/api/project/${project.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'Application/json' },
+        body: JSON.stringify({
+          title: projectTitle.value,
+          industry: projectIndustry.value,
+          description: projectDescription.value,
+        }),
+      });
+      const data = await response.json();
+      if (data.updated) showUpdatedProject();
+    }
   }
 
   return (
@@ -35,25 +57,33 @@ function ProjectModal() {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Изменить описание проекта</h5>
+            {newProject
+              ?
+                <h5 className="modal-title">Добавить новый проект</h5>
+              :
+                <h5 className="modal-title">Изменить описание проекта</h5>}
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
           </div>
           <div className="modal-body">
-            <form className="modal-form" onSubmit={updateProject}>
+            <form className="modal-form" id="project-modal-form" onSubmit={addUpdateProject}>
               <div className="mb-3">
                 <label className="form-label">Название проекта</label>
-                <input type="text" className="form-control" name="projectTitle" defaultValue={project.title} />
+                <input type="text" className="form-control" name="projectTitle" defaultValue={project.title} required />
               </div>
               <div className="mb-3">
                 <label className="form-label">Индустрия (основное направление)</label>
-                <input type="text" className="form-control" name="projectIndustry" defaultValue={project.industry} />
+                <input type="text" className="form-control" name="projectIndustry" defaultValue={project.industry} required />
               </div>
               <div className="mb-3">
                 <label className="form-label">Краткое описание</label>
-                <textarea className="form-control" name="projectDescription" defaultValue={project.description} />
+                <textarea className="form-control" name="projectDescription" defaultValue={project.description} required />
               </div>
               <div className="modal-footer">
-                <button type="submit" className="btn btn-dark btn-modal" data-bs-dismiss="modal">Сохранить изменения</button>
+                {newProject
+                ?
+                  <button type="submit" className="btn btn-dark btn-modal" data-bs-dismiss="modal">Добавить проект</button>
+                :
+                  <button type="submit" className="btn btn-dark btn-modal" data-bs-dismiss="modal">Сохранить изменения</button>}
               </div>
             </form>
           </div>
