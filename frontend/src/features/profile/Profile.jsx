@@ -31,7 +31,7 @@ function Profile() {
 
   return (
     <div className="container card-list-container">
-      {(projectCards.length === 0) ? <p style={{ marginBottom: '50px' }}>Список проектов пока пуст</p>
+      {(projectCards.length === 0) ? <p style={{ marginBottom: '50px', fontSize: '15px' }}>Список проектов пока пуст</p>
         : <div className="card-list row">{projectCards.map((proj) => <ProjectCard key={[proj.id]} proj={proj} />)}</div>}
       <button type="button" className="btn btn-success btn-add-project" data-bs-toggle="modal" data-bs-target="#projectModal" onClick={clearCurProject}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">

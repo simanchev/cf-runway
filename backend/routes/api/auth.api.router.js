@@ -53,7 +53,7 @@ authRouter.post('/registration', async (req, res) => {
       try {
         const checkedUser = await User.findOne({ where: { email }, raw: true });
         if (checkedUser === null) {
-          res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
+          res.status(500).json({ login: false, message: 'Неверный email или пароль' });
           return;
         }
         const isSame = await bcrypt.compare(password, checkedUser.password);
@@ -65,7 +65,7 @@ authRouter.post('/registration', async (req, res) => {
             login: 'now', username: name, id, auth: true,
           });
         } else {
-          res.status(500).json({ message: 'Такого пользователя не существует или неверный пароль!' });
+          res.status(500).json({ message: 'Неверный email или пароль' });
         }
       } catch (err) {
         res.status(500).json({ errorMessage: err.message });
@@ -87,7 +87,7 @@ authRouter.post('/login', async (req, res) => {
     const checkedUser = await User.findOne({ where: { email }, raw: true });
 
     if (checkedUser === null) {
-      res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
+      res.status(500).json({ login: false, message: 'Неверный email или пароль' });
       return;
     }
     const isSame = await bcrypt.compare(password, checkedUser.password);
@@ -99,7 +99,7 @@ authRouter.post('/login', async (req, res) => {
         login: true, username: name, id, auth: true,
       });
     } else {
-      res.status(500).json({ login: false, message: 'Такого пользователя не существует или неверный пароль!' });
+      res.status(500).json({ login: false, message: 'Неверный email или пароль' });
     }
   } catch (err) {
     res.status(500).json({ errorMessage: err.message });
