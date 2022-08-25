@@ -477,8 +477,6 @@ textarea {
   justify-content: space-between;
 }
 
-
-
 @media print {
   .results-table {
     transform: translateY(10px);
@@ -487,4 +485,24 @@ textarea {
   .range-section {
     display: none;
   }
+}
+
+.logo {
+  width: 40px;
+  margin-right: 15px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  text-decoration: unset !important;
+}
+
+.navbar-brand {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+tr {
+  vertical-align: middle;
 }
