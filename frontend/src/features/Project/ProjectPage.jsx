@@ -16,6 +16,7 @@ import DeleteModal from './DeleteModal';
 import './ProjectPage.css';
 
 function ProjectPage() {
+  if (!localStorage.user) window.location.replace('/');
   const { id } = useParams();
   const project = useSelector((state) => state.projects.curProject);
   const revenueData = useSelector((state) => state.finData.revenueData);

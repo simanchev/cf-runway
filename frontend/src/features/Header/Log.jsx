@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 
 function Log() {
   const dispatch = useDispatch();
-  const [log, setLogin] = useState(true);
+  const [logMsg, setLogMsg] = useState();
   async function login(e) {
     e.preventDefault();
     const { email, password } = e.target;
@@ -21,7 +21,7 @@ function Log() {
     const data = await response.json();
 
     if (data.login === false) {
-      setLogin(data.message);
+      setLogMsg(data.message);
     }
     if (data.login === true) {
       dispatch({ type: 'AUTHENTIC', payload: { username: data.username, auth: data.auth } });
@@ -46,7 +46,7 @@ function Log() {
               <div className="mb-3">
                 <input type="password" className="form-control" name="password" placeholder="Пароль" required />
               </div>
-              <div>{log}</div>
+              {logMsg && <div className="alert alert-danger" role="alert">{logMsg}</div>}
               <div className="modal-footer">
                 <button type="submit" className="btn btn-dark">Вход</button>
               </div>
