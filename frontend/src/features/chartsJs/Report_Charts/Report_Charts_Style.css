@@ -1,7 +1,21 @@
-#doughnut_charts_style {
+.doughnut_charts_style {
   width: 17% !important;
 }
 
 .chart-div {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 80px;
+}
+
+
+@media print {
+  .chart-div {
+    width: 900px;
+    height: 300px;
+  }
+
+  .doughnut_charts_style {
+    transform: scale(0.7) translateX(-115px) translateY(-80px);
+  }
 }

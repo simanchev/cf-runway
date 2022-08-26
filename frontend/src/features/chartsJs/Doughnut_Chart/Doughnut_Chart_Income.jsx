@@ -28,14 +28,14 @@ function Doughnut_Chart_Income({ revenueChartData }) {
   };
 
   return (
-    <div id="pie_style">
+    <div className="pie_style">
       <Doughnut data={doughnutDataIncome} options={doughnutDataIncome.options} />
       {sumIncome
         ? (
           <div className="label-text">
             Приток
             <br />
-            {`${(sumIncome / 1000).toLocaleString()} тыс. ₽`}
+            {`${Math.round((sumIncome / 1000)).toLocaleString()} тыс. ₽`}
           </div>
         ) : ''}
     </div>

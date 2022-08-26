@@ -27,9 +27,10 @@ function Header() {
   return (
     <nav className="navbar">
       <div className="container">
-        <div>
-          <Link className="navbar-brand" to="/">CF Runway</Link>
-        </div>
+        <Link className="logo-wrap" to="/">
+          <img className="logo" src="cfr-logo.png" alt="logo" />
+          <span className="navbar-brand">CF Runway</span>
+        </Link>
         <ul className="nav justify-content-end">
           {((user !== null) || name)
             ? (
