@@ -1,17 +1,19 @@
-/* eslint-disable react/jsx-pascal-case */
-/* eslint-disable camelcase */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-plusplus */
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useReactToPrint } from 'react-to-print';
 import { useParams } from 'react-router-dom';
 import actionType from '../store/actions';
 import ProjectModal from './ProjectModal';
 import FinDataSection from '../finData/FinDataSection';
 import curMonthNames from './months';
-import Report_Charts from '../chartsJs/Report_Charts/Report_Charts';
+import ReportCharts from '../chartsJs/Report_Charts/Report_Charts';
 import Range from '../Range/Range';
 import DeleteModal from './DeleteModal';
+import getSchedule from './schedule';
+import './ProjectPage.css';
+import logo from './logo-report.jpeg';
 
 function ProjectPage() {
   if (!localStorage.user) window.location.replace('/');
@@ -26,36 +28,40 @@ function ProjectPage() {
 
   if (document.querySelector('#project-modal-form')) document.querySelector('#project-modal-form').reset();
 
+  const revenueScheduledData = getSchedule(revenueData);
+  const costScheduledData = getSchedule(costData);
+  const investmentScheduledData = getSchedule(investmentData);
+  const financingScheduledData = getSchedule(financingData);
+
   let revenueSchedule = new Array(12).fill(0);
   for (let i = 0; i < revenueSchedule.length; i++) {
-    for (let j = 0; j < revenueData.length; j++) {
-      revenueSchedule[i] += revenueData[j][i + 1];
+    for (let j = 0; j < revenueScheduledData.length; j++) {
+      revenueSchedule[i] += revenueScheduledData[j].schedule[i + 1];
     }
   }
   const { revenueAdj } = useSelector((st) => st.projects);
   const { costAdj } = useSelector((st) => st.projects);
-  //  console.log(range2, 'COST');
-  //  console.log(range, 'REVENUE');
+
   let costSchedule = new Array(12).fill(0);
   for (let i = 0; i < costSchedule.length; i++) {
-    for (let j = 0; j < costData.length; j++) {
-      costSchedule[i] += costData[j][i + 1];
+    for (let j = 0; j < costScheduledData.length; j++) {
+      costSchedule[i] += costScheduledData[j].schedule[i + 1];
     }
-  }// прогнать по массиву, переприсвоить новые значения с моими данными с ренджа
+  }
   costSchedule = costSchedule.map((el) => el * (1 + costAdj / 100));
   revenueSchedule = revenueSchedule.map((el) => el * (1 + revenueAdj / 100));
 
   const investmentSchedule = new Array(12).fill(0);
   for (let i = 0; i < investmentSchedule.length; i++) {
-    for (let j = 0; j < investmentData.length; j++) {
-      investmentSchedule[i] += investmentData[j][i + 1];
+    for (let j = 0; j < investmentScheduledData.length; j++) {
+      investmentSchedule[i] += investmentScheduledData[j].schedule[i + 1];
     }
   }
 
   const financingSchedule = new Array(12).fill(0);
   for (let i = 0; i < financingSchedule.length; i++) {
-    for (let j = 0; j < financingData.length; j++) {
-      financingSchedule[i] += financingData[j][i + 1];
+    for (let j = 0; j < financingScheduledData.length; j++) {
+      financingSchedule[i] += financingScheduledData[j].schedule[i + 1];
     }
   }
 
@@ -89,21 +95,21 @@ function ProjectPage() {
   }
 
   const revenueChartData = [];
-  for (let i = 0; i < revenueData.length; i++) {
-    if (revenueData[i][12] !== 0) {
+  for (let i = 0; i < revenueScheduledData.length; i++) {
+    if (revenueScheduledData[i].schedule[12] !== 0) {
       revenueChartData.push({
-        title: revenueData[i].title,
-        sum: revenueData[i][12],
+        title: revenueScheduledData[i].title,
+        sum: revenueScheduledData[i].schedule[12],
       });
     }
   }
 
   const costChartData = [];
   for (let i = 0; i < costData.length; i++) {
-    if (costData[i][12] !== 0) {
+    if (costScheduledData[i].schedule[12] !== 0) {
       costChartData.push({
-        title: costData[i].title,
-        sum: costData[i][12],
+        title: costScheduledData[i].title,
+        sum: costScheduledData[i].schedule[12],
       });
     }
   }
@@ -138,8 +144,13 @@ function ProjectPage() {
     memoLoadFindData();
   }, [id, memoLoadFindData, memoLoadProjectData]);
 
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
-    <div className="container">
+    <div className="container" ref={componentRef}>
       <h4>
         {project.title}
         {' '}
@@ -205,7 +216,7 @@ function ProjectPage() {
         </div>
       </div>
       <Range />
-      <Report_Charts chartData={chartData} />
+      <ReportCharts chartData={chartData} />
       <div className="fin-data-group">
         <FinDataSection />
         <ProjectModal />
@@ -246,7 +257,7 @@ function ProjectPage() {
         </tbody>
       </table>
       <div className="footer-buttons">
-        <button type="submit" className="btn btn-dark">Скачать отчет о проекте</button>
+        <button type="submit" className="btn btn-dark" onClick={handlePrint}>Скачать отчет о проекте</button>
         <button type="button" className="btn btn-danger btn-delete-project" data-bs-toggle="modal" data-bs-target="#deleteModal">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -255,6 +266,15 @@ function ProjectPage() {
           Удалить проект
         </button>
       </div>
+      {/* <div style={{ display: 'none' }}> */}
+      <div className="logo-link" style={{ display: 'none' }}>
+        <div>
+          <img id="logo-report" src={logo} alt="" />
+          <p><b>CF Runway.</b> Онлайн-сервис для прогнозирования денежных потоков бизнеса</p>
+        </div>
+        <p>https://cfrunway.herokuapp.com/</p>
+      </div>
+      {/* </div> */}
     </div>
   );
 }

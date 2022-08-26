@@ -4,6 +4,10 @@
 
 .navbar {
   margin-bottom: 50px !important;
+  padding: 10px 0 !important;
+  height: 75px;
+  display: flex;
+  align-items: center;
 }
 
 .nav {
@@ -14,8 +18,8 @@
   background: url('../public/wall.jpg');
   background-size: cover;
   margin-top: -50px;
-  height: 100vh;
-}
+  height: calc(100vh - 75px);
+};
 
 .isSame{
   color:red;
@@ -327,12 +331,13 @@ textarea {
   padding: 30px;
   width: 45%;
   padding-bottom: 40px;
+  padding-right: 50px;
 }
 
 .welcome-wrap h6 {
   font-weight: 500;
   line-height: 1.7;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .btn-header {
@@ -472,4 +477,32 @@ textarea {
   justify-content: space-between;
 }
 
+@media print {
+  .results-table {
+    transform: translateY(10px);
+  }
 
+  .range-section {
+    display: none;
+  }
+}
+
+.logo {
+  width: 40px;
+  margin-right: 15px;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  text-decoration: unset !important;
+}
+
+.navbar-brand {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif !important;
+  font-weight: 500 !important;
+}
+
+tr {
+  vertical-align: middle;
+}

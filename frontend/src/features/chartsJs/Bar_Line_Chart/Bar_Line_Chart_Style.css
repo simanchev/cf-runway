@@ -1,9 +1,9 @@
-#bar_line_style {
+.bar_line_style {
  width: 75%;
 }
 
-.chart-div {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 70px;
+@media print {
+  .bar_line_style {
+    transform: scale(0.7) translateX(-150px) translateY(-80px);  
+  }
 }

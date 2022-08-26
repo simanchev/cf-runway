@@ -55,7 +55,7 @@ function Bar_Line_Chart({ barChartData }) {
   };
 
   return (
-    <div id="bar_line_style">
+    <div className="bar_line_style">
       <Bar data={barlineData} options={barlineData.options} />
     </div>
   );

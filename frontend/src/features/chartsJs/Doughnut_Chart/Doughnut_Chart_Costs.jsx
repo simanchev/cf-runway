@@ -27,14 +27,14 @@ function Doughnut_Chart_Costs({ costChartData }) {
   };
 
   return (
-    <div id="pie_style">
+    <div className="pie_style">
       <Doughnut data={doughnutDataCost} options={doughnutDataCost.options} />
       {sumCost
         ? (
           <div className="label-text">
             Отток
             <br />
-            {`${(sumCost / 1000).toLocaleString()} тыс. ₽`}
+            {`${Math.round((sumCost / 1000)).toLocaleString()} тыс. ₽`}
           </div>
         ) : ''}
     </div>
