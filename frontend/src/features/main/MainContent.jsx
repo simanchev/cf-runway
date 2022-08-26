@@ -14,7 +14,7 @@ function MainContent() {
           {localStorage.user
             ? <button type="button" className="btn btn-warning btn-welcome" onClick={() => navigate('/profile')}>Начать сейчас</button>
             :
-            <button type="button" className="btn btn-warning btn-welcome" data-bs-toggle="modal" data-bs-target="#regModal">Рассчитать</button>}
+            <button type="button" className="btn btn-warning btn-welcome" data-bs-toggle="modal" data-bs-target="#regModal">Начать сейчас</button>}
         </div>
       </div>
     </div>
