@@ -1,17 +1,18 @@
+require("dotenv").config();
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport(
   {
-    host: 'smtp.mail.ru',
-    port: 465,
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
     secure: true,
     auth: {
-      user: 'cfrunway@mail.ru',
-      pass: '8vbxrR0Tkn3RjsZrWKXt',
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
   },
   // {
-  //   from: 'Mailer Test <cfrunway@yandex.ru>',
+  //   from: 'Mailer Test <process.env.EMAIL_USER>',
   // },
 );
 

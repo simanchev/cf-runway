@@ -1,3 +1,4 @@
+require("dotenv").config();
 const authRouter = require('express').Router();
 const bcrypt = require('bcrypt');
 const transporter = require('../nodemailer');
@@ -29,19 +30,19 @@ authRouter.post('/registration', async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
 
     if (password !== passwordConf) { // сравниваем пароли на сервере
-      res.status(500).json({ isSame: false });
+      res.status(400).json({ isSame: false });
       return;
     }
 
     if (password.length < 4) { // валидация по длинне пароля
-      res.status(500).json({ passwordLength: false });
+      res.status(400).json({ passwordLength: false });
       return;
     }
 
     // ищем юзера. если есть - то "уже зарегистрирован"
     const user = await User.findOne({ where: { email } });
     if (user) {
-      res.status(500).json({ registration: false });
+      res.status(409).json({ registration: false });
       return;
     }
     await User.create({
@@ -54,7 +55,7 @@ authRouter.post('/registration', async (req, res) => {
     // console.log('мыло пользователя', email);
 
     const mail = {
-      from: '<cfrunway@mail.ru>',
+      from: `<${process.env.EMAIL_USER}>`,
       to: email,
       subject: `Здравствуйте, ${username}! Вас приветствует CF-Runway!`,
       text: `Dear ${username}!`,
@@ -75,7 +76,7 @@ authRouter.post('/registration', async (req, res) => {
       try {
         const checkedUser = await User.findOne({ where: { email }, raw: true });
         if (checkedUser === null) {
-          res.status(500).json({ login: false, message: 'Неверный email или пароль' });
+          res.status(401).json({ login: false, message: 'Неверный email или пароль' });
           return;
         }
         const isSame = await bcrypt.compare(password, checkedUser.password);
@@ -87,7 +88,7 @@ authRouter.post('/registration', async (req, res) => {
             login: 'now', username: name, id, auth: true,
           });
         } else {
-          res.status(500).json({ message: 'Неверный email или пароль' });
+          res.status(401).json({ message: 'Неверный email или пароль' });
         }
       } catch (err) {
         res.status(500).json({ errorMessage: err.message });
