@@ -7,7 +7,7 @@ services:
       - PGHOST=postgres
       - PGDATABASE=cfrunway
       - PGPASSWORD=postgres_password
-      - PGPORT=5432
+      - PGPORT=5432git 
       - POSTGRES_PASSWORD=postgres_password
     # ports:
       # - "5432:5432"
@@ -44,8 +44,6 @@ services:
   
   frontend:
     stdin_open: true
-    env_file:
-      - backend/.env
     build:
       dockerfile: Dockerfile.dev
       context: ./frontend
